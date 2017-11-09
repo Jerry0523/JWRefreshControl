@@ -236,7 +236,7 @@ open class SimpleShapeView: UIView {
 
 extension UIBezierPath {
     
-    enum PathMethod: Int {
+    public enum PathMethod: Int {
         case line = 0
         case move = 1
         case curve = 2
@@ -282,11 +282,11 @@ extension UIBezierPath {
         }
     }
     
-    public convenience init(dataArray: [String], destSize: CGFloat) throws {
+    public convenience init(dataArray: [String], destSize: CGFloat = 1.0, defaultMethod: PathMethod? = .line) throws {
         self.init()
         for line in dataArray {
             let lineGroup = line.components(separatedBy: "|")
-            var method: PathMethod = .line
+            var method: PathMethod = defaultMethod ?? .line
             if lineGroup.count == 2 {
                 guard let aMethod = PathMethod.init(rawValue: Int(lineGroup[1])!) else {
                     throw NSError.init(domain: "com.jerry", code: 0, userInfo: [NSLocalizedDescriptionKey: "unknown path method!"])

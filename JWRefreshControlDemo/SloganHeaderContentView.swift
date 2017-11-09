@@ -41,8 +41,11 @@ extension SloganHeaderContentView : AnyRefreshContent {
     }
     
     func setProgress(progress: CGFloat) {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
         sloganLayer.strokeEnd = progress
         sloganLayer.fillColor = themeColor.withAlphaComponent(progress).cgColor
+        CATransaction.commit()
     }
     
     func startLoading() {
@@ -56,7 +59,7 @@ extension SloganHeaderContentView : AnyRefreshContent {
 
 class SloganLayer: CAShapeLayer {
     
-    func convertStringToPoint(pointString:String) -> CGPoint {
+    func convertToPoint(pointString: String) -> CGPoint {
         let pointsArray = pointString.components(separatedBy: ",")
         if pointsArray.count == 2 {
             return CGPoint.init(x: CGFloat(Float(pointsArray[0])!) , y: CGFloat(Float(pointsArray[1])!))
@@ -76,38 +79,18 @@ class SloganLayer: CAShapeLayer {
     }
     
     private func setup() {
-        let final = UIBezierPath()
-        final.miterLimit = 4
+        var final: UIBezierPath? = nil
         if let pointsArray = NSArray(contentsOfFile: Bundle.main.path(forResource: "SloganPoints", ofType: "plist")!) {
             if pointsArray.count > 0 {
-                for item in pointsArray {
-                    let group = item as! NSArray
-                    if group.count > 0 {
-                        for pointItem in group {
-                            let pointString = pointItem as? String
-                            if (pointString != nil) {
-                                if (!(pointsArray.firstObject as! NSArray == group && group.firstObject as? String == pointString)) {
-                                    final.close()
-                                }
-                                
-                                final.move(to: convertStringToPoint(pointString: pointString!))
-                            } else {
-                                if let pointsArray = pointItem as? [String], pointsArray.count > 0 {
-                                    if pointsArray.count == 1 {
-                                        final.addLine(to: convertStringToPoint(pointString: pointsArray[0]))
-                                    } else if pointsArray.count == 3 {
-                                        final.addCurve(to: convertStringToPoint(pointString: pointsArray[0]), controlPoint1: convertStringToPoint(pointString: pointsArray[1]), controlPoint2: convertStringToPoint(pointString: pointsArray[2]))
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                final = try? UIBezierPath.init(dataArray: pointsArray as! [String], defaultMethod: .curve)
             }
         }
         
-        final.close()
-        self.path = final.cgPath
+        if final != nil {
+            final?.miterLimit = 4
+            final?.close()
+            self.path = final!.cgPath
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
