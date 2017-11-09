@@ -23,6 +23,9 @@
 		C438C8CB1FB4152700706AD8 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C438C8CA1FB4152700706AD8 /* WebViewViewController.swift */; };
 		C438C8CD1FB4182000706AD8 /* SloganPoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = C438C8CC1FB4182000706AD8 /* SloganPoints.plist */; };
 		C438C8CF1FB4184800706AD8 /* SloganHeaderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C438C8CE1FB4184800706AD8 /* SloganHeaderContentView.swift */; };
+		C438C8D31FB4257B00706AD8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C438C8D01FB4257B00706AD8 /* README.md */; };
+		C438C8D41FB4257B00706AD8 /* JWRefreshControl.podspec in Resources */ = {isa = PBXBuildFile; fileRef = C438C8D11FB4257B00706AD8 /* JWRefreshControl.podspec */; };
+		C438C8D51FB4257B00706AD8 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = C438C8D21FB4257B00706AD8 /* LICENSE */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,9 @@
 		C438C8CA1FB4152700706AD8 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		C438C8CC1FB4182000706AD8 /* SloganPoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SloganPoints.plist; sourceTree = "<group>"; };
 		C438C8CE1FB4184800706AD8 /* SloganHeaderContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SloganHeaderContentView.swift; sourceTree = "<group>"; };
+		C438C8D01FB4257B00706AD8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C438C8D11FB4257B00706AD8 /* JWRefreshControl.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JWRefreshControl.podspec; sourceTree = "<group>"; };
+		C438C8D21FB4257B00706AD8 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +68,9 @@
 			children = (
 				C402AB081FB3F0AF00B8FA09 /* JWRefreshControl */,
 				C402AAD91FB3F07100B8FA09 /* JWRefreshControlDemo */,
+				C438C8D11FB4257B00706AD8 /* JWRefreshControl.podspec */,
+				C438C8D21FB4257B00706AD8 /* LICENSE */,
+				C438C8D01FB4257B00706AD8 /* README.md */,
 				C402AAD81FB3F07100B8FA09 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -166,8 +175,11 @@
 			files = (
 				C402AAE51FB3F07100B8FA09 /* LaunchScreen.storyboard in Resources */,
 				C438C8CD1FB4182000706AD8 /* SloganPoints.plist in Resources */,
+				C438C8D31FB4257B00706AD8 /* README.md in Resources */,
+				C438C8D51FB4257B00706AD8 /* LICENSE in Resources */,
 				C402AAE21FB3F07100B8FA09 /* Assets.xcassets in Resources */,
 				C402AAE01FB3F07100B8FA09 /* Main.storyboard in Resources */,
+				C438C8D41FB4257B00706AD8 /* JWRefreshControl.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +340,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = JWRefreshControlDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jerry.JWRefreshControlDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -342,6 +355,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = JWRefreshControlDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jerry.JWRefreshControlDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
