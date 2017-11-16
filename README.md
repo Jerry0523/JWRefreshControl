@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/Jerry0523/JWRefreshControl.svg?branch=master)](https://travis-ci.org/Jerry0523/JWRefreshControl)
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/JWRefreshControl.svg)](https://img.shields.io/cocoapods/v/JWRefreshControl.svg)
+
 # JWRefreshControlDemo
 A refresh control(refresh header &amp; footer for scrollview) for iOS app.
 
