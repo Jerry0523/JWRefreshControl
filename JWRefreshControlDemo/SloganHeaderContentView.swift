@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JWRefreshControl
 
 let themeColor = UIColor.init(red: 246.0 / 255.0, green: 72 / 255.0, blue: 69 / 255.0, alpha: 1.0)
 

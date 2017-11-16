@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JWRefreshControl
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
