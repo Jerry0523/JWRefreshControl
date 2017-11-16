@@ -1,7 +1,7 @@
 #Intent.podspec
 Pod::Spec.new do |s|
 s.name         = "JWRefreshControl"
-s.version      = "1.0.0"
+s.version      = "1.0.1"
 s.summary      = "A refresh control(refresh header & footer for scrollview) for iOS app."
 
 s.homepage     = "https://github.com/Jerry0523/JWRefreshControl"
