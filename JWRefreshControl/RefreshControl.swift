@@ -27,7 +27,7 @@ public enum RefreshHeaderInteraction {
     case still
     case follow
     
-    fileprivate func update<T>(content: T, context: UIView) where T: AnyRefreshContent, T: UIView {
+    fileprivate func update<T>(content: T, context: UIView) where T: UIView & AnyRefreshContent {
         let viewHeight = T.preferredHeight
         switch self {
         case .still:
@@ -356,6 +356,9 @@ open class RefreshFooterControl<T>: UIView , AnyRefreshContext, RefreshControl w
                 self.refreshingBlock?(self)
             })
             self.isHidden = false
+            var contentFrame = self.contentView.frame
+            contentFrame.size.width = scrollView.frame.size.width
+            self.contentView.frame = contentFrame
             self.contentView.startLoading?()
         default:
             break
