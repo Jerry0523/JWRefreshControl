@@ -24,12 +24,12 @@ class CollectionViewContentViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let flowlayout = self.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
-            let itemWidth = (self.view.frame.size.width - 40) / 3.0
+        if let flowlayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+            let itemWidth = (view.frame.size.width - 40) / 3.0
             flowlayout.itemSize = CGSize.init(width: itemWidth, height: itemWidth)
         }
         
-        self.collectionView?.addRefreshHeader { [weak self] (header) in
+        collectionView?.addRefreshHeader { [weak self] (header) in
             if self == nil {
                 return
             }
@@ -41,7 +41,7 @@ class CollectionViewContentViewController: UICollectionViewController {
             })
         }
         
-        self.collectionView?.addRefreshFooter { [weak self] (footer) in
+        collectionView?.addRefreshFooter { [weak self] (footer) in
             if self == nil {
                 return
             }
@@ -64,7 +64,7 @@ class CollectionViewContentViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.data.count
+        return data.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

@@ -31,9 +31,9 @@ public extension UIScrollView {
         }
         
         set {
-            self.removeRefreshHeader()
+            removeRefreshHeader()
             if let refreshView = newValue as? UIView {
-                self.addSubview(refreshView)
+                addSubview(refreshView)
             }
             objc_setAssociatedObject(self, &UIScrollView.refreshHeaderKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
@@ -45,36 +45,36 @@ public extension UIScrollView {
         }
         
         set {
-            self.removeRefreshFooter()
+            removeRefreshFooter()
             if let refreshView = newValue as? UIView {
-                self.addSubview(refreshView)
+                addSubview(refreshView)
             }
             objc_setAssociatedObject(self, &UIScrollView.refreshFooterKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
     public func addRefreshHeader(callBack: @escaping (RefreshHeaderControl<DefaultRefreshHeaderContentView>) -> ()) {
-        self.addCustomRefreshHeader(callBack: callBack)
+        addCustomRefreshHeader(callBack: callBack)
     }
     
     public func addRefreshFooter(callBack: @escaping (RefreshFooterControl<DefaultRefreshFooterContentView>) -> ()) {
-        self.addCustomRefreshFooter(callBack: callBack)
+        addCustomRefreshFooter(callBack: callBack)
     }
     
     public func addCustomRefreshHeader<T>(callBack: @escaping (RefreshHeaderControl<T>) -> ()) {
-        let headerControl = RefreshHeaderControl<T>.init(frame: CGRect.init(x: 0, y: 0, width: self.frame.size.width, height: 0))
+        let headerControl = RefreshHeaderControl<T>.init(frame: CGRect.init(x: 0, y: 0, width: frame.size.width, height: 0))
         headerControl.refreshingBlock = callBack
-        self.refreshHeader = headerControl
+        refreshHeader = headerControl
     }
     
     public func addCustomRefreshFooter<T>(callBack: @escaping (RefreshFooterControl<T>) -> ()) {
-        let footerControl = RefreshFooterControl<T>.init(frame: CGRect.init(x: 0, y: 0, width: self.frame.size.width, height: 0))
+        let footerControl = RefreshFooterControl<T>.init(frame: CGRect.init(x: 0, y: 0, width: frame.size.width, height: 0))
         footerControl.refreshingBlock = callBack
-        self.refreshFooter = footerControl
+        refreshFooter = footerControl
     }
     
     public func removeRefreshHeader() {
-        let headerControl = self.refreshHeader
+        let headerControl = refreshHeader
         headerControl?.stopLoading()
         if let refreshView = headerControl as? UIView {
             refreshView.removeFromSuperview()
@@ -83,7 +83,7 @@ public extension UIScrollView {
     }
     
     public func removeRefreshFooter() {
-        let footerControl = self.refreshFooter
+        let footerControl = refreshFooter
         footerControl?.stopLoading()
         if let refreshView = footerControl as? UIView {
             refreshView.removeFromSuperview()

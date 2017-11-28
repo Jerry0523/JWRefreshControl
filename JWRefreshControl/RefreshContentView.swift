@@ -45,86 +45,86 @@ open class DefaultRefreshHeaderContentView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.setup()
+        setup()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.setup()
+        setup()
     }
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        self.arrowView.center = CGPoint.init(x: self.frame.size.width * 0.5, y: self.frame.size.height * 0.5 - 11.0)
-        self.successView.center = CGPoint.init(x: self.frame.size.width * 0.5, y: self.frame.size.height * 0.5 - 11.0)
-        self.progressView.center = CGPoint.init(x: self.frame.size.width * 0.5, y: self.frame.size.height * 0.5 - 11.0)
-        self.loadingView.center = CGPoint.init(x: self.frame.size.width * 0.5, y: self.frame.size.height * 0.5 - 11.0)
-        self.errorLabel.center = CGPoint.init(x: self.frame.size.width * 0.5, y: self.frame.size.height * 0.5 - 11.0)
-        self.statusLabel.center = CGPoint.init(x: self.frame.size.width * 0.5, y: self.frame.size.height * 0.5 + 11.0)
+        arrowView.center = CGPoint.init(x: frame.size.width * 0.5, y: frame.size.height * 0.5 - 11.0)
+        successView.center = CGPoint.init(x: frame.size.width * 0.5, y: frame.size.height * 0.5 - 11.0)
+        progressView.center = CGPoint.init(x: frame.size.width * 0.5, y: frame.size.height * 0.5 - 11.0)
+        loadingView.center = CGPoint.init(x: frame.size.width * 0.5, y: frame.size.height * 0.5 - 11.0)
+        errorLabel.center = CGPoint.init(x: frame.size.width * 0.5, y: frame.size.height * 0.5 - 11.0)
+        statusLabel.center = CGPoint.init(x: frame.size.width * 0.5, y: frame.size.height * 0.5 + 11.0)
     }
     
     private func setup() {
-        self.arrowView.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleRightMargin]
-        self.arrowView.lineWidth = 2.0
-        self.arrowView.type = .arrow
-        self.arrowView.subType = .arrowBottom
-        self.arrowView.isHidden = true
-        self.addSubview(self.arrowView)
+        arrowView.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleRightMargin]
+        arrowView.lineWidth = 2.0
+        arrowView.type = .arrow
+        arrowView.subType = .arrowBottom
+        arrowView.isHidden = true
+        addSubview(arrowView)
         
-        self.successView.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleRightMargin]
-        self.successView.lineWidth = 2.0
-        self.successView.type = .yes
-        self.successView.isHidden = true
-        self.addSubview(self.successView)
+        successView.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleRightMargin]
+        successView.lineWidth = 2.0
+        successView.type = .yes
+        successView.isHidden = true
+        addSubview(successView)
         
-        self.progressView.drawBackground = false
-        self.progressView.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleRightMargin]
-        self.progressView.lineWidth = 2.0
-        self.addSubview(self.progressView)
+        progressView.drawBackground = false
+        progressView.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleRightMargin]
+        progressView.lineWidth = 2.0
+        addSubview(progressView)
         
-        self.loadingView.drawBackground = false
-        self.loadingView.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleRightMargin]
-        self.loadingView.style = .cumulative
-        self.loadingView.lineWidth = 2.0
-        self.addSubview(self.loadingView)
+        loadingView.drawBackground = false
+        loadingView.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleRightMargin]
+        loadingView.style = .cumulative
+        loadingView.lineWidth = 2.0
+        addSubview(loadingView)
         
-        var frame = self.errorLabel.frame
-        frame.size.width = self.frame.size.width
+        var frame = errorLabel.frame
+        frame.size.width = frame.size.width
 
-        self.errorLabel.frame = frame
-        self.errorLabel.textColor = UIColor.init(white: 80.0 / 255.0, alpha: 1.0)
-        self.errorLabel.textAlignment = .center
-        self.errorLabel.font = UIFont.systemFont(ofSize: 12.0)
-        self.errorLabel.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleRightMargin, .flexibleWidth]
-        self.addSubview(self.errorLabel)
+        errorLabel.frame = frame
+        errorLabel.textColor = UIColor.init(white: 80.0 / 255.0, alpha: 1.0)
+        errorLabel.textAlignment = .center
+        errorLabel.font = UIFont.systemFont(ofSize: 12.0)
+        errorLabel.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleRightMargin, .flexibleWidth]
+        addSubview(errorLabel)
         
-        frame = self.statusLabel.frame
-        frame.size.width = self.frame.size.width
-        self.statusLabel.frame = frame
-        self.statusLabel.textColor = UIColor.init(white: 80.0 / 255.0, alpha: 1.0)
-        self.statusLabel.textAlignment = .center
-        self.statusLabel.font = UIFont.systemFont(ofSize: 12.0)
-        self.statusLabel.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
-        self.addSubview(self.statusLabel)
+        frame = statusLabel.frame
+        frame.size.width = frame.size.width
+        statusLabel.frame = frame
+        statusLabel.textColor = UIColor.init(white: 80.0 / 255.0, alpha: 1.0)
+        statusLabel.textAlignment = .center
+        statusLabel.font = UIFont.systemFont(ofSize: 12.0)
+        statusLabel.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
+        addSubview(statusLabel)
         
         let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(didTapContentView(sender:)))
-        self.addGestureRecognizer(tapGesture)
+        addGestureRecognizer(tapGesture)
     }
     
     @objc private func didTapContentView(sender: Any?) {
-        if let refreshable = self.superview as? RefreshHeaderControl<DefaultRefreshHeaderContentView> {
+        if let refreshable = superview as? RefreshHeaderControl<DefaultRefreshHeaderContentView> {
             refreshable.refreshingBlock?(refreshable)
-            self.startLoading()
+            startLoading()
         }
     }
     
     private func reset() {
-        self.loadingView.isHidden = true
-        self.successView.isHidden = true
-        self.errorLabel.isHidden = true
-        self.arrowView.isHidden = true
-        self.progressView.isHidden = true
-        self.isUserInteractionEnabled = false
+        loadingView.isHidden = true
+        successView.isHidden = true
+        errorLabel.isHidden = true
+        arrowView.isHidden = true
+        progressView.isHidden = true
+        isUserInteractionEnabled = false
     }
     
     private let arrowView = SimpleShapeView.init(frame: CGRect.init(x: 0, y: 0, width: 10, height: 10))
@@ -141,14 +141,14 @@ extension DefaultRefreshHeaderContentView : AnyRefreshContent {
     }
     
     open func setProgress(progress: CGFloat) {
-        self.reset()
+        reset()
         
-        self.arrowView.isHidden = false
-        self.progressView.isHidden = false
+        arrowView.isHidden = false
+        progressView.isHidden = false
         
         let progress = max(min(progress, 1), 0)
         
-        self.progressView.progress = progress
+        progressView.progress = progress
         if progress == 1 {
             arrowView.subType = .arrowTop
             statusLabel.text = "Release to Refresh"
@@ -159,38 +159,38 @@ extension DefaultRefreshHeaderContentView : AnyRefreshContent {
     }
     
     open func startLoading() {
-        self.reset()
+        reset()
         
-        self.loadingView.isHidden = false
-        self.loadingView.startAnimating()
-        self.statusLabel.text = "Loading"
+        loadingView.isHidden = false
+        loadingView.startAnimating()
+        statusLabel.text = "Loading"
         
     }
     
     open func stopLoading() {
-        self.reset()
+        reset()
         loadingView.stopAnimating()
-        self.statusLabel.text = nil
+        statusLabel.text = nil
     }
     
     open func loadedSuccess() {
-        self.reset()
-        self.successView.isHidden = false
-        self.progressView.isHidden = false
-        self.progressView.progress = 1.0
-        self.statusLabel.text = "Success"
-        self.loadingView.stopAnimating()
-        self.successView.beginSimpleAnimation()
+        reset()
+        successView.isHidden = false
+        progressView.isHidden = false
+        progressView.progress = 1.0
+        statusLabel.text = "Success"
+        loadingView.stopAnimating()
+        successView.beginSimpleAnimation()
 
     }
     
     open func loadedError(withMsg msg: String) {
-        self.reset()
-        self.errorLabel.isHidden = false
-        self.errorLabel.text = msg
-        self.statusLabel.text = "Click to Retry"
-        self.loadingView.stopAnimating()
-        self.isUserInteractionEnabled = true
+        reset()
+        errorLabel.isHidden = false
+        errorLabel.text = msg
+        statusLabel.text = "Click to Retry"
+        loadingView.stopAnimating()
+        isUserInteractionEnabled = true
     }
 }
 
@@ -198,62 +198,62 @@ open class DefaultRefreshFooterContentView : UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.setup()
+        setup()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.setup()
+        setup()
     }
     
     private func setup() {
         
-        var frame = self.centerLabel.frame
-        frame.size.width = self.frame.size.width
+        var frame = centerLabel.frame
+        frame.size.width = frame.size.width
         
-        self.centerLabel.frame = frame
-        self.centerLabel.textColor = UIColor.init(white: 80.0 / 255.0, alpha: 1.0)
-        self.centerLabel.textAlignment = .center
-        self.centerLabel.font = UIFont.systemFont(ofSize: 12.0)
-        self.centerLabel.autoresizingMask = .flexibleWidth
-        self.addSubview(self.centerLabel)
+        centerLabel.frame = frame
+        centerLabel.textColor = UIColor.init(white: 80.0 / 255.0, alpha: 1.0)
+        centerLabel.textAlignment = .center
+        centerLabel.font = UIFont.systemFont(ofSize: 12.0)
+        centerLabel.autoresizingMask = .flexibleWidth
+        addSubview(centerLabel)
         
-        frame = self.errorLabel.frame
-        frame.size.width = self.frame.size.width
+        frame = errorLabel.frame
+        frame.size.width = frame.size.width
         
-        self.errorLabel.frame = frame
-        self.errorLabel.textColor = UIColor.init(white: 80.0 / 255.0, alpha: 1.0)
-        self.errorLabel.textAlignment = .center
-        self.errorLabel.font = UIFont.systemFont(ofSize: 12.0)
-        self.errorLabel.autoresizingMask = .flexibleWidth
-        self.addSubview(self.errorLabel)
+        errorLabel.frame = frame
+        errorLabel.textColor = UIColor.init(white: 80.0 / 255.0, alpha: 1.0)
+        errorLabel.textAlignment = .center
+        errorLabel.font = UIFont.systemFont(ofSize: 12.0)
+        errorLabel.autoresizingMask = .flexibleWidth
+        addSubview(errorLabel)
         
-        frame = self.statusLabel.frame
-        frame.size.width = self.frame.size.width
+        frame = statusLabel.frame
+        frame.size.width = frame.size.width
         
-        self.statusLabel.frame = frame
-        self.statusLabel.textColor = UIColor.init(white: 80.0 / 255.0, alpha: 1.0)
-        self.statusLabel.textAlignment = .center
-        self.statusLabel.font = UIFont.systemFont(ofSize: 12.0)
-        self.statusLabel.autoresizingMask = .flexibleWidth
-        self.addSubview(self.statusLabel)
+        statusLabel.frame = frame
+        statusLabel.textColor = UIColor.init(white: 80.0 / 255.0, alpha: 1.0)
+        statusLabel.textAlignment = .center
+        statusLabel.font = UIFont.systemFont(ofSize: 12.0)
+        statusLabel.autoresizingMask = .flexibleWidth
+        addSubview(statusLabel)
         
         let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(didTapContentView(sender:)))
-        self.addGestureRecognizer(tapGesture)
+        addGestureRecognizer(tapGesture)
     }
     
     @objc private func didTapContentView(sender: Any?) {
-        if let refreshable = self.superview as? RefreshFooterControl<DefaultRefreshFooterContentView> {
+        if let refreshable = superview as? RefreshFooterControl<DefaultRefreshFooterContentView> {
             refreshable.refreshingBlock?(refreshable)
-            self.startLoading()
+            startLoading()
         }
     }
     
     private func reset() {
-        self.errorLabel.isHidden = true
-        self.centerLabel.isHidden = true
-        self.statusLabel.isHidden = true
-        self.isUserInteractionEnabled = false
+        errorLabel.isHidden = true
+        centerLabel.isHidden = true
+        statusLabel.isHidden = true
+        isUserInteractionEnabled = false
     }
     
     private let centerLabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: 0, height: 50))
@@ -267,32 +267,32 @@ extension DefaultRefreshFooterContentView : AnyRefreshContent {
     }
     
     open func startLoading() {
-        self.reset()
-        self.centerLabel.isHidden = false
-        self.centerLabel.text = "Loading"
+        reset()
+        centerLabel.isHidden = false
+        centerLabel.text = "Loading"
     }
     
     open func stopLoading() {
-        self.reset()
-        self.statusLabel.text = nil
+        reset()
+        statusLabel.text = nil
     }
     
     open func loadedError(withMsg msg: String) {
-        self.reset()
-        self.errorLabel.isHidden = false
-        self.statusLabel.isHidden = false
-        self.errorLabel.text = msg
-        self.statusLabel.text = "Click to Retry"
-        self.isUserInteractionEnabled = true
+        reset()
+        errorLabel.isHidden = false
+        statusLabel.isHidden = false
+        errorLabel.text = msg
+        statusLabel.text = "Click to Retry"
+        isUserInteractionEnabled = true
     }
     
     open func loadedPause(withMsg msg: String) {
-        self.reset()
-        self.centerLabel.isHidden = false
-        self.centerLabel.text = msg
+        reset()
+        centerLabel.isHidden = false
+        centerLabel.text = msg
     }
     
     open func loadedSuccess() {
-        self.reset()
+        reset()
     }
 }

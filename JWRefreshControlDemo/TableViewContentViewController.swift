@@ -24,7 +24,7 @@ class TableViewContentViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.addRefreshHeader { [weak self] (header) in
+        tableView.addRefreshHeader { [weak self] (header) in
             if self == nil {
                 return
             }
@@ -36,7 +36,7 @@ class TableViewContentViewController: UITableViewController {
             })
         }
         
-        self.tableView.addRefreshFooter { [weak self] (footer) in
+        tableView.addRefreshFooter { [weak self] (footer) in
             if self == nil {
                 return
             }
@@ -58,7 +58,7 @@ class TableViewContentViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.data.count
+        return data.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -66,7 +66,7 @@ open class SimpleShapeView: UIView {
     @IBInspectable open var lineWidth: CGFloat = 2.0 {
         didSet {
             if lineWidth != oldValue {
-                self.shapeLayer.lineWidth = lineWidth
+                shapeLayer.lineWidth = lineWidth
             }
         }
     }
@@ -74,7 +74,7 @@ open class SimpleShapeView: UIView {
     @IBInspectable open var filled = false {
         didSet {
             if filled != oldValue {
-                self.updateLayerColor()
+                updateLayerColor()
             }
         }
     }
@@ -82,9 +82,9 @@ open class SimpleShapeView: UIView {
     open var type: SimpleShapeType = .custom {
         didSet {
             if type != oldValue {
-                self.maskLayer = nil
-                self.shapeLayer.mask = nil
-                self.setNeedsLayout()
+                maskLayer = nil
+                shapeLayer.mask = nil
+                setNeedsLayout()
             }
         }
     }
@@ -94,7 +94,7 @@ open class SimpleShapeView: UIView {
             if subType == oldValue {
                 return
             }
-            if self.type == .arrow {
+            if type == .arrow {
                 var angle: Double = 0
                 if subType == .arrowLeft {
                     angle = -Double.pi / 2
@@ -106,14 +106,14 @@ open class SimpleShapeView: UIView {
                 UIView.animate(withDuration: 0.25, animations: {
                     self.shapeLayer.transform = CATransform3DMakeRotation(CGFloat(angle), 0, 0, 1.0)
                 })
-            } else if self.type == .pentastar {
+            } else if type == .pentastar {
                 if subType == .pentastarHalf {
-                    self.maskLayer = CAShapeLayer.init()
-                    self.shapeLayer.mask = self.maskLayer
-                    self.setupMaskLayer()
+                    maskLayer = CAShapeLayer.init()
+                    shapeLayer.mask = maskLayer
+                    setupMaskLayer()
                 } else {
-                    self.maskLayer = nil
-                    self.shapeLayer.mask = nil
+                    maskLayer = nil
+                    shapeLayer.mask = nil
                 }
             }
         }
@@ -126,12 +126,12 @@ open class SimpleShapeView: UIView {
             }
             let newType = SimpleShapeType.init(rawValue: typeString)
             if newType != nil {
-                self.type = newType!
+                type = newType!
             }
         }
         
         get {
-            return self.type.rawValue
+            return type.rawValue
         }
     }
     
@@ -142,29 +142,29 @@ open class SimpleShapeView: UIView {
             }
             let newType = SimpleShapeSubType.init(rawValue: subTypeString)
             if newType != nil {
-                self.subType = newType!
+                subType = newType!
             }
         }
         
         get {
-            return self.subType?.rawValue
+            return subType?.rawValue
         }
     }
     
     open var shapeData: [String]? {
         get {
-            return self.type.shapeData
+            return type.shapeData
         }
     }
     
     open func beginSimpleAnimation() {
-        if self.type == .yes {
-            self.shapeLayer.removeAllAnimations()
+        if type == .yes {
+            shapeLayer.removeAllAnimations()
             let animation = CABasicAnimation.init(keyPath: "strokeEnd")
             animation.fromValue = 0
             animation.toValue = 1.0
             animation.duration = 0.25
-            self.shapeLayer.add(animation, forKey: nil)
+            shapeLayer.add(animation, forKey: nil)
         }
     }
     
@@ -182,7 +182,7 @@ open class SimpleShapeView: UIView {
     
     private var shapeLayer: CAShapeLayer {
         get {
-            return self.layer as! CAShapeLayer
+            return layer as! CAShapeLayer
         }
     }
     
@@ -190,46 +190,46 @@ open class SimpleShapeView: UIView {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        self.setup()
+        setup()
     }
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.setup()
+        setup()
     }
     
     open override func tintColorDidChange() {
         super.tintColorDidChange()
-        self.updateLayerColor()
+        updateLayerColor()
     }
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        let layerSize = min(self.frame.size.width, self.frame.size.height)
-        let bezierPath = try? UIBezierPath.init(dataArray: self.shapeData ?? [], destSize: layerSize)
-        self.shapeLayer.path = bezierPath?.cgPath
-        self.setupMaskLayer()
+        let layerSize = min(frame.size.width, frame.size.height)
+        let bezierPath = try? UIBezierPath.init(dataArray: shapeData ?? [], destSize: layerSize)
+        shapeLayer.path = bezierPath?.cgPath
+        setupMaskLayer()
     }
     
     private func setup() {
-        self.shapeLayer.lineWidth = self.lineWidth
-        self.shapeLayer.lineCap = kCALineCapRound
-        self.shapeLayer.lineJoin = kCALineJoinRound
-        self.updateLayerColor()
+        shapeLayer.lineWidth = lineWidth
+        shapeLayer.lineCap = kCALineCapRound
+        shapeLayer.lineJoin = kCALineJoinRound
+        updateLayerColor()
     }
     
     private func updateLayerColor() {
-        self.shapeLayer.strokeColor = self.tintColor.cgColor
+        shapeLayer.strokeColor = tintColor.cgColor
         var filledColor = UIColor.clear
-        if self.filled && (self.type == .heart || self.type == .pentastar) {
-            filledColor = self.tintColor
+        if filled && (type == .heart || type == .pentastar) {
+            filledColor = tintColor
         }
         shapeLayer.fillColor = filledColor.cgColor
     }
     
     private func setupMaskLayer() {
-        if self.subType == .pentastarHalf {
-            maskLayer?.path = UIBezierPath.init(rect: CGRect.init(x: 0, y: 0, width: self.frame.size.width * 0.5, height: self.frame.size.height)).cgPath
+        if subType == .pentastarHalf {
+            maskLayer?.path = UIBezierPath.init(rect: CGRect.init(x: 0, y: 0, width: frame.size.width * 0.5, height: frame.size.height)).cgPath
         }
     }
 }

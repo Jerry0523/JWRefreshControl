@@ -32,14 +32,14 @@ public enum CircleLoadingStyle {
 open class CircleLoadingView: UIView {
     open private(set) var isAnimating = false {
         didSet {
-            self.isHidden = !isAnimating
+            isHidden = !isAnimating
         }
     }
     
     open var style = CircleLoadingStyle.default {
         didSet {
             if style != oldValue {
-                self.updateLayerStyle()
+                updateLayerStyle()
             }
         }
     }
@@ -47,8 +47,8 @@ open class CircleLoadingView: UIView {
     open var lineWidth: CGFloat = 3.0 {
         didSet {
             if lineWidth != oldValue {
-                self.circleLayer.lineWidth = lineWidth
-                self.layoutLayers()
+                circleLayer.lineWidth = lineWidth
+                layoutLayers()
             }
         }
     }
@@ -56,19 +56,19 @@ open class CircleLoadingView: UIView {
     open var drawBackground = true {
         didSet {
             if drawBackground != oldValue {
-               self.setNeedsDisplay()
+               setNeedsDisplay()
             }
         }
     }
     
     open func startAnimating() {
-        if self.isAnimating {
+        if isAnimating {
             return
         }
         
-        self.isAnimating = true
+        isAnimating = true
         let duration = 1.5
-        if self.style == .cumulative {
+        if style == .cumulative {
             let strokeStartAnimation = CAKeyframeAnimation.init(keyPath: "strokeStart")
             strokeStartAnimation.duration = duration
             strokeStartAnimation.values = [0, 0.2, 1.0]
@@ -81,120 +81,120 @@ open class CircleLoadingView: UIView {
             groupAnimation.animations = [strokeStartAnimation, strokeEndAnimation]
             groupAnimation.duration = duration
             groupAnimation.repeatCount = Float.infinity
-            self.circleLayer.add(groupAnimation, forKey: CircleLoadingView.animationKey)
-        } else if self.style == .default {
+            circleLayer.add(groupAnimation, forKey: CircleLoadingView.animationKey)
+        } else if style == .default {
             let rotationAnimation = CABasicAnimation.init(keyPath: "transform.rotation.z")
             rotationAnimation.toValue = Float(Double.pi * 2)
             rotationAnimation.duration = duration
             rotationAnimation.isCumulative = true
             rotationAnimation.repeatCount = Float.infinity
-            self.circleLayer.add(rotationAnimation, forKey: CircleLoadingView.animationKey)
-        } else if self.style ==  .gradient {
+            circleLayer.add(rotationAnimation, forKey: CircleLoadingView.animationKey)
+        } else if style ==  .gradient {
             let rotationAnimation = CABasicAnimation.init(keyPath: "transform.rotation.z")
             rotationAnimation.toValue = Float(Double.pi * 2.0)
             rotationAnimation.duration = duration
             rotationAnimation.isCumulative = true
             rotationAnimation.repeatCount = Float.infinity
-            self.gradientLayer?.add(rotationAnimation, forKey: CircleLoadingView.animationKey)
+            gradientLayer?.add(rotationAnimation, forKey: CircleLoadingView.animationKey)
         }
     }
     
     open func stopAnimating() {
-        self.circleLayer.removeAllAnimations()
-        self.isAnimating = false
+        circleLayer.removeAllAnimations()
+        isAnimating = false
     }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.clear
-        self.setup()
+        backgroundColor = UIColor.clear
+        setup()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.setup()
+        setup()
     }
     
     open override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
-        if newWindow != nil && self.isAnimating {
-            let simpleAnimation = self.circleLayer.animation(forKey: CircleLoadingView.animationKey)
+        if newWindow != nil && isAnimating {
+            let simpleAnimation = circleLayer.animation(forKey: CircleLoadingView.animationKey)
             if simpleAnimation == nil {
-                self.isAnimating = false
-                self.startAnimating()
+                isAnimating = false
+                startAnimating()
             }
         }
     }
     
     open override func tintColorDidChange() {
         super.tintColorDidChange()
-        self.circleLayer.strokeColor = self.tintColor.cgColor
-        if self.gradientLayer != nil {
-            self.updateGradientLayerColor()
+        circleLayer.strokeColor = tintColor.cgColor
+        if gradientLayer != nil {
+            updateGradientLayerColor()
         }
     }
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        self.layoutLayers()
+        layoutLayers()
     }
     
     open override func draw(_ rect: CGRect) {
         super.draw(rect)
-        if self.drawBackground && self.style != .gradient {
+        if drawBackground && style != .gradient {
             let context = UIGraphicsGetCurrentContext()
-            context?.setLineWidth(self.lineWidth)
-            context?.setStrokeColor(self.tintColor.withAlphaComponent(0.2).cgColor)
+            context?.setLineWidth(lineWidth)
+            context?.setStrokeColor(tintColor.withAlphaComponent(0.2).cgColor)
             context?.beginPath()
-            if self.circleLayer.path != nil {
-                context?.addPath(self.circleLayer.path!)
+            if circleLayer.path != nil {
+                context?.addPath(circleLayer.path!)
             }
             context?.strokePath()
         }
     }
     
     private func layoutLayers() {
-        self.circleLayer.frame = self.bounds;
+        circleLayer.frame = bounds;
         
         let path = CGMutablePath()
         
-        let radius = (min(self.frame.size.width, self.frame.size.height) - self.circleLayer.lineWidth) * 0.5
-        path.addArc(center:CGPoint.init(x: self.frame.size.width * 0.5, y: self.frame.size.height * 0.5), radius: radius, startAngle: CGFloat(-Double.pi / 2), endAngle: CGFloat(-Double.pi / 2 + Double.pi * 2), clockwise: false)
-        self.circleLayer.path = path;
+        let radius = (min(frame.size.width, frame.size.height) - circleLayer.lineWidth) * 0.5
+        path.addArc(center:CGPoint.init(x: frame.size.width * 0.5, y: frame.size.height * 0.5), radius: radius, startAngle: CGFloat(-Double.pi / 2), endAngle: CGFloat(-Double.pi / 2 + Double.pi * 2), clockwise: false)
+        circleLayer.path = path;
         
-        if let gradientLayer = self.gradientLayer {
-            gradientLayer.frame = self.bounds
+        if let gradientLayer = gradientLayer {
+            gradientLayer.frame = bounds
             let g0 = gradientLayer.sublayers?.first as? CAGradientLayer
             let g1 = gradientLayer.sublayers?.last as? CAGradientLayer
-            g0?.frame = CGRect.init(x: 0, y: 0, width: self.frame.size.width * 0.5, height: self.frame.size.height)
-            g1?.frame = CGRect.init(x: self.frame.size.width * 0.5, y: 0, width: self.frame.size.width * 0.5, height: self.frame.size.height)
-            gradientLayer.mask = self.circleLayer
+            g0?.frame = CGRect.init(x: 0, y: 0, width: frame.size.width * 0.5, height: frame.size.height)
+            g1?.frame = CGRect.init(x: frame.size.width * 0.5, y: 0, width: frame.size.width * 0.5, height: frame.size.height)
+            gradientLayer.mask = circleLayer
         }
     }
     
     private func updateGradientLayerColor() {
-        guard let gradientLayer = self.gradientLayer else {
+        guard let gradientLayer = gradientLayer else {
             return
         }
         let g0 = gradientLayer.sublayers?.first as? CAGradientLayer
         let g1 = gradientLayer.sublayers?.last as? CAGradientLayer
         
-        g0?.colors = [self.tintColor.withAlphaComponent(0.5).cgColor, self.tintColor.withAlphaComponent(0.15).cgColor]
+        g0?.colors = [tintColor.withAlphaComponent(0.5).cgColor, tintColor.withAlphaComponent(0.15).cgColor]
         g0?.startPoint = CGPoint.init(x: 1.0, y: 1.0)
         g0?.endPoint = CGPoint.init(x: 1.0, y: 0.0)
         
-        g1?.colors = [self.tintColor.withAlphaComponent(0.5).cgColor, self.tintColor.cgColor]
+        g1?.colors = [tintColor.withAlphaComponent(0.5).cgColor, tintColor.cgColor]
         g1?.startPoint = CGPoint.init(x: 1.0, y: 1.0)
         g1?.endPoint = CGPoint.init(x: 1.0, y: 0.0)
         
     }
     
     private func updateLayerStyle() {
-        switch self.style {
+        switch style {
         case .gradient:
-            if self.gradientLayer == nil {
+            if gradientLayer == nil {
                 let gradientLayer = CALayer.init()
-                gradientLayer.mask = self.circleLayer
+                gradientLayer.mask = circleLayer
                 
                 let g0 = CAGradientLayer.init()
                 let g1 = CAGradientLayer.init()
@@ -203,33 +203,33 @@ open class CircleLoadingView: UIView {
                 gradientLayer.addSublayer(g1)
                 
                 self.gradientLayer = gradientLayer
-                self.updateGradientLayerColor()
+                updateGradientLayerColor()
             }
-            self.circleLayer.removeFromSuperlayer()
-            self.layer.addSublayer(self.gradientLayer!)
+            circleLayer.removeFromSuperlayer()
+            layer.addSublayer(gradientLayer!)
         default:
-            if self.gradientLayer != nil {
-                self.gradientLayer?.removeFromSuperlayer()
-                self.gradientLayer = nil
+            if gradientLayer != nil {
+                gradientLayer?.removeFromSuperlayer()
+                gradientLayer = nil
             }
             
-            if self.circleLayer.superlayer == nil {
-                self.layer.addSublayer(self.circleLayer)
+            if circleLayer.superlayer == nil {
+                layer.addSublayer(circleLayer)
             }
             
             if style == .default {
-                self.circleLayer.strokeEnd = 0.6
+                circleLayer.strokeEnd = 0.6
             } else if style == .cumulative {
-                self.circleLayer.strokeEnd = 0
+                circleLayer.strokeEnd = 0
             }
         }
     }
     
     private func setup() {
-        self.layer.addSublayer(self.circleLayer)
-        self.circleLayer.strokeColor = self.tintColor.cgColor
-        self.circleLayer.lineWidth = self.lineWidth
-        self.updateLayerStyle()
+        layer.addSublayer(circleLayer)
+        circleLayer.strokeColor = tintColor.cgColor
+        circleLayer.lineWidth = lineWidth
+        updateLayerStyle()
     }
     
     private var circleLayer: CAShapeLayer = {

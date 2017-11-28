@@ -15,10 +15,10 @@ class SloganHeaderContentView: UIView {
     
     override init(frame: CGRect) {
         
-        self.sloganLayer = SloganLayer.init()
+        sloganLayer = SloganLayer.init()
         
         super.init(frame: frame)
-        self.layer.addSublayer(sloganLayer)
+        layer.addSublayer(sloganLayer)
         sloganLayer.strokeColor = themeColor.cgColor
         sloganLayer.fillColor = UIColor.clear.cgColor
     }
@@ -29,7 +29,7 @@ class SloganHeaderContentView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        sloganLayer.frame = CGRect.init(x: (self.frame.size.width - 170) * 0.5, y: self.frame.size.height - 69, width: 170, height: 56)
+        sloganLayer.frame = CGRect.init(x: (frame.size.width - 170) * 0.5, y: frame.size.height - 69, width: 170, height: 56)
     }
     
     private let sloganLayer: SloganLayer!
@@ -71,12 +71,12 @@ class SloganLayer: CAShapeLayer {
     
     override init(layer: Any) {
         super.init(layer: layer)
-        self.setup()
+        setup()
     }
     
     override init() {
         super.init()
-        self.setup()
+        setup()
     }
     
     private func setup() {
@@ -90,7 +90,7 @@ class SloganLayer: CAShapeLayer {
         if final != nil {
             final?.miterLimit = 4
             final?.close()
-            self.path = final!.cgPath
+            path = final!.cgPath
         }
     }
     
@@ -118,25 +118,25 @@ class SloganLayer: CAShapeLayer {
         animGroup.isRemovedOnCompletion = false
         animGroup.fillMode = kCAFillModeForwards
         
-        self.add(animGroup, forKey: "sloganAnimation")
+        add(animGroup, forKey: "sloganAnimation")
     }
     
     func pauseAnimation(){
-        if self.speed > 0 {
-            let pauseTime = self.convertTime(CACurrentMediaTime(), from: nil)
-            self.speed = 0
-            self.timeOffset = pauseTime
+        if speed > 0 {
+            let pauseTime = convertTime(CACurrentMediaTime(), from: nil)
+            speed = 0
+            timeOffset = pauseTime
         }
     }
     
     func resumeAnimation(){
-        if self.speed == 0 {
-            let pausedTime = self.timeOffset
-            self.speed = 1.0
-            self.timeOffset = 0.0
-            self.beginTime = 0.0
-            let timeSincePause = self.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
-            self.beginTime = timeSincePause
+        if speed == 0 {
+            let pausedTime = timeOffset
+            speed = 1.0
+            timeOffset = 0.0
+            beginTime = 0.0
+            let timeSincePause = convertTime(CACurrentMediaTime(), from: nil) - pausedTime
+            beginTime = timeSincePause
         }
     }
     

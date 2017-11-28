@@ -35,19 +35,19 @@ open class CircleProgressView: UIView {
             if progress == oldValue {
                 return
             }
-            if self.style == .default {
-                if self.clockWise {
-                    self.circleLayer.strokeEnd = progress
+            if style == .default {
+                if clockWise {
+                    circleLayer.strokeEnd = progress
                 } else {
-                    self.circleLayer.strokeStart = progress
-                    self.circleLayer.strokeEnd = 1.0
+                    circleLayer.strokeStart = progress
+                    circleLayer.strokeEnd = 1.0
                 }
             } else {
                 let pathAnimation = CABasicAnimation.init(keyPath: "path")
-                pathAnimation.fromValue = self.circleLayer.path
-                self.setupShape()
-                pathAnimation.toValue = self.circleLayer.path
-                self.circleLayer.add(pathAnimation, forKey: nil)
+                pathAnimation.fromValue = circleLayer.path
+                setupShape()
+                pathAnimation.toValue = circleLayer.path
+                circleLayer.add(pathAnimation, forKey: nil)
             }
         }
     }
@@ -55,8 +55,8 @@ open class CircleProgressView: UIView {
     open var style: CircleProgressStyle = .default {
         didSet {
             if style != oldValue {
-                self.setupLayerStyle()
-                self.setupLayerColor()
+                setupLayerStyle()
+                setupLayerColor()
             }
         }
     }
@@ -64,8 +64,8 @@ open class CircleProgressView: UIView {
     open var lineWidth: CGFloat = 0 {
         didSet {
             if lineWidth != oldValue {
-                self.circleLayer.lineWidth = lineWidth
-                self.backgroundLayer.lineWidth = lineWidth
+                circleLayer.lineWidth = lineWidth
+                backgroundLayer.lineWidth = lineWidth
             }
         }
     }
@@ -74,10 +74,10 @@ open class CircleProgressView: UIView {
         didSet {
             if drawBackground != oldValue {
                 if drawBackground {
-                    self.setupBackgroundShape()
-                    self.layer.insertSublayer(self.backgroundLayer, below: self.circleLayer)
+                    setupBackgroundShape()
+                    layer.insertSublayer(backgroundLayer, below: circleLayer)
                 } else {
-                    self.backgroundLayer.removeFromSuperlayer()
+                    backgroundLayer.removeFromSuperlayer()
                 }
             }
         }
@@ -88,95 +88,95 @@ open class CircleProgressView: UIView {
     open var backgroundTintColor = UIColor.init(white: 23.0 / 255.0, alpha: 1.0) {
         didSet {
             if backgroundLayer != oldValue {
-                self.backgroundLayer.strokeColor = backgroundTintColor.cgColor
+                backgroundLayer.strokeColor = backgroundTintColor.cgColor
             }
         }
     }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.clear
-        self.setup()
+        backgroundColor = UIColor.clear
+        setup()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.setup()
+        setup()
     }
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        self.setupShape()
-        if self.drawBackground {
-            self.setupBackgroundShape()
+        setupShape()
+        if drawBackground {
+            setupBackgroundShape()
         }
     }
     
     open override func tintColorDidChange() {
         super.tintColorDidChange()
-        self.setupLayerColor()
+        setupLayerColor()
     }
     
     private func setup() {
-        self.layer.addSublayer(self.circleLayer)
-        self.layer.insertSublayer(self.backgroundLayer, below: self.circleLayer)
-        self.backgroundLayer.strokeColor = self.backgroundTintColor.cgColor
-        self.setupLayerStyle()
-        self.setupLayerColor()
+        layer.addSublayer(circleLayer)
+        layer.insertSublayer(backgroundLayer, below: circleLayer)
+        backgroundLayer.strokeColor = backgroundTintColor.cgColor
+        setupLayerStyle()
+        setupLayerColor()
     }
     
     private func setupLayerColor() {
-        if self.style == .default {
-            self.circleLayer.fillColor = UIColor.clear.cgColor
-            self.circleLayer.strokeColor = self.tintColor.cgColor
-        } else if self.style == .pie {
-            self.circleLayer.fillColor = self.tintColor.cgColor
-            self.circleLayer.strokeColor = UIColor.clear.cgColor
+        if style == .default {
+            circleLayer.fillColor = UIColor.clear.cgColor
+            circleLayer.strokeColor = tintColor.cgColor
+        } else if style == .pie {
+            circleLayer.fillColor = tintColor.cgColor
+            circleLayer.strokeColor = UIColor.clear.cgColor
         }
     }
     
     private func setupLayerStyle() {
-        if self.style == .default {
-            self.circleLayer.lineCap = kCALineCapRound
-            self.circleLayer.strokeStart = 0
-            if self.clockWise {
-                self.circleLayer.strokeEnd = 0
+        if style == .default {
+            circleLayer.lineCap = kCALineCapRound
+            circleLayer.strokeStart = 0
+            if clockWise {
+                circleLayer.strokeEnd = 0
             } else {
-                self.circleLayer.strokeEnd = 1.0
+                circleLayer.strokeEnd = 1.0
             }
-            self.lineWidth = 4.0
-        } else if self.style == .pie {
-            self.lineWidth = 1.0
+            lineWidth = 4.0
+        } else if style == .pie {
+            lineWidth = 1.0
         }
     }
     
     private func setupShape() {
-        self.circleLayer.frame = self.bounds
+        circleLayer.frame = bounds
         let path = CGMutablePath.init()
-        if self.style == .pie {
-            path.move(to: CGPoint.init(x: self.frame.size.width * 0.5, y: self.frame.size.height * 0.5))
+        if style == .pie {
+            path.move(to: CGPoint.init(x: frame.size.width * 0.5, y: frame.size.height * 0.5))
         }
-        let circleProgress = self.style == .pie ? self.progress : 1.0
-        var radius = (min(self.frame.size.width, self.frame.size.height) - self.circleLayer.lineWidth) * 0.5
-        if self.style == .pie {
+        let circleProgress = style == .pie ? progress : 1.0
+        var radius = (min(frame.size.width, frame.size.height) - circleLayer.lineWidth) * 0.5
+        if style == .pie {
             radius -= 2.0
         }
-        path.addArc(center: CGPoint.init(x: self.frame.size.width * 0.5, y: self.frame.size.height * 0.5), radius: radius, startAngle: CGFloat(-Double.pi / 2), endAngle: CGFloat(-Double.pi / 2 + Double.pi * 2 * Double(circleProgress)), clockwise: false)
-        self.circleLayer.path = path
+        path.addArc(center: CGPoint.init(x: frame.size.width * 0.5, y: frame.size.height * 0.5), radius: radius, startAngle: CGFloat(-Double.pi / 2), endAngle: CGFloat(-Double.pi / 2 + Double.pi * 2 * Double(circleProgress)), clockwise: false)
+        circleLayer.path = path
     }
     
     private func setupBackgroundShape() {
-        self.backgroundLayer.frame = self.bounds
+        backgroundLayer.frame = bounds
         let path = CGMutablePath.init()
-        if self.style == .pie {
-            path.move(to: CGPoint.init(x: self.frame.size.width * 0.5, y: self.frame.size.height * 0.5))
+        if style == .pie {
+            path.move(to: CGPoint.init(x: frame.size.width * 0.5, y: frame.size.height * 0.5))
         }
-        var radius = (min(self.frame.size.width, self.frame.size.height) - self.circleLayer.lineWidth) * 0.5
-        if self.style == .pie {
+        var radius = (min(frame.size.width, frame.size.height) - circleLayer.lineWidth) * 0.5
+        if style == .pie {
             radius -= 2.0
         }
-        path.addArc(center: CGPoint.init(x: self.frame.size.width * 0.5, y: self.frame.size.height * 0.5), radius: radius, startAngle: CGFloat(-Double.pi / 2), endAngle: CGFloat(-Double.pi / 2 + Double.pi * 2), clockwise: false)
-        self.backgroundLayer.path = path
+        path.addArc(center: CGPoint.init(x: frame.size.width * 0.5, y: frame.size.height * 0.5), radius: radius, startAngle: CGFloat(-Double.pi / 2), endAngle: CGFloat(-Double.pi / 2 + Double.pi * 2), clockwise: false)
+        backgroundLayer.path = path
     }
     
     private let circleLayer = CAShapeLayer()
