@@ -321,13 +321,15 @@ open class RefreshFooterControl<T>: UIView , AnyRefreshContext, RefreshControl w
             return
         }
         var offsetSpace = -preFetchedDistance
+        var contentHeight = scrollView.contentSize.height
         if #available(iOS 11.0, *) {
             offsetSpace += scrollView.adjustedContentInset.bottom
+            contentHeight += (scrollView.adjustedContentInset.top + scrollView.adjustedContentInset.bottom)
         }
-        
+        contentHeight += (scrollView.contentInset.top + scrollView.contentInset.bottom)
         if state != .pause &&
             scrollView.contentSize.height > 0 &&
-            scrollView.contentSize.height >= scrollView.frame.size.height &&
+            contentHeight >= scrollView.frame.size.height &&
             scrollView.contentOffset.y + scrollView.frame.size.height - scrollView.contentSize.height > offsetSpace {
             state = .refreshing
             frame = CGRect.init(x: 0, y: scrollView.contentSize.height, width: scrollView.frame.size.width, height: contentView.frame.size.height)
