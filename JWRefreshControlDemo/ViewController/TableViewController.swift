@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  TableViewController.swift
 //  JWRefreshControlDemo
 //
 //  Created by Jerry on 2017/11/9.
@@ -11,7 +11,7 @@ import UIKit
 private let reuseIdentifier = "default"
 private let batchCount = 10
 
-class TableViewContentViewController: UITableViewController {
+class TableViewController: UITableViewController {
     
     var data: [Int] = {
         var data: [Int]?

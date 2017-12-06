@@ -1,5 +1,5 @@
 //
-//  SloganHeaderContentView.swift
+//  SloganContentView.swift
 //  JWRefreshControlDemo
 //
 //  Created by Jerry on 2017/11/9.
@@ -11,7 +11,7 @@ import JWRefreshControl
 
 let themeColor = UIColor.init(red: 246.0 / 255.0, green: 72 / 255.0, blue: 69 / 255.0, alpha: 1.0)
 
-class SloganHeaderContentView: UIView {
+class SloganContentView: UIView {
     
     override init(frame: CGRect) {
         
@@ -35,7 +35,7 @@ class SloganHeaderContentView: UIView {
     private let sloganLayer: SloganLayer!
 }
 
-extension SloganHeaderContentView : AnyRefreshContent {
+extension SloganContentView : AnyRefreshContent {
     
     static var preferredHeight: CGFloat {
         return 120

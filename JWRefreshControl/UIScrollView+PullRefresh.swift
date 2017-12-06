@@ -33,7 +33,7 @@ public extension UIScrollView {
         set {
             removeRefreshHeader()
             if let refreshView = newValue as? UIView {
-                addSubview(refreshView)
+                insertSubview(refreshView, at: 0)
             }
             objc_setAssociatedObject(self, &UIScrollView.refreshHeaderKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
@@ -47,7 +47,7 @@ public extension UIScrollView {
         set {
             removeRefreshFooter()
             if let refreshView = newValue as? UIView {
-                addSubview(refreshView)
+                insertSubview(refreshView, at: 0)
             }
             objc_setAssociatedObject(self, &UIScrollView.refreshFooterKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }

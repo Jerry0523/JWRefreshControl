@@ -17,15 +17,15 @@ class WebViewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        webView.scrollView.addCustomRefreshHeader { [weak self] (header: RefreshHeaderControl<SloganHeaderContentView>) in
+        webView.scrollView.addCustomRefreshHeader { [weak self] (header: RefreshHeaderControl<SloganContentView>) in
             self?.webView.reload()
             header.loadedSuccess()
         }
         
-        let refreshHeader = webView.scrollView.refreshHeader as? RefreshHeaderControl<SloganHeaderContentView>
+        let refreshHeader = webView.scrollView.refreshHeader as? RefreshHeaderControl<SloganContentView>
         refreshHeader?.style = .follow
         
-        webView.load(URLRequest.init(url: URL.init(string: "https://www.baidu.com")!))
+        webView.load(URLRequest.init(url: URL.init(string: "https://www.apple.com")!))
     }
 
     override func didReceiveMemoryWarning() {

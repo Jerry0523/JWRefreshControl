@@ -89,7 +89,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="286" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="WebView with custom refresh control" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jcv-JH-cR2">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="WebView with CAShapeLayer refresh control" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jcv-JH-cR2">
                                                     <rect key="frame" x="16" y="0.0" width="269" height="59.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="14"/>
@@ -100,6 +100,26 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="eRN-ae-rUC" kind="show" id="bnw-gb-g50"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="CwS-QT-kwC" rowHeight="60" style="IBUITableViewCellStyleDefault" id="47a-Sj-6qC">
+                                        <rect key="frame" x="0.0" y="215" width="320" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="47a-Sj-6qC" id="JwY-c1-vgt">
+                                            <rect key="frame" x="0.0" y="0.0" width="286" height="59.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="ScrollView with GIF refresh control" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CwS-QT-kwC">
+                                                    <rect key="frame" x="16" y="0.0" width="269" height="59.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="14"/>
+                                                    <color key="textColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="cJ7-qC-HvJ" kind="show" id="jR7-YN-PWD"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -125,7 +145,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IKT-BP-mZO">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -135,9 +155,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="IKT-BP-mZO" firstAttribute="top" secondItem="sD7-3x-6hF" secondAttribute="top" constant="-64" id="31W-Dj-02S"/>
+                            <constraint firstItem="IKT-BP-mZO" firstAttribute="top" secondItem="sD7-3x-6hF" secondAttribute="top" id="2iv-DJ-cUE"/>
                             <constraint firstItem="IKT-BP-mZO" firstAttribute="leading" secondItem="sD7-3x-6hF" secondAttribute="leading" id="KLZ-rQ-J7M"/>
-                            <constraint firstItem="IKT-BP-mZO" firstAttribute="bottom" secondItem="DXC-GZ-b02" secondAttribute="bottom" id="RQL-aO-wqv"/>
+                            <constraint firstItem="IKT-BP-mZO" firstAttribute="bottom" secondItem="DXC-GZ-b02" secondAttribute="bottom" id="Pwl-am-d0l"/>
                             <constraint firstItem="IKT-BP-mZO" firstAttribute="trailing" secondItem="sD7-3x-6hF" secondAttribute="trailing" id="fbX-qo-ZZD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sD7-3x-6hF"/>
@@ -148,12 +168,79 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7RB-nW-aPl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-804" y="960"/>
+            <point key="canvasLocation" x="-1151" y="844"/>
+        </scene>
+        <!--ScrollView with Refresh Control-->
+        <scene sceneID="gJm-zx-QRs">
+            <objects>
+                <viewController title="ScrollView with Refresh Control" id="cJ7-qC-HvJ" customClass="ScrollViewController" customModule="JWRefreshControlDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WVK-K7-Bem">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dIP-eT-slV">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tSL-ku-MqU">
+                                        <rect key="frame" x="10" y="10" width="300" height="2462"/>
+                                        <string key="text">Atlanta voters hit the polls on Tuesday and delivered a nearly split decision in the city's mayoral contest, leading candidate Mary Norwood to call for a recount minutes into Wednesday morning as Keisha Lance Bottoms celebrated the result.
+
+"We will be asking for a recount," Norwood said.
+Norwood cited an unofficial count in remarks before her supporters, and said while she was trailing her opponent Bottoms, she was waiting for further updates on the vote total later in the week.
+"It's not over yet," Norwood said.
+Bottoms, meanwhile, delivered a celebratory speech alongside sitting Mayor Kasim Reed, who backed her bid.
+Bottoms, a Democrat, squared off against Norwood, an independent, in the nonpartisan runoff to succeed Reed, who is term limited from seeking re-election.
+Votes rolled in late Tuesday evening, offering a nail-biting finish for the contentious race to lead one of the largest cities in the deep south -- and one that echoed Atlanta's 2009 mayoral contest, when Norwood narrowly lost to Reed and requested a recount, which certified the slim loss.
+Acknowledging this history, Norwood said, "I've done this before."
+A Norwood victory would mean Atlanta -- a gentrifying city where the African American share of the population remains a majority but has gone down over the years -- would have its first white mayor in more than 40 years.
+Georgia utilizes a majority rule with a runoff voting system, which means that if no candidate secures more than 50% of the vote in the general election, a final race between the top two candidates decides the winner.
+Bottoms and Norwood earned about 26% and 21%, respectively, of the vote in the general election on November 6, meaning they emerged as the top two candidates from the field of 11.
+Reed, the current mayor, endorsed Bottoms ahead of the general election, and the two share many positions in common. His tenure as mayor became one of the major factors in the race. Norwood, in the final debate on Sunday, sought to cast Reed's support as a negative, tying Bottoms to the controversial aspects of Reed's tenure, including a reported bribery investigation into Atlanta City Hall.
+Reed, according to the Atlanta Journal-Constitution, has denied he is personally involved in the probe and said he would cooperate with any requests from the Justice Department.
+Reed and Norwood traded barbs for much of the race, and Norwood drew ire when the Atlanta newspaper reported she had told a group of Young Republicans that she believed she lost the 2009 mayoral race against Reed because he engaged in voter fraud -- an unsubstantiated charge that Reed's office said came without evidence.
+Bottoms, meanwhile, sought to cast Norwood as a Republican hiding behind the guise of her independent status. The city of Atlanta is a Democratic stronghold in a state that is otherwise largely Republican, and the city's government remains the only major Democratic power center in the state's political system, which is dominated by Republican officeholders.
+In a last-minute boost to Norwood -- and one with significant cachet -- former Atlanta Mayor Shirley Franklin endorsed the independent candidate over Bottoms.
+Norwood also got endorsements from several of her former competitors, and state senator Vincent Fort -- the unsuccessful candidate backed by independent Sen. Bernie Sanders of Vermont -- had kind words to say about her after the general election.
+Fort, however, declined to endorse one of the two remaining contenders and told his supporters to vote their consciences.
+Bottoms counts the backing of major Georgia Democrats like former Atlanta Mayor Andrew Young, a civil rights icon and former UN ambassador.
+And Bottoms got herself a last-minute boost as well. Democratic US Sens. Kamala Harris of California and Cory Booker of New Jersey appeared in Atlanta the weekend before the runoff election to promote her candidacy.
+Bottoms likewise has the backing of major Atlanta hip-hop figures, like Killer Mike and T.I., who compared Norwood to President Donald Trump.</string>
+                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="15"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="tSL-ku-MqU" firstAttribute="centerX" secondItem="dIP-eT-slV" secondAttribute="centerX" id="LuD-YK-8Or"/>
+                                    <constraint firstItem="tSL-ku-MqU" firstAttribute="top" secondItem="dIP-eT-slV" secondAttribute="top" constant="10" id="bZc-gW-Yel"/>
+                                    <constraint firstAttribute="bottom" secondItem="tSL-ku-MqU" secondAttribute="bottom" constant="10" id="blZ-yt-huP"/>
+                                    <constraint firstAttribute="trailing" secondItem="tSL-ku-MqU" secondAttribute="trailing" constant="10" id="gGs-35-im9"/>
+                                    <constraint firstItem="tSL-ku-MqU" firstAttribute="leading" secondItem="dIP-eT-slV" secondAttribute="leading" constant="10" id="y2V-YH-NmC"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dIP-eT-slV" firstAttribute="top" secondItem="m6Q-ZG-rnF" secondAttribute="top" id="5im-d0-7hr"/>
+                            <constraint firstItem="dIP-eT-slV" firstAttribute="trailing" secondItem="m6Q-ZG-rnF" secondAttribute="trailing" id="Bdp-U8-p8W"/>
+                            <constraint firstItem="dIP-eT-slV" firstAttribute="bottom" secondItem="WVK-K7-Bem" secondAttribute="bottom" id="CMW-Hp-Nmj"/>
+                            <constraint firstItem="dIP-eT-slV" firstAttribute="leading" secondItem="m6Q-ZG-rnF" secondAttribute="leading" id="Jr1-TD-MXC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="m6Q-ZG-rnF"/>
+                    </view>
+                    <connections>
+                        <outlet property="scrollView" destination="dIP-eT-slV" id="qwQ-ye-zc2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YAL-cw-j3E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-381" y="843"/>
         </scene>
         <!--Default Refresh Control-->
         <scene sceneID="N1T-6W-mBw">
             <objects>
-                <collectionViewController title="Default Refresh Control" id="6z7-u1-5BC" customClass="CollectionViewContentViewController" customModule="JWRefreshControlDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController title="Default Refresh Control" id="6z7-u1-5BC" customClass="CollectionViewController" customModule="JWRefreshControlDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="YRA-TG-DLq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -195,12 +282,12 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RAk-Zo-l9S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="11.25" y="369.71830985915494"/>
+            <point key="canvasLocation" x="278" y="388"/>
         </scene>
         <!--Default Refresh Control-->
         <scene sceneID="iC9-wT-Nyu">
             <objects>
-                <tableViewController title="Default Refresh Control" id="xzN-sg-CSM" customClass="TableViewContentViewController" customModule="JWRefreshControlDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Default Refresh Control" id="xzN-sg-CSM" customClass="TableViewController" customModule="JWRefreshControlDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="vZZ-73-y8d">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -235,7 +322,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3u4-iU-8Oo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="0.0" y="-307"/>
+            <point key="canvasLocation" x="278" y="-303"/>
         </scene>
     </scenes>
 </document>

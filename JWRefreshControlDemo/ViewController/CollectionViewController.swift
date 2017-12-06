@@ -1,5 +1,5 @@
 //
-//  CollectionViewContentViewController.swift
+//  CollectionViewController.swift
 //  JWRefreshControlDemo
 //
 //  Created by Jerry on 2017/11/9.
@@ -11,7 +11,7 @@ import UIKit
 private let reuseIdentifier = "default"
 private let batchCount = 27
 
-class CollectionViewContentViewController: UICollectionViewController {
+class CollectionViewController: UICollectionViewController {
     
     var data: [Int] = {
         var data: [Int]?

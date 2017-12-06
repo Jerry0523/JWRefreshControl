@@ -151,10 +151,10 @@ extension DefaultRefreshHeaderContentView : AnyRefreshContent {
         progressView.progress = progress
         if progress == 1 {
             arrowView.subType = .arrowTop
-            statusLabel.text = "Release to Refresh"
+            statusLabel.text = MsgReleaseToRefresh
         } else {
             arrowView.subType = .arrowBottom
-            statusLabel.text = "Pull to Refresh"
+            statusLabel.text = MsgPullToRefresh
         }
     }
     
@@ -163,7 +163,7 @@ extension DefaultRefreshHeaderContentView : AnyRefreshContent {
         
         loadingView.isHidden = false
         loadingView.startAnimating()
-        statusLabel.text = "Loading"
+        statusLabel.text = MsgLoading
         
     }
     
@@ -178,7 +178,7 @@ extension DefaultRefreshHeaderContentView : AnyRefreshContent {
         successView.isHidden = false
         progressView.isHidden = false
         progressView.progress = 1.0
-        statusLabel.text = "Success"
+        statusLabel.text = MsgSuccess
         loadingView.stopAnimating()
         successView.beginSimpleAnimation()
 
@@ -188,7 +188,7 @@ extension DefaultRefreshHeaderContentView : AnyRefreshContent {
         reset()
         errorLabel.isHidden = false
         errorLabel.text = msg
-        statusLabel.text = "Click to Retry"
+        statusLabel.text = MsgClickToRetry
         loadingView.stopAnimating()
         isUserInteractionEnabled = true
     }
@@ -269,7 +269,7 @@ extension DefaultRefreshFooterContentView : AnyRefreshContent {
     open func startLoading() {
         reset()
         centerLabel.isHidden = false
-        centerLabel.text = "Loading"
+        centerLabel.text = MsgLoading
     }
     
     open func stopLoading() {
@@ -282,7 +282,7 @@ extension DefaultRefreshFooterContentView : AnyRefreshContent {
         errorLabel.isHidden = false
         statusLabel.isHidden = false
         errorLabel.text = msg
-        statusLabel.text = "Click to Retry"
+        statusLabel.text = MsgClickToRetry
         isUserInteractionEnabled = true
     }
     
@@ -296,3 +296,9 @@ extension DefaultRefreshFooterContentView : AnyRefreshContent {
         reset()
     }
 }
+
+private let MsgReleaseToRefresh = NSLocalizedString("Release to Refresh", comment: "")
+private let MsgPullToRefresh = NSLocalizedString("Pull to Refresh", comment: "")
+private let MsgLoading = NSLocalizedString("Loading", comment: "")
+private let MsgSuccess = NSLocalizedString("Success", comment: "")
+private let MsgClickToRetry = NSLocalizedString("Click to Retry", comment: "")

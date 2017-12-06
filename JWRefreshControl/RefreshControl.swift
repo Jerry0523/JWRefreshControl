@@ -222,7 +222,7 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl wh
             UIView.animate(withDuration: 0.25, animations: {
                 scrollView.contentInset = self.scrollViewOriginalInset
             })
-            
+        
         case .refreshing:
             contentView.startLoading?()
             UIView.animate(withDuration: 0.25, animations: {
