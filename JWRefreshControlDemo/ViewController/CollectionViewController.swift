@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JWRefreshControl
 
 private let reuseIdentifier = "default"
 private let batchCount = 27

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JWRefreshControl
 
 private let reuseIdentifier = "default"
 private let batchCount = 10
@@ -65,6 +66,23 @@ class TableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
         cell.textLabel?.text = "This is line \(data[indexPath.row])"
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 0 {
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 30))
+            label.text = "  Hello Title"
+            label.backgroundColor = UIColor.white
+            return label
+        }
+        return nil
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 30.0
+        }
+        return 0
     }
 }
 

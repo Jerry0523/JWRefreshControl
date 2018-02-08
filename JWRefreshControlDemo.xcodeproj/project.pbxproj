@@ -24,6 +24,8 @@
 		C438C8D31FB4257B00706AD8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C438C8D01FB4257B00706AD8 /* README.md */; };
 		C438C8D41FB4257B00706AD8 /* JWRefreshControl.podspec in Resources */ = {isa = PBXBuildFile; fileRef = C438C8D11FB4257B00706AD8 /* JWRefreshControl.podspec */; };
 		C438C8D51FB4257B00706AD8 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = C438C8D21FB4257B00706AD8 /* LICENSE */; };
+		C47A43E8202C28D700F39F23 /* UIScrollView+Private.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47A43E7202C28D700F39F23 /* UIScrollView+Private.swift */; };
+		C47A43EA202C2C3200F39F23 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47A43E9202C2C3200F39F23 /* Protocols.swift */; };
 		C4C148821FD7D0BC00A68880 /* GifContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C1487B1FD7D0BC00A68880 /* GifContentView.swift */; };
 		C4C148831FD7D0BC00A68880 /* SloganContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C1487C1FD7D0BC00A68880 /* SloganContentView.swift */; };
 		C4C148841FD7D0BC00A68880 /* ScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C1487E1FD7D0BC00A68880 /* ScrollViewController.swift */; };
@@ -75,6 +77,8 @@
 		C438C8D01FB4257B00706AD8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C438C8D11FB4257B00706AD8 /* JWRefreshControl.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JWRefreshControl.podspec; sourceTree = "<group>"; };
 		C438C8D21FB4257B00706AD8 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		C47A43E7202C28D700F39F23 /* UIScrollView+Private.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Private.swift"; sourceTree = "<group>"; };
+		C47A43E9202C2C3200F39F23 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		C4C1487B1FD7D0BC00A68880 /* GifContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifContentView.swift; sourceTree = "<group>"; };
 		C4C1487C1FD7D0BC00A68880 /* SloganContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SloganContentView.swift; sourceTree = "<group>"; };
 		C4C1487E1FD7D0BC00A68880 /* ScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
@@ -139,12 +143,14 @@
 		C402AB081FB3F0AF00B8FA09 /* JWRefreshControl */ = {
 			isa = PBXGroup;
 			children = (
+				C47A43E9202C2C3200F39F23 /* Protocols.swift */,
 				C402AB0B1FB3F0CB00B8FA09 /* UIScrollView+PullRefresh.swift */,
 				C402AB091FB3F0CB00B8FA09 /* RefreshControl.swift */,
 				C402AB0A1FB3F0CB00B8FA09 /* RefreshContentView.swift */,
 				C402AB0F1FB3F1E900B8FA09 /* SimpleShapeView.swift */,
 				C402AB111FB3F20100B8FA09 /* CircleLoadingView.swift */,
 				C402AB121FB3F20200B8FA09 /* CircleProgressView.swift */,
+				C47A43E7202C28D700F39F23 /* UIScrollView+Private.swift */,
 			);
 			path = JWRefreshControl;
 			sourceTree = "<group>";
@@ -313,12 +319,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C47A43E8202C28D700F39F23 /* UIScrollView+Private.swift in Sources */,
 				C431F55C1FBD8F1200FAD488 /* UIScrollView+PullRefresh.swift in Sources */,
 				C431F55D1FBD8F1200FAD488 /* RefreshControl.swift in Sources */,
 				C431F55E1FBD8F1200FAD488 /* RefreshContentView.swift in Sources */,
 				C431F55F1FBD8F1200FAD488 /* SimpleShapeView.swift in Sources */,
 				C431F5601FBD8F1200FAD488 /* CircleLoadingView.swift in Sources */,
 				C431F5611FBD8F1200FAD488 /* CircleProgressView.swift in Sources */,
+				C47A43EA202C2C3200F39F23 /* Protocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

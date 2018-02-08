@@ -23,24 +23,6 @@
 
 import UIKit
 
-public enum PullRefreshState {
-    case idle
-    case refreshing
-    case pause
-}
-
-@objc public protocol AnyRefreshContent {
-    
-    static var preferredHeight: CGFloat { get }
-    
-    @objc optional func setProgress(progress: CGFloat)
-    @objc optional func startLoading()
-    @objc optional func stopLoading()
-    @objc optional func loadedSuccess()
-    @objc optional func loadedError(withMsg msg: String)
-    @objc optional func loadedPause(withMsg msg: String)
-}
-
 open class DefaultRefreshHeaderContentView: UIView {
     
     override init(frame: CGRect) {
@@ -297,8 +279,16 @@ extension DefaultRefreshFooterContentView : AnyRefreshContent {
     }
 }
 
-private let MsgReleaseToRefresh = NSLocalizedString("Release to Refresh", comment: "")
-private let MsgPullToRefresh = NSLocalizedString("Pull to Refresh", comment: "")
-private let MsgLoading = NSLocalizedString("Loading", comment: "")
-private let MsgSuccess = NSLocalizedString("Success", comment: "")
-private let MsgClickToRetry = NSLocalizedString("Click to Retry", comment: "")
+fileprivate extension String {
+    
+    var localized: String {
+        return NSLocalizedString(self, comment: "")
+    }
+    
+}
+
+private let MsgReleaseToRefresh = "Release to Refresh".localized
+private let MsgPullToRefresh = "Pull to Refresh".localized
+private let MsgLoading = "Loading".localized
+private let MsgSuccess = "Success".localized
+private let MsgClickToRetry = "Click to Retry".localized
