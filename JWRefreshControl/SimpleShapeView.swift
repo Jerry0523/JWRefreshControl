@@ -23,45 +23,58 @@
 
 import UIKit
 
-public enum SimpleShapeType : String {
-    case custom = "custom"
-    case yes = "yes"
-    case arrow = "arrow"
-    case heart = "heart"
-    case pentastar = "pentastar"
-    case add = "add"
-    case close = "close"
-    
-    public var shapeData: [String]? {
-        switch self {
-        case .yes:
-            return ["0.04,0.53|1", "0.4,0.9", "0.96,0.1"]
-        case .arrow:
-            return ["0.5,0.98|1", "0.5,0.02", "0.2,0.36", "0.5,0.02|1", "0.8,0.36"]
-        case .heart:
-            return ["0.5,0.3|1", "0.08,0.26,0.28,0.03,0.1,0.18|2", "0.11,0.51,0.05,0.36,0.06,0.45|2", "0.5,0.9,0.2,0.65|3", "0.89,0.51,0.8,0.65|3","0.92,0.26,0.94,0.45,0.95,0.36|2", "0.5,0.3,0.9,0.18,0.72,0.03|2"]
-        case .pentastar:
-            return ["0.5,0.05|1", "0.6,0.39", "0.95,0.39", "0.67,0.6", "0.77,0.93", "0.5,0.73", "0.23,0.93", "0.33,0.6", "0.05,0.39", "0.4,0.39", "0.5,0.05"]
-        case .add:
-            return ["0.04,0.5|1", "0.96,0.5", "0.5,0.04|1", "0.5,0.96"]
-        case .close:
-            return ["0.16,0.16|1", "0.82,0.82", "0.84,0.16|1", "0.18,0.82"]
-        default:
-            return nil
-        }
-    }
-}
-
-public enum SimpleShapeSubType : String {
-    case arrowTop = "top"
-    case arrowBottom = "bottom"
-    case arrowLeft = "left"
-    case arrowRight = "right"
-    case pentastarHalf = "half"
-}
-
 @IBDesignable
 open class SimpleShapeView: UIView {
+    
+    public enum SimpleShapeType : String {
+        
+        case custom = "custom"
+        
+        case yes = "yes"
+        
+        case arrow = "arrow"
+        
+        case heart = "heart"
+        
+        case pentastar = "pentastar"
+        
+        case add = "add"
+        
+        case close = "close"
+        
+        public var shapeData: [String]? {
+            switch self {
+            case .yes:
+                return ["0.04,0.53|1", "0.4,0.9", "0.96,0.1"]
+            case .arrow:
+                return ["0.5,0.98|1", "0.5,0.02", "0.2,0.36", "0.5,0.02|1", "0.8,0.36"]
+            case .heart:
+                return ["0.5,0.3|1", "0.08,0.26,0.28,0.03,0.1,0.18|2", "0.11,0.51,0.05,0.36,0.06,0.45|2", "0.5,0.9,0.2,0.65|3", "0.89,0.51,0.8,0.65|3","0.92,0.26,0.94,0.45,0.95,0.36|2", "0.5,0.3,0.9,0.18,0.72,0.03|2"]
+            case .pentastar:
+                return ["0.5,0.05|1", "0.6,0.39", "0.95,0.39", "0.67,0.6", "0.77,0.93", "0.5,0.73", "0.23,0.93", "0.33,0.6", "0.05,0.39", "0.4,0.39", "0.5,0.05"]
+            case .add:
+                return ["0.04,0.5|1", "0.96,0.5", "0.5,0.04|1", "0.5,0.96"]
+            case .close:
+                return ["0.16,0.16|1", "0.82,0.82", "0.84,0.16|1", "0.18,0.82"]
+            default:
+                return nil
+            }
+        }
+    }
+    
+    public enum SimpleShapeSubType : String {
+        
+        case arrowTop = "top"
+        
+        case arrowBottom = "bottom"
+        
+        case arrowLeft = "left"
+        
+        case arrowRight = "right"
+        
+        case pentastarHalf = "half"
+        
+    }
     
     @IBInspectable open var lineWidth: CGFloat = 2.0 {
         didSet {

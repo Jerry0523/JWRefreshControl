@@ -23,27 +23,27 @@
 
 import UIKit
 
-public enum RefreshHeaderInteraction {
+open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl where T: AnyRefreshContent & UIView {
     
-    case still
-    
-    case follow
-    
-    fileprivate func update<T>(content: T, context: UIView) where T: UIView & AnyRefreshContent {
-        let viewHeight = T.preferredHeight
-        switch self {
-        case .still:
-            content.frame = CGRect(x: 0, y: 0, width: context.frame.size.width, height: viewHeight)
-            content.autoresizingMask = .flexibleWidth
-            
-        case .follow:
-            content.frame = CGRect(x: 0, y: context.frame.size.height - viewHeight, width: context.frame.size.width, height: viewHeight)
-            content.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
+    public enum RefreshHeaderInteraction {
+        
+        case still
+        
+        case follow
+        
+        fileprivate func update<T>(content: T, context: UIView) where T: UIView & AnyRefreshContent {
+            let viewHeight = T.preferredHeight
+            switch self {
+            case .still:
+                content.frame = CGRect(x: 0, y: 0, width: context.frame.size.width, height: viewHeight)
+                content.autoresizingMask = .flexibleWidth
+                
+            case .follow:
+                content.frame = CGRect(x: 0, y: context.frame.size.height - viewHeight, width: context.frame.size.width, height: viewHeight)
+                content.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
+            }
         }
     }
-}
-
-open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl where T: AnyRefreshContent & UIView {
     
     open var style: RefreshHeaderInteraction = .still {
         didSet {

@@ -75,7 +75,23 @@ public protocol AnyRefreshContext : class where ContentType : AnyRefreshContent 
     
 }
 
-public extension RefreshControl where Self : AnyRefreshContext {
+protocol AnyRefreshObserver : class {
+    
+    weak var scrollView: UIScrollView? { get set }
+    
+    var keyPathObservations: [NSKeyValueObservation] { get set }
+    
+    func registKVO()
+    
+    func removeKVO()
+    
+    func scrollViewContentOffsetDidChange()
+    
+    func updateContentViewByStateChanged()
+    
+}
+
+extension RefreshControl where Self : AnyRefreshContext {
     
     public func loadedPause(withMsg msg: String) {
         contentView.loadedPause?(withMsg: msg)
@@ -103,23 +119,7 @@ public extension RefreshControl where Self : AnyRefreshContext {
     }
 }
 
-protocol AnyRefreshObserver : class {
-    
-    weak var scrollView: UIScrollView? { get set }
-    
-    var keyPathObservations: [NSKeyValueObservation] { get set }
-    
-    func registKVO()
-    
-    func removeKVO()
-    
-    func scrollViewContentOffsetDidChange()
-    
-    func updateContentViewByStateChanged()
-    
-}
-
-extension AnyRefreshObserver {
+extension RefreshControl where Self : AnyRefreshObserver {
     
     func registKVO() {
         guard let scrollView = scrollView else {

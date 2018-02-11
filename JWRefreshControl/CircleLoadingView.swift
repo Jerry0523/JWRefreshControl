@@ -23,13 +23,18 @@
 
 import UIKit
 
-public enum CircleLoadingStyle {
-    case `default`
-    case cumulative
-    case gradient
-}
-
 open class CircleLoadingView: UIView {
+    
+    public enum CircleLoadingStyle {
+        
+        case `default`
+        
+        case cumulative
+        
+        case gradient
+        
+    }
+    
     open private(set) var isAnimating = false {
         didSet {
             isHidden = !isAnimating

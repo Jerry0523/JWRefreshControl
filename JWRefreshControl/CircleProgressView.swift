@@ -23,12 +23,14 @@
 
 import UIKit
 
-public enum CircleProgressStyle {
-    case `default`
-    case pie
-}
-
 open class CircleProgressView: UIView {
+    
+    public enum CircleProgressStyle {
+        
+        case `default`
+        
+        case pie
+    }
     
     open var progress: CGFloat = 0 {
         didSet {
