@@ -83,8 +83,13 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl wh
         removeKVO()
         self.scrollView = scrollView
         scrollView.alwaysBounceVertical = true
-        panGestureRecognizer = scrollView.panGestureRecognizer
         registKVO()
+        let panGestureRecognizer = scrollView.panGestureRecognizer
+        keyPathObservations.append(
+            panGestureRecognizer.observe(\.state, changeHandler: { [weak self] (scrollView, change) in
+                self?.scrollViewPanGestureStateDidChange()
+            })
+        )
     }
     
     private func setup() {
@@ -94,33 +99,86 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl wh
         style.update(content: contentView, context: self)
     }
     
-    private func removeKVO() {
-        keyPathObservations = []
-        scrollView = nil
-        panGestureRecognizer = nil
-    }
-    
-    private func registKVO() {
-        guard let scrollView = scrollView, let panGestureRecognizer = panGestureRecognizer else {
+    private func scrollViewPanGestureStateDidChange() {
+        guard let scrollView = scrollView else {
             return
         }
-        
-        var observations: [NSKeyValueObservation] = []
-        observations.append(
-            scrollView.observe(\.contentOffset, changeHandler: { [weak self] (scrollView, change) in
-                self?.scrollViewContentOffsetDidChange()
-            })
-        )
-        
-        observations.append(
-            panGestureRecognizer.observe(\.state, changeHandler: { [weak self] (scrollView, change) in
-                self?.scrollViewPanGestureStateDidChange()
-            })
-        )
-        keyPathObservations = observations
+        if scrollView.panGestureRecognizer.state == .ended {
+            if state != .idle {
+                return
+            }
+            var offsetY = -(scrollView.contentInset.top + scrollView.contentOffset.y)
+            if #available(iOS 11.0, *) {
+                offsetY -= (scrollView.adjustedContentInset.top - scrollView.contentInset.top)
+            }
+            if (offsetY >= contentView.frame.size.height) {
+                state = .refreshing
+            } else {
+                state = .idle
+            }
+        }
     }
     
-    private func scrollViewContentOffsetDidChange() {
+    weak var scrollView: UIScrollView?
+    
+    var keyPathObservations: [NSKeyValueObservation] = []
+    
+}
+
+open class RefreshFooterControl<T>: UIView , AnyRefreshContext, RefreshControl where T: AnyRefreshContent, T: UIView {
+    
+    open var state = PullRefreshState.idle {
+        didSet {
+            if state != oldValue {
+                updateContentViewByStateChanged()
+            }
+        }
+    }
+    
+    open var refreshingBlock: ((RefreshFooterControl<T>) -> ())?
+    
+    open var preFetchedDistance: CGFloat = 0
+    
+    open let contentView = T()
+    
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    open override func willMove(toSuperview newSuperview: UIView?) {
+        super.willMove(toSuperview: newSuperview)
+        guard let scrollView = newSuperview as? UIScrollView else {
+            return
+        }
+        removeKVO()
+        contentView.frame = CGRect(x: 0, y: 0, width:scrollView.frame.size.width, height: T.preferredHeight)
+        self.scrollView = scrollView
+        scrollView.alwaysBounceVertical = true
+        registKVO()
+    }
+    
+    private func setup() {
+        autoresizingMask = .flexibleWidth
+        clipsToBounds = true
+        addSubview(contentView)
+        isHidden = true
+    }
+    
+    weak var scrollView: UIScrollView?
+    
+    var keyPathObservations: [NSKeyValueObservation] = []
+    
+}
+
+extension RefreshHeaderControl : AnyRefreshObserver {
+    
+    func scrollViewContentOffsetDidChange() {
         guard let scrollView = scrollView else {
             return
         }
@@ -160,24 +218,7 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl wh
         
     }
     
-    private func scrollViewPanGestureStateDidChange() {
-        if scrollView!.panGestureRecognizer.state == .ended {
-            if state != .idle {
-                return
-            }
-            var offsetY = -(scrollView!.contentInset.top + scrollView!.contentOffset.y)
-            if #available(iOS 11.0, *) {
-                offsetY -= (scrollView!.adjustedContentInset.top - scrollView!.contentInset.top)
-            }
-            if (offsetY >= contentView.frame.size.height) {
-                state = .refreshing
-            } else {
-                state = .idle
-            }
-        }
-    }
-    
-    private func updateContentViewByStateChanged() {
+    func updateContentViewByStateChanged() {
         guard let scrollView = scrollView else {
             return
         }
@@ -188,7 +229,7 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl wh
             UIView.animate(withDuration: 0.25, animations: {
                 scrollView.jw_updateHeaderInset(0)
             })
-        
+            
         case .refreshing:
             contentView.startLoading?()
             UIView.animate(withDuration: 0.25, animations: {
@@ -201,82 +242,11 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl wh
             break
         }
     }
-    
-    private weak var scrollView: UIScrollView?
-    
-    private weak var panGestureRecognizer: UIPanGestureRecognizer?
-    
-    private var keyPathObservations: [NSKeyValueObservation] = []
-    
-    private var scrollViewLastOffset = CGPoint.zero
-    
 }
 
-open class RefreshFooterControl<T>: UIView , AnyRefreshContext, RefreshControl where T: AnyRefreshContent, T: UIView {
+extension RefreshFooterControl : AnyRefreshObserver {
     
-    open var state = PullRefreshState.idle {
-        didSet {
-            if state != oldValue {
-                updateContentViewByStateChanged()
-            }
-        }
-    }
-    
-    open var refreshingBlock: ((RefreshFooterControl<T>) -> ())?
-    
-    open var preFetchedDistance: CGFloat = 0
-    
-    open let contentView = T()
-    
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-    
-    open override func willMove(toSuperview newSuperview: UIView?) {
-        super.willMove(toSuperview: newSuperview)
-        guard let scrollView = newSuperview as? UIScrollView else {
-            return
-        }
-        contentView.frame = CGRect(x: 0, y: 0, width:scrollView.frame.size.width, height: T.preferredHeight)
-        self.scrollView = scrollView
-        scrollView.alwaysBounceVertical = true
-        registKVO()
-    }
-    
-    private func removeKVO() {
-        keyPathObservations = []
-        scrollView = nil
-    }
-    
-    private func registKVO() {
-        guard let scrollView = scrollView else {
-            return
-        }
-        
-        var observations: [NSKeyValueObservation] = []
-        
-        observations.append(
-            scrollView.observe(\.contentOffset, changeHandler: { [weak self] (scrollView, change) in
-                self?.scrollViewContentOffsetDidChange()
-            })
-        )
-        keyPathObservations = observations
-    }
-    
-    private func setup() {
-        autoresizingMask = .flexibleWidth
-        clipsToBounds = true
-        addSubview(contentView)
-        isHidden = true
-    }
-    
-    private func scrollViewContentOffsetDidChange() {
+    func scrollViewContentOffsetDidChange() {
         guard let scrollView = scrollView else {
             return
         }
@@ -296,7 +266,7 @@ open class RefreshFooterControl<T>: UIView , AnyRefreshContext, RefreshControl w
         }
     }
     
-    private func updateContentViewByStateChanged() {
+    public func updateContentViewByStateChanged() {
         guard let scrollView = scrollView else {
             return
         }
@@ -320,9 +290,4 @@ open class RefreshFooterControl<T>: UIView , AnyRefreshContext, RefreshControl w
             break
         }
     }
-    
-    private weak var scrollView: UIScrollView?
-    
-    private var keyPathObservations: [NSKeyValueObservation] = []
-    
 }

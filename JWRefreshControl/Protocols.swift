@@ -72,6 +72,7 @@ public protocol AnyRefreshContext : class where ContentType : AnyRefreshContent 
     var contentView: ContentType { get }
     
     var state: PullRefreshState { get set }
+    
 }
 
 public extension RefreshControl where Self : AnyRefreshContext {
@@ -99,5 +100,41 @@ public extension RefreshControl where Self : AnyRefreshContext {
         DispatchQueue.main.asyncAfter(deadline: .now() + (withDelay ?? 0.6)) {[weak self] in
             self?.state = .idle
         }
+    }
+}
+
+protocol AnyRefreshObserver : class {
+    
+    weak var scrollView: UIScrollView? { get set }
+    
+    var keyPathObservations: [NSKeyValueObservation] { get set }
+    
+    func registKVO()
+    
+    func removeKVO()
+    
+    func scrollViewContentOffsetDidChange()
+    
+    func updateContentViewByStateChanged()
+    
+}
+
+extension AnyRefreshObserver {
+    
+    func registKVO() {
+        guard let scrollView = scrollView else {
+            return
+        }
+        
+        keyPathObservations = [
+            scrollView.observe(\.contentOffset, changeHandler: { [weak self] (scrollView, change) in
+                self?.scrollViewContentOffsetDidChange()
+            })
+        ]
+    }
+    
+    func removeKVO() {
+        scrollView = nil
+        keyPathObservations = []
     }
 }
