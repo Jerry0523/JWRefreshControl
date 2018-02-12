@@ -31,7 +31,7 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl wh
         
         case follow
         
-        fileprivate func update<T>(content: T, context: UIView) where T: UIView & AnyRefreshContent {
+        func update<T>(content: T, context: UIView) where T: UIView & AnyRefreshContent {
             let viewHeight = T.preferredHeight
             switch self {
             case .still:
@@ -125,7 +125,7 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl wh
     
 }
 
-open class RefreshFooterControl<T>: UIView , AnyRefreshContext, RefreshControl where T: AnyRefreshContent, T: UIView {
+open class RefreshFooterControl<T>: UIView , AnyRefreshContext, RefreshControl where T: AnyRefreshContent & UIView {
     
     open var state = PullRefreshState.idle {
         didSet {
