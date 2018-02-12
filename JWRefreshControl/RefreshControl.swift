@@ -25,34 +25,6 @@ import UIKit
 
 open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl where T: AnyRefreshContent & UIView {
     
-    public enum RefreshHeaderInteraction {
-        
-        case still
-        
-        case follow
-        
-        func update<T>(content: T, context: UIView) where T: UIView & AnyRefreshContent {
-            let viewHeight = T.preferredHeight
-            switch self {
-            case .still:
-                content.frame = CGRect(x: 0, y: 0, width: context.frame.size.width, height: viewHeight)
-                content.autoresizingMask = .flexibleWidth
-                
-            case .follow:
-                content.frame = CGRect(x: 0, y: context.frame.size.height - viewHeight, width: context.frame.size.width, height: viewHeight)
-                content.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
-            }
-        }
-    }
-    
-    open var style: RefreshHeaderInteraction = .still {
-        didSet {
-            if style != oldValue {
-                style.update(content: contentView, context: self)
-            }
-        }
-    }
-    
     public var state = PullRefreshState.idle {
         didSet {
             if state != oldValue {
@@ -95,8 +67,19 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl wh
     private func setup() {
         autoresizingMask = .flexibleWidth
         clipsToBounds = true
+        layout(contentView: contentView)
         addSubview(contentView)
-        style.update(content: contentView, context: self)
+    }
+    
+    private func layout(contentView: T) {
+        let viewHeight = T.preferredHeight
+        if T.self.isPinnedToEdge ?? false {
+            contentView.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: viewHeight)
+            contentView.autoresizingMask = .flexibleWidth
+        } else {
+            contentView.frame = CGRect(x: 0, y: self.frame.size.height - viewHeight, width: self.frame.size.width, height: viewHeight)
+            contentView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
+        }
     }
     
     private func scrollViewPanGestureStateDidChange() {
@@ -111,7 +94,7 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl wh
             if #available(iOS 11.0, *) {
                 offsetY -= (scrollView.adjustedContentInset.top - scrollView.contentInset.top)
             }
-            if (offsetY >= contentView.frame.size.height) {
+            if (offsetY >= T.preferredHeight) {
                 state = .refreshing
             } else {
                 state = .idle
@@ -194,7 +177,7 @@ extension RefreshHeaderControl : AnyRefreshObserver {
             frame = CGRect(x: 0, y: -offsetY, width: scrollView.frame.size.width, height: offsetY)
             
             if state == .idle {
-                contentView.setProgress?(progress: frame.size.height / contentView.frame.size.height)
+                contentView.setProgress?(progress: frame.size.height / T.preferredHeight)
             }
         }
         
@@ -205,7 +188,7 @@ extension RefreshHeaderControl : AnyRefreshObserver {
                 insetsTop = 0
             }
             
-            insetsTop = min(contentView.frame.size.height, insetsTop)
+            insetsTop = min(T.preferredHeight, insetsTop)
             insetsTop = max(0, insetsTop)
             
             if scrollView.jw_adjustedContentInset.top != insetsTop {
@@ -233,7 +216,7 @@ extension RefreshHeaderControl : AnyRefreshObserver {
         case .refreshing:
             contentView.startLoading?()
             UIView.animate(withDuration: 0.25, animations: {
-                scrollView.jw_updateHeaderInset(self.contentView.frame.size.height)
+                scrollView.jw_updateHeaderInset(T.preferredHeight)
             }, completion: { (finished) in
                 self.refreshingBlock?(self)
                 self.scrollView?.refreshFooter?.stopLoading()
@@ -262,7 +245,12 @@ extension RefreshFooterControl : AnyRefreshObserver {
             contentHeight >= scrollView.frame.size.height &&
             scrollView.contentOffset.y + scrollView.frame.size.height - scrollView.contentSize.height > offsetSpace {
             state = .refreshing
-            frame = CGRect(x: 0, y: scrollView.contentSize.height, width: scrollView.frame.size.width, height: contentView.frame.size.height)
+            if T.self.isPinnedToEdge ?? false {
+                let offsetY = scrollView.contentOffset.y + scrollView.frame.size.height - T.preferredHeight
+                frame = CGRect(x: 0, y: offsetY, width: scrollView.frame.size.width, height: T.preferredHeight)
+            } else {
+                frame = CGRect(x: 0, y: scrollView.contentSize.height, width: scrollView.frame.size.width, height: T.preferredHeight)
+            }
         }
     }
     
@@ -277,7 +265,7 @@ extension RefreshFooterControl : AnyRefreshObserver {
             contentView.stopLoading?()
             scrollView.jw_updateFooterInset(0)
         case .refreshing:
-            scrollView.jw_updateFooterInset(contentView.frame.size.height)
+            scrollView.jw_updateFooterInset(T.preferredHeight)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: {
                 self.refreshingBlock?(self)
             })

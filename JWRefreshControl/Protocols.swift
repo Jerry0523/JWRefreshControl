@@ -37,30 +37,46 @@ public protocol RefreshControl {
     
 }
 
+/// A type that any contentView of the refresh control (header or footer) should conform to
 @objc public protocol AnyRefreshContent {
     
+    ///The preferred height of the content view
     static var preferredHeight: CGFloat { get }
     
+    ///Whether the content view should pin to the edge
+    ///e.g. when the content view is on a refresh header, and isPinnedToEdge set to true, the content view will pin to the top of the scrollView without scrolling
+    @objc optional static var isPinnedToEdge: Bool { get }
+    
+    ///When the refresh actions are beging triggered
     @objc optional func setProgress(progress: CGFloat)
     
+    ///When the refresh control is beginning to load
     @objc optional func startLoading()
     
+    ///When the refresh control is stopped
     @objc optional func stopLoading()
     
+    ///When the refresh control loaded successfully
     @objc optional func loadedSuccess()
     
+    ///When an error occurred
     @objc optional func loadedError(withMsg msg: String)
     
+    ///When the refresh control is paused
+    ///Paused means that the scrollView keeps the state of refreshing (e.g. contentInset), but with no more listening to the refresh actions
     @objc optional func loadedPause(withMsg msg: String)
     
 }
 
 public enum PullRefreshState {
     
+    ///The default state, do nothing and listen to the scrollview state change
     case idle
     
+    ///The refreshing state, which will change the scrollView's contentInset and call the refreshing closures
     case refreshing
     
+    //The paused state, which will keeps the scrollView's refreshing state (e.g. contentInset) and stop listening to the actions
     case pause
     
 }

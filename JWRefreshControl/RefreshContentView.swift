@@ -118,9 +118,10 @@ open class DefaultRefreshHeaderContentView: UIView {
 }
 
 extension DefaultRefreshHeaderContentView : AnyRefreshContent {
-    open static var preferredHeight: CGFloat {
-        return 70.0
-    }
+    
+    open static var preferredHeight = CGFloat(70.0)
+    
+    open static var isPinnedToEdge = true
     
     open func setProgress(progress: CGFloat) {
         reset()
@@ -244,9 +245,8 @@ open class DefaultRefreshFooterContentView : UIView {
 }
 
 extension DefaultRefreshFooterContentView : AnyRefreshContent {
-    open static var preferredHeight: CGFloat {
-        return 50.0
-    }
+    
+    open static var preferredHeight = CGFloat(50.0)
     
     open func startLoading() {
         reset()

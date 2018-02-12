@@ -19,10 +19,6 @@ class ScrollViewController: UIViewController {
         scrollView.addCustomRefreshHeader { (header: RefreshHeaderControl<GifContentView>) in
             header.loadedSuccess()
         }
-        
-        let refreshHeader = scrollView.refreshHeader as? RefreshHeaderControl<GifContentView>
-        refreshHeader?.style = .follow
-
     }
 
     override func didReceiveMemoryWarning() {
