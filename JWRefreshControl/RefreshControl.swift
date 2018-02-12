@@ -49,10 +49,17 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl wh
     
     open override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
+        
+        if newSuperview == nil {
+            self.state = .idle
+        }
+        
+        removeKVO()
+        
         guard let scrollView = newSuperview as? UIScrollView else {
             return
         }
-        removeKVO()
+        
         self.scrollView = scrollView
         scrollView.alwaysBounceVertical = true
         registKVO()
@@ -136,10 +143,16 @@ open class RefreshFooterControl<T>: UIView , AnyRefreshContext, RefreshControl w
     
     open override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
+        
+        if newSuperview == nil {
+            self.state = .idle
+        }
+        
+        removeKVO()
+        
         guard let scrollView = newSuperview as? UIScrollView else {
             return
         }
-        removeKVO()
         contentView.frame = CGRect(x: 0, y: 0, width:scrollView.frame.size.width, height: T.preferredHeight)
         self.scrollView = scrollView
         scrollView.alwaysBounceVertical = true
