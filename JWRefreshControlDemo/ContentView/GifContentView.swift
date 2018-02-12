@@ -44,7 +44,7 @@ extension GifContentView : AnyRefreshContent {
         imageView.stopAnimating()
     }
     
-    func setProgress(progress: CGFloat) {
+    func setProgress(_ progress: CGFloat) {
         imageView.stopAnimating()
         imageView.image = UIImage.init(named: "frame\(Int(progress * 25.0) % FrameCount)")
     }

@@ -123,7 +123,7 @@ extension DefaultRefreshHeaderContentView : AnyRefreshContent {
     
     open static var isPinnedToEdge = true
     
-    open func setProgress(progress: CGFloat) {
+    open func setProgress(_ progress: CGFloat) {
         reset()
         
         arrowView.isHidden = false

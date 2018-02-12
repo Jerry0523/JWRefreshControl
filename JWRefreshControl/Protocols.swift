@@ -48,7 +48,7 @@ public protocol RefreshControl {
     @objc optional static var isPinnedToEdge: Bool { get }
     
     ///When the refresh actions are beging triggered
-    @objc optional func setProgress(progress: CGFloat)
+    @objc optional func setProgress(_ progress: CGFloat)
     
     ///When the refresh control is beginning to load
     @objc optional func startLoading()

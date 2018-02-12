@@ -177,7 +177,7 @@ extension RefreshHeaderControl : AnyRefreshObserver {
             frame = CGRect(x: 0, y: -offsetY, width: scrollView.frame.size.width, height: offsetY)
             
             if state == .idle {
-                contentView.setProgress?(progress: frame.size.height / T.preferredHeight)
+                contentView.setProgress?(frame.size.height / T.preferredHeight)
             }
         }
         

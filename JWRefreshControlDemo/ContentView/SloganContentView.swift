@@ -41,7 +41,7 @@ extension SloganContentView : AnyRefreshContent {
         return 120
     }
     
-    func setProgress(progress: CGFloat) {
+    func setProgress(_ progress: CGFloat) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         sloganLayer.strokeEnd = progress
