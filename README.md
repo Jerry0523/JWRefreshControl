@@ -4,6 +4,8 @@
 # JWRefreshControlDemo
 A refresh control(refresh header &amp; footer for scrollview) for iOS app.
 
+![alt tag](https://raw.githubusercontent.com/Jerry0523/JWRefreshControl/master/screenshot.gif)
+
 Usage
 -------
 
