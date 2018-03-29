@@ -29,7 +29,7 @@ self.tableView.addRefreshFooter { [weak self] (footer) in
 ```swift
 self.webView.scrollView.addCustomRefreshHeader { [weak self] (header: RefreshHeaderControl<SloganHeaderContentView>) in
     self?.webView.reload()
-    header.loadedSuccess()
+    header.success()
 }
 ```
 
@@ -37,22 +37,22 @@ self.webView.scrollView.addCustomRefreshHeader { [weak self] (header: RefreshHea
 
 - Notify refresh successfully
 ```swift
-self.tableView.refreshHeader.loadedSuccess()
+self.tableView.refreshHeader.success()
 ```
 
 - Notify refresh error
 ```swift
-self.tableView.refreshHeader.loadedError(withMsg: "Network Error")
+self.tableView.refreshHeader.error(withMsg: "Network Error")
 ```
 
 - Notify no more data
 ```swift
-self.tableView.refreshFooter.loadedPause(withMsg: "No More Data")
+self.tableView.refreshFooter.pause(withMsg: "No More Data")
 ```
 
 - Notify fetch task to stop
 ```swift
-self.tableView.refreshHeader.stopLoading()
+self.tableView.refreshHeader.stop()
 ```
 
 ## Installation with CocoaPods

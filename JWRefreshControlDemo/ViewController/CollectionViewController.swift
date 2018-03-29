@@ -37,7 +37,7 @@ class CollectionViewController: UICollectionViewController {
             
             FakeRequest.createMockData(forStartIndex: 1, batchCount: batchCount, callBack: { [weak self] (output) in
                 self?.data = output
-                header.loadedSuccess()
+                header.success()
                 self?.collectionView?.reloadData()
             })
         }
@@ -48,11 +48,11 @@ class CollectionViewController: UICollectionViewController {
             }
             
             if self!.data.count >= batchCount * 3 {
-                footer.loadedPause(withMsg: "No More Data")
+                footer.pause(withMsg: "No More Data")
             } else {
                 FakeRequest.createMockData(forStartIndex: self!.data.count + 1, callBack: { [weak self] (output) in
                     self?.data.append(contentsOf: output)
-                    footer.loadedSuccess()
+                    footer.success()
                     self?.collectionView?.reloadData()
                 })
             }

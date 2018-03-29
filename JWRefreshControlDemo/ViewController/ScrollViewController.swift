@@ -17,7 +17,7 @@ class ScrollViewController: UIViewController {
         super.viewDidLoad()
         
         scrollView.addCustomRefreshHeader { (header: RefreshHeaderControl<GifContentView>) in
-            header.loadedSuccess()
+            header.success()
         }
     }
 

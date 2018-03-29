@@ -25,15 +25,15 @@ import UIKit
 
 public protocol RefreshControl {
     
-    func startLoading()
+    func start()
     
-    func stopLoading()
+    func stop()
     
-    func loadedSuccess(withDelay: TimeInterval?)
+    func success(withDelay: TimeInterval?)
     
-    func loadedPause(withMsg msg: String)
+    func pause(withMsg msg: String)
     
-    func loadedError(withMsg msg: String)
+    func error(withMsg msg: String)
     
 }
 
@@ -51,20 +51,20 @@ public protocol RefreshControl {
     @objc optional func setProgress(_ progress: CGFloat)
     
     ///When the refresh control is beginning to load
-    @objc optional func startLoading()
+    @objc optional func start()
     
     ///When the refresh control is stopped
-    @objc optional func stopLoading()
+    @objc optional func stop()
     
     ///When the refresh control loaded successfully
-    @objc optional func loadedSuccess()
+    @objc optional func success()
     
     ///When an error occurred
-    @objc optional func loadedError(withMsg msg: String)
+    @objc optional func error(withMsg msg: String)
     
     ///When the refresh control is paused
     ///Paused means that the scrollView keeps the state of refreshing (e.g. contentInset), but with no more listening to the refresh actions
-    @objc optional func loadedPause(withMsg msg: String)
+    @objc optional func pause(withMsg msg: String)
     
 }
 
@@ -109,26 +109,26 @@ protocol AnyRefreshObserver : class {
 
 extension RefreshControl where Self : AnyRefreshContext {
     
-    public func loadedPause(withMsg msg: String) {
-        contentView.loadedPause?(withMsg: msg)
+    public func pause(withMsg msg: String) {
+        contentView.pause?(withMsg: msg)
         state = .pause
     }
     
-    public func loadedError(withMsg msg: String) {
-        contentView.loadedError?(withMsg: msg)
+    public func error(withMsg msg: String) {
+        contentView.error?(withMsg: msg)
         state = .pause
     }
     
-    public func startLoading() {
+    public func start() {
         state = .refreshing
     }
     
-    public func stopLoading() {
+    public func stop() {
         state = .idle
     }
     
-    public func loadedSuccess(withDelay: TimeInterval? = 0.6) {
-        contentView.loadedSuccess?()
+    public func success(withDelay: TimeInterval? = 0.6) {
+        contentView.success?()
         DispatchQueue.main.asyncAfter(deadline: .now() + (withDelay ?? 0.6)) {[weak self] in
             self?.state = .idle
         }

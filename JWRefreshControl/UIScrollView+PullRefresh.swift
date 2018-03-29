@@ -75,7 +75,7 @@ public extension UIScrollView {
     
     public func removeRefreshHeader() {
         let headerControl = refreshHeader
-        headerControl?.stopLoading()
+        headerControl?.stop()
         if let refreshView = headerControl as? UIView {
             refreshView.removeFromSuperview()
         }
@@ -84,7 +84,7 @@ public extension UIScrollView {
     
     public func removeRefreshFooter() {
         let footerControl = refreshFooter
-        footerControl?.stopLoading()
+        footerControl?.stop()
         if let refreshView = footerControl as? UIView {
             refreshView.removeFromSuperview()
         }

@@ -36,11 +36,11 @@ extension GifContentView : AnyRefreshContent {
         return 160.0
     }
     
-    func startLoading() {
+    func start() {
         imageView.startAnimating()
     }
     
-    func stopLoading() {
+    func stop() {
         imageView.stopAnimating()
     }
     

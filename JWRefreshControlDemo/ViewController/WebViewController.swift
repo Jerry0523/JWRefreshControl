@@ -19,7 +19,7 @@ class WebViewViewController: UIViewController {
         
         webView.scrollView.addCustomRefreshHeader { [weak self] (header: RefreshHeaderControl<SloganContentView>) in
             self?.webView.reload()
-            header.loadedSuccess()
+            header.success()
         }        
         webView.load(URLRequest.init(url: URL.init(string: "https://www.apple.com")!))
     }

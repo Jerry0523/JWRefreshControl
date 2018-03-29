@@ -221,18 +221,18 @@ extension RefreshHeaderControl : AnyRefreshObserver {
         
         switch state {
         case .idle:
-            contentView.stopLoading?()
+            contentView.stop?()
             UIView.animate(withDuration: 0.25, animations: {
                 scrollView.jw_updateHeaderInset(0)
             })
             
         case .refreshing:
-            contentView.startLoading?()
+            contentView.start?()
             UIView.animate(withDuration: 0.25, animations: {
                 scrollView.jw_updateHeaderInset(T.preferredHeight)
             }, completion: { (finished) in
                 self.refreshingBlock?(self)
-                self.scrollView?.refreshFooter?.stopLoading()
+                self.scrollView?.refreshFooter?.stop()
             })
         default:
             break
@@ -275,7 +275,7 @@ extension RefreshFooterControl : AnyRefreshObserver {
         switch state {
         case .idle:
             isHidden = true
-            contentView.stopLoading?()
+            contentView.stop?()
             scrollView.jw_updateFooterInset(0)
         case .refreshing:
             scrollView.jw_updateFooterInset(T.preferredHeight)
@@ -286,7 +286,7 @@ extension RefreshFooterControl : AnyRefreshObserver {
             var contentFrame = contentView.frame
             contentFrame.size.width = scrollView.frame.size.width
             contentView.frame = contentFrame
-            contentView.startLoading?()
+            contentView.start?()
         default:
             break
         }

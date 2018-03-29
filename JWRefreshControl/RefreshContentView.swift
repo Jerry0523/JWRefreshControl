@@ -96,7 +96,7 @@ open class DefaultRefreshHeaderContentView: UIView {
     @objc private func didTapContentView(sender: Any?) {
         if let refreshable = superview as? RefreshHeaderControl<DefaultRefreshHeaderContentView> {
             refreshable.refreshingBlock?(refreshable)
-            startLoading()
+            start()
         }
     }
     
@@ -141,7 +141,7 @@ extension DefaultRefreshHeaderContentView : AnyRefreshContent {
         }
     }
     
-    open func startLoading() {
+    open func start() {
         reset()
         
         loadingView.isHidden = false
@@ -150,13 +150,13 @@ extension DefaultRefreshHeaderContentView : AnyRefreshContent {
         
     }
     
-    open func stopLoading() {
+    open func stop() {
         reset()
         loadingView.stopAnimating()
         statusLabel.text = nil
     }
     
-    open func loadedSuccess() {
+    open func success() {
         reset()
         successView.isHidden = false
         progressView.isHidden = false
@@ -167,7 +167,7 @@ extension DefaultRefreshHeaderContentView : AnyRefreshContent {
 
     }
     
-    open func loadedError(withMsg msg: String) {
+    open func error(withMsg msg: String) {
         reset()
         errorLabel.isHidden = false
         errorLabel.text = msg
@@ -228,7 +228,7 @@ open class DefaultRefreshFooterContentView : UIView {
     @objc private func didTapContentView(sender: Any?) {
         if let refreshable = superview as? RefreshFooterControl<DefaultRefreshFooterContentView> {
             refreshable.refreshingBlock?(refreshable)
-            startLoading()
+            start()
         }
     }
     
@@ -248,18 +248,18 @@ extension DefaultRefreshFooterContentView : AnyRefreshContent {
     
     open static var preferredHeight = CGFloat(50.0)
     
-    open func startLoading() {
+    open func start() {
         reset()
         centerLabel.isHidden = false
         centerLabel.text = MsgLoading
     }
     
-    open func stopLoading() {
+    open func stop() {
         reset()
         statusLabel.text = nil
     }
     
-    open func loadedError(withMsg msg: String) {
+    open func error(withMsg msg: String) {
         reset()
         errorLabel.isHidden = false
         statusLabel.isHidden = false
@@ -268,13 +268,13 @@ extension DefaultRefreshFooterContentView : AnyRefreshContent {
         isUserInteractionEnabled = true
     }
     
-    open func loadedPause(withMsg msg: String) {
+    open func pause(withMsg msg: String) {
         reset()
         centerLabel.isHidden = false
         centerLabel.text = msg
     }
     
-    open func loadedSuccess() {
+    open func success() {
         reset()
     }
 }

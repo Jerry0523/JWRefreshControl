@@ -49,11 +49,11 @@ extension SloganContentView : AnyRefreshContent {
         CATransaction.commit()
     }
     
-    func startLoading() {
+    func start() {
         sloganLayer.startAnimation()
     }
     
-    func stopLoading() {
+    func stop() {
         sloganLayer.removeAllAnimations()
     }
 }
