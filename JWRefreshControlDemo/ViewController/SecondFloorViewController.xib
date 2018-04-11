@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SecondFloorViewController" customModule="JWRefreshControlDemo" customModuleProvider="target">
+            <connections>
+                <outlet property="button0" destination="N2v-wG-LtT" id="Lus-q9-ERh"/>
+                <outlet property="button1" destination="k5a-N8-7cz" id="xOT-qm-7ct"/>
+                <outlet property="button2" destination="R5l-kV-vAl" id="eh0-TE-41C"/>
+                <outlet property="button3" destination="DZK-Ho-53t" id="WBv-4K-jdx"/>
+                <outlet property="view" destination="iN0-l3-epB" id="ciD-zX-Pj7"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="tMV-BN-0th">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k5a-N8-7cz">
+                    <rect key="frame" x="237" y="223.5" width="60" height="60"/>
+                    <color key="backgroundColor" red="0.43137870782960153" green="1" blue="0.22379271202006135" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="FAE-fg-wkX"/>
+                        <constraint firstAttribute="height" constant="60" id="IFd-pV-Cj6"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="9"/>
+                    <state key="normal" title="Account">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="30"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2v-wG-LtT">
+                    <rect key="frame" x="77.5" y="223.5" width="60" height="60"/>
+                    <color key="backgroundColor" red="0.72718878312084301" green="0.23417571616821409" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="9ss-i5-pHY"/>
+                        <constraint firstAttribute="width" constant="60" id="Bsc-ci-Eza"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="YzM-cC-KAt"/>
+                        <constraint firstAttribute="height" constant="60" id="zAy-h3-V4Q"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="14"/>
+                    <state key="normal" title="Cart">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="30"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5l-kV-vAl">
+                    <rect key="frame" x="77.5" y="383.5" width="60" height="60"/>
+                    <color key="backgroundColor" red="1" green="0.64483816969999996" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="cyf-M8-DH3"/>
+                        <constraint firstAttribute="height" constant="60" id="wQ6-rj-SqR"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="9"/>
+                    <state key="normal" title="Message">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="30"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DZK-Ho-53t">
+                    <rect key="frame" x="237" y="383.5" width="60" height="60"/>
+                    <color key="backgroundColor" red="1" green="0.27859933040000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="DBd-j5-Shi"/>
+                        <constraint firstAttribute="height" constant="60" id="s4F-59-kqs"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="14"/>
+                    <state key="normal" title="Set">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="30"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Wh-xk-KdQ">
+                    <rect key="frame" x="157" y="303" width="60" height="60"/>
+                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="Jha-OI-9sn"/>
+                        <constraint firstAttribute="height" constant="60" id="cDR-AM-bKw"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="14"/>
+                    <state key="normal" title="Close">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="30"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="didClickCloseButton:" destination="-1" eventType="touchUpInside" id="OGE-MH-Udw"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="R5l-kV-vAl" firstAttribute="leading" secondItem="N2v-wG-LtT" secondAttribute="leading" id="2qx-R2-itM"/>
+                <constraint firstItem="k5a-N8-7cz" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-80" id="8dy-DL-PGT"/>
+                <constraint firstItem="k5a-N8-7cz" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="80" id="BqU-Ny-xod"/>
+                <constraint firstItem="k5a-N8-7cz" firstAttribute="height" secondItem="N2v-wG-LtT" secondAttribute="height" id="HZG-dn-2ja"/>
+                <constraint firstItem="N2v-wG-LtT" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-80" id="Hka-ov-qcb"/>
+                <constraint firstItem="R5l-kV-vAl" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="80" id="IlI-im-91g"/>
+                <constraint firstItem="DZK-Ho-53t" firstAttribute="bottom" secondItem="R5l-kV-vAl" secondAttribute="bottom" id="QrR-iR-3yt"/>
+                <constraint firstItem="DZK-Ho-53t" firstAttribute="trailing" secondItem="k5a-N8-7cz" secondAttribute="trailing" id="RK9-hL-CPd"/>
+                <constraint firstItem="1Wh-xk-KdQ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="SkP-I3-MQE"/>
+                <constraint firstItem="R5l-kV-vAl" firstAttribute="width" secondItem="N2v-wG-LtT" secondAttribute="width" id="WN8-cP-okp"/>
+                <constraint firstItem="R5l-kV-vAl" firstAttribute="height" secondItem="N2v-wG-LtT" secondAttribute="height" id="d6r-fl-0lX"/>
+                <constraint firstItem="1Wh-xk-KdQ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="gz2-Y8-L5D"/>
+                <constraint firstItem="DZK-Ho-53t" firstAttribute="height" secondItem="N2v-wG-LtT" secondAttribute="height" id="hFm-F5-7eD"/>
+                <constraint firstItem="R5l-kV-vAl" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-80" id="kPj-sT-P6T"/>
+                <constraint firstItem="k5a-N8-7cz" firstAttribute="top" secondItem="N2v-wG-LtT" secondAttribute="top" id="lj0-dA-g7D"/>
+                <constraint firstItem="N2v-wG-LtT" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-80" id="m2R-xd-QBn"/>
+                <constraint firstItem="DZK-Ho-53t" firstAttribute="width" secondItem="N2v-wG-LtT" secondAttribute="width" id="mba-xc-Sxp"/>
+                <constraint firstItem="k5a-N8-7cz" firstAttribute="width" secondItem="N2v-wG-LtT" secondAttribute="width" id="v1V-Ls-aa7"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="33.5" y="53.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="background" width="600" height="1065"/>
+    </resources>
+</document>

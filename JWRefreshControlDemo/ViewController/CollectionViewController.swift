@@ -30,7 +30,8 @@ class CollectionViewController: UICollectionViewController {
             flowlayout.itemSize = CGSize.init(width: itemWidth, height: itemWidth)
         }
         
-        collectionView?.addRefreshHeader { [weak self] (header) in
+        
+        collectionView?.addCustomRefreshHeader { [weak self] (header: RefreshHeaderControl<SegmentContentView>) in
             if self == nil {
                 return
             }
@@ -42,6 +43,9 @@ class CollectionViewController: UICollectionViewController {
             })
         }
         
+        let refreshHeader = collectionView?.refreshHeader as? RefreshHeaderControl<SegmentContentView>
+        refreshHeader?.progressHandler = progressHandler
+    
         collectionView?.addRefreshFooter { [weak self] (footer) in
             if self == nil {
                 return
@@ -56,6 +60,19 @@ class CollectionViewController: UICollectionViewController {
                     self?.collectionView?.reloadData()
                 })
             }
+        }
+    }
+    
+    func progressHandler(refreshHeader: RefreshHeaderControl<SegmentContentView>, progress: CGFloat) {
+        if progress < 1.0 {
+            refreshHeader.state = .idle
+        } else if progress < SegmentContentView.SegmentThreshold {
+            refreshHeader.state = .refreshing
+        } else {
+            let secondFloorVC = SecondFloorViewController()
+            secondFloorVC.modalPresentationStyle = .custom
+            secondFloorVC.transitioningDelegate = self
+            self.present(secondFloorVC, animated: true, completion: nil)
         }
     }
 
@@ -75,4 +92,12 @@ class CollectionViewController: UICollectionViewController {
         }
         return cell
     }
+}
+
+extension CollectionViewController : UIViewControllerTransitioningDelegate {
+    
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        return SecondFloorPresentationController(presentedViewController: presented, presenting: presenting)
+    }
+    
 }

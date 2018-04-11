@@ -27,6 +27,8 @@ class SloganContentView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    open override var intrinsicContentSize: CGSize { return CGSize(width: UIViewNoIntrinsicMetric, height: 120.0) }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         sloganLayer.frame = CGRect.init(x: (frame.size.width - 170) * 0.5, y: frame.size.height - 69, width: 170, height: 56)
@@ -36,10 +38,6 @@ class SloganContentView: UIView {
 }
 
 extension SloganContentView : AnyRefreshContent {
-    
-    static var preferredHeight: CGFloat {
-        return 120
-    }
     
     func setProgress(_ progress: CGFloat) {
         CATransaction.begin()

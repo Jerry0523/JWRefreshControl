@@ -26,6 +26,10 @@
 		C438C8D51FB4257B00706AD8 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = C438C8D21FB4257B00706AD8 /* LICENSE */; };
 		C47A43E8202C28D700F39F23 /* UIScrollView+Private.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47A43E7202C28D700F39F23 /* UIScrollView+Private.swift */; };
 		C47A43EA202C2C3200F39F23 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47A43E9202C2C3200F39F23 /* Protocols.swift */; };
+		C499E243207DF32C005D9CA5 /* SegmentContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C499E242207DF32C005D9CA5 /* SegmentContentView.swift */; };
+		C499E245207E09D4005D9CA5 /* SecondFloorPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C499E244207E09D4005D9CA5 /* SecondFloorPresentationController.swift */; };
+		C499E247207E0B95005D9CA5 /* SecondFloorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C499E246207E0B95005D9CA5 /* SecondFloorViewController.swift */; };
+		C499E24F207E5A70005D9CA5 /* SecondFloorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C499E24E207E5A70005D9CA5 /* SecondFloorViewController.xib */; };
 		C4C148821FD7D0BC00A68880 /* GifContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C1487B1FD7D0BC00A68880 /* GifContentView.swift */; };
 		C4C148831FD7D0BC00A68880 /* SloganContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C1487C1FD7D0BC00A68880 /* SloganContentView.swift */; };
 		C4C148841FD7D0BC00A68880 /* ScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C1487E1FD7D0BC00A68880 /* ScrollViewController.swift */; };
@@ -79,6 +83,10 @@
 		C438C8D21FB4257B00706AD8 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		C47A43E7202C28D700F39F23 /* UIScrollView+Private.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Private.swift"; sourceTree = "<group>"; };
 		C47A43E9202C2C3200F39F23 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		C499E242207DF32C005D9CA5 /* SegmentContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentContentView.swift; sourceTree = "<group>"; };
+		C499E244207E09D4005D9CA5 /* SecondFloorPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondFloorPresentationController.swift; sourceTree = "<group>"; };
+		C499E246207E0B95005D9CA5 /* SecondFloorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondFloorViewController.swift; sourceTree = "<group>"; };
+		C499E24E207E5A70005D9CA5 /* SecondFloorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondFloorViewController.xib; sourceTree = "<group>"; };
 		C4C1487B1FD7D0BC00A68880 /* GifContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifContentView.swift; sourceTree = "<group>"; };
 		C4C1487C1FD7D0BC00A68880 /* SloganContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SloganContentView.swift; sourceTree = "<group>"; };
 		C4C1487E1FD7D0BC00A68880 /* ScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +168,7 @@
 			children = (
 				C4C1487B1FD7D0BC00A68880 /* GifContentView.swift */,
 				C4C1487C1FD7D0BC00A68880 /* SloganContentView.swift */,
+				C499E242207DF32C005D9CA5 /* SegmentContentView.swift */,
 			);
 			path = ContentView;
 			sourceTree = "<group>";
@@ -171,6 +180,9 @@
 				C4C148811FD7D0BC00A68880 /* CollectionViewController.swift */,
 				C4C148801FD7D0BC00A68880 /* WebViewController.swift */,
 				C4C1487E1FD7D0BC00A68880 /* ScrollViewController.swift */,
+				C499E246207E0B95005D9CA5 /* SecondFloorViewController.swift */,
+				C499E24E207E5A70005D9CA5 /* SecondFloorViewController.xib */,
+				C499E244207E09D4005D9CA5 /* SecondFloorPresentationController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -243,7 +255,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0910;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Jerry;
 				TargetAttributes = {
 					C402AAD61FB3F07100B8FA09 = {
@@ -283,6 +295,7 @@
 				C402AAE51FB3F07100B8FA09 /* LaunchScreen.storyboard in Resources */,
 				C438C8CD1FB4182000706AD8 /* SloganPoints.plist in Resources */,
 				C438C8D31FB4257B00706AD8 /* README.md in Resources */,
+				C499E24F207E5A70005D9CA5 /* SecondFloorViewController.xib in Resources */,
 				C438C8D51FB4257B00706AD8 /* LICENSE in Resources */,
 				C402AAE21FB3F07100B8FA09 /* Assets.xcassets in Resources */,
 				C402AAE01FB3F07100B8FA09 /* Main.storyboard in Resources */,
@@ -304,13 +317,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C499E243207DF32C005D9CA5 /* SegmentContentView.swift in Sources */,
 				C4C148831FD7D0BC00A68880 /* SloganContentView.swift in Sources */,
 				C4C148851FD7D0BC00A68880 /* TableViewController.swift in Sources */,
 				C438C8C91FB4126600706AD8 /* FakeRequest.swift in Sources */,
+				C499E247207E0B95005D9CA5 /* SecondFloorViewController.swift in Sources */,
 				C4C148841FD7D0BC00A68880 /* ScrollViewController.swift in Sources */,
 				C4C148871FD7D0BC00A68880 /* CollectionViewController.swift in Sources */,
 				C4C148861FD7D0BC00A68880 /* WebViewController.swift in Sources */,
 				C4C148821FD7D0BC00A68880 /* GifContentView.swift in Sources */,
+				C499E245207E09D4005D9CA5 /* SecondFloorPresentationController.swift in Sources */,
 				C402AADB1FB3F07100B8FA09 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -374,6 +390,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -381,6 +398,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -431,6 +449,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -438,6 +457,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

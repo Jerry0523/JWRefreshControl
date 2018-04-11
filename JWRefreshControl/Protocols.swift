@@ -40,9 +40,6 @@ public protocol RefreshControl {
 /// A type that any contentView of the refresh control (header or footer) should conform to
 @objc public protocol AnyRefreshContent {
     
-    ///The preferred height of the content view
-    static var preferredHeight: CGFloat { get }
-    
     ///Whether the content view should pin to the edge
     ///e.g. when the content view is on a refresh header, and isPinnedToEdge set to true, the content view will pin to the top of the scrollView without scrolling
     @objc optional static var isPinnedToEdge: Bool { get }
@@ -93,7 +90,7 @@ public protocol AnyRefreshContext : class where ContentType : AnyRefreshContent 
 
 protocol AnyRefreshObserver : class {
     
-    weak var scrollView: UIScrollView? { get set }
+    var scrollView: UIScrollView? { get set }
     
     var keyPathObservations: [NSKeyValueObservation] { get set }
     

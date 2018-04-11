@@ -24,6 +24,8 @@ class GifContentView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    open override var intrinsicContentSize: CGSize { return CGSize(width: UIViewNoIntrinsicMetric, height: 160.0) }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         imageView.center = CGPoint.init(x: self.bounds.size.width * 0.5, y: self.bounds.size.height * 0.5)
@@ -31,10 +33,6 @@ class GifContentView: UIView {
 }
 
 extension GifContentView : AnyRefreshContent {
-    
-    static var preferredHeight: CGFloat {
-        return 160.0
-    }
     
     func start() {
         imageView.startAnimating()

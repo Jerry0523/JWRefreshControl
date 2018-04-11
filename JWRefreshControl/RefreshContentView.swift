@@ -35,6 +35,8 @@ open class DefaultRefreshHeaderContentView: UIView {
         setup()
     }
     
+    open override var intrinsicContentSize: CGSize { return CGSize(width: UIViewNoIntrinsicMetric, height: 70.0) }
+    
     open override func layoutSubviews() {
         super.layoutSubviews()
         arrowView.center = CGPoint.init(x: frame.size.width * 0.5, y: frame.size.height * 0.5 - 11.0)
@@ -119,8 +121,6 @@ open class DefaultRefreshHeaderContentView: UIView {
 
 extension DefaultRefreshHeaderContentView : AnyRefreshContent {
     
-    open static var preferredHeight = CGFloat(70.0)
-    
     open static var isPinnedToEdge = true
     
     open func setProgress(_ progress: CGFloat) {
@@ -189,6 +189,8 @@ open class DefaultRefreshFooterContentView : UIView {
         setup()
     }
     
+    open override var intrinsicContentSize: CGSize { return CGSize(width: UIViewNoIntrinsicMetric, height: 50.0) }
+    
     private func setup() {
         
         var frame = centerLabel.frame
@@ -245,8 +247,6 @@ open class DefaultRefreshFooterContentView : UIView {
 }
 
 extension DefaultRefreshFooterContentView : AnyRefreshContent {
-    
-    open static var preferredHeight = CGFloat(50.0)
     
     open func start() {
         reset()
