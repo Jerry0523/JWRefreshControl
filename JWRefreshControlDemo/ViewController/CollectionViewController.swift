@@ -97,7 +97,9 @@ class CollectionViewController: UICollectionViewController {
 extension CollectionViewController : UIViewControllerTransitioningDelegate {
     
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        return SecondFloorPresentationController(presentedViewController: presented, presenting: presenting)
+        let presenter = SecondFloorPresentationController(presentedViewController: presented, presenting: presenting)
+        presenter.contentViewController = self
+        return presenter
     }
     
 }

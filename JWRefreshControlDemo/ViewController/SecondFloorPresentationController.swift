@@ -9,23 +9,44 @@
 import UIKit
 
 class SecondFloorPresentationController: UIPresentationController {
+
+    var maskViews: [UIView] = [UIView]()
     
-    var topMaskView: UIView?
+    weak var contentViewController: UIViewController?
 
     override func presentationTransitionWillBegin() {
-        if let nc = presentingViewController as? UINavigationController,
-            let collectionVC = nc.topViewController as? UICollectionViewController {
+        if let collectionVC = contentViewController as? UICollectionViewController {
+            
             presentedViewController.view.frame = containerView!.bounds
             presentedViewController.view.layoutIfNeeded()
-            topMaskView = presentedViewController.view.resizableSnapshotView(from: CGRect(x: 0, y: 0, width: collectionVC.view.bounds.width, height: collectionVC.view.safeAreaInsets.top), afterScreenUpdates: true, withCapInsets: UIEdgeInsets.zero)
-            containerView?.addSubview(topMaskView!)
+            
+            maskViews.removeAll()
+            
+            if !(collectionVC.navigationController?.isNavigationBarHidden ?? false) {
+                if let topMaskView = presentedViewController.view.resizableSnapshotView(from: CGRect(x: 0, y: 0, width: collectionVC.view.bounds.width, height: collectionVC.view.safeAreaInsets.top), afterScreenUpdates: true, withCapInsets: UIEdgeInsets.zero) {
+                    maskViews.append(topMaskView)
+                    containerView?.addSubview(topMaskView)
+                }
+            }
+            
+            if !(collectionVC.tabBarController?.tabBar.isHidden ?? false) {
+                let frame = CGRect(x: 0, y: collectionVC.view.bounds.height - collectionVC.view.safeAreaInsets.bottom, width: collectionVC.view.bounds.width, height: collectionVC.view.safeAreaInsets.bottom)
+                if let bottomMaskView = presentedViewController.view.resizableSnapshotView(from: frame, afterScreenUpdates: true, withCapInsets: UIEdgeInsets.zero) {
+                    maskViews.append(bottomMaskView)
+                    bottomMaskView.frame = frame
+                    containerView?.addSubview(bottomMaskView)
+                }
+            }
+            
+            maskViews.forEach { $0.alpha = 0 }
+            
             presentedViewController.view.alpha = 0
-            topMaskView?.alpha = 0
             
             UIView.animate(withDuration: CATransaction.animationDuration()) {
-                nc.navigationBar.alpha = 0
+                collectionVC.navigationController?.navigationBar.alpha = 0
+                collectionVC.tabBarController?.tabBar.alpha = 0
                 collectionVC.collectionView?.setContentOffset(CGPoint(x: 0, y: -UIScreen.main.bounds.size.height), animated: false)
-                self.topMaskView?.alpha = 1.0
+                self.maskViews.forEach { $0.alpha = 1.0 }
             }
         }
     }
@@ -34,17 +55,17 @@ class SecondFloorPresentationController: UIPresentationController {
         UIView.animate(withDuration: CATransaction.animationDuration(), animations: {
             self.presentedViewController.view.alpha = 1.0
         }) { (completed) in
-            self.topMaskView?.removeFromSuperview()
+            self.maskViews.forEach { $0.removeFromSuperview() }
         }        
     }
     
     override func dismissalTransitionWillBegin() {
         presentedViewController.view.alpha = 0
-        if let nc = presentingViewController as? UINavigationController,
-            let collectionVC = nc.topViewController as? UICollectionViewController {
-            collectionVC.collectionView?.setContentOffset(CGPoint(x: 0, y: -collectionVC.view.safeAreaInsets.top), animated: true)
+        if let collectionVC = contentViewController as? UICollectionViewController {
             UIView.animate(withDuration: 0.25) {
-                nc.navigationBar.alpha = 1.0
+                collectionVC.navigationController?.navigationBar.alpha = 1.0
+                collectionVC.tabBarController?.tabBar.alpha = 1.0
+                collectionVC.collectionView?.setContentOffset(CGPoint(x: 0, y: -collectionVC.view.safeAreaInsets.top), animated: false)
             }
         }
     }
