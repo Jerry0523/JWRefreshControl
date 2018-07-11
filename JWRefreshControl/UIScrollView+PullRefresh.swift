@@ -53,24 +53,30 @@ public extension UIScrollView {
         }
     }
     
-    public func addRefreshHeader(callBack: @escaping (RefreshHeaderControl<DefaultRefreshHeaderContentView>) -> ()) {
-        addCustomRefreshHeader(callBack: callBack)
+    @discardableResult
+    public func addRefreshHeader(callBack: @escaping (RefreshHeaderControl<DefaultRefreshHeaderContentView>) -> ()) -> RefreshHeaderControl<DefaultRefreshHeaderContentView> {
+        return addCustomRefreshHeader(callBack: callBack)
     }
     
-    public func addRefreshFooter(callBack: @escaping (RefreshFooterControl<DefaultRefreshFooterContentView>) -> ()) {
-        addCustomRefreshFooter(callBack: callBack)
+    @discardableResult
+    public func addRefreshFooter(callBack: @escaping (RefreshFooterControl<DefaultRefreshFooterContentView>) -> ()) -> RefreshFooterControl<DefaultRefreshFooterContentView>{
+        return addCustomRefreshFooter(callBack: callBack)
     }
-    
-    public func addCustomRefreshHeader<T>(callBack: @escaping (RefreshHeaderControl<T>) -> ()) {
+   
+    @discardableResult
+    public func addCustomRefreshHeader<T>(callBack: @escaping (RefreshHeaderControl<T>) -> ()) -> RefreshHeaderControl<T> {
         let headerControl = RefreshHeaderControl<T>.init(frame: CGRect.init(x: 0, y: 0, width: frame.size.width, height: 0))
         headerControl.refreshingBlock = callBack
         refreshHeader = headerControl
+        return headerControl
     }
     
-    public func addCustomRefreshFooter<T>(callBack: @escaping (RefreshFooterControl<T>) -> ()) {
+    @discardableResult
+    public func addCustomRefreshFooter<T>(callBack: @escaping (RefreshFooterControl<T>) -> ()) -> RefreshFooterControl<T> {
         let footerControl = RefreshFooterControl<T>.init(frame: CGRect.init(x: 0, y: 0, width: frame.size.width, height: 0))
         footerControl.refreshingBlock = callBack
         refreshFooter = footerControl
+        return footerControl
     }
     
     public func removeRefreshHeader() {

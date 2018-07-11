@@ -40,26 +40,26 @@ public protocol RefreshControl {
 /// A type that any contentView of the refresh control (header or footer) should conform to
 @objc public protocol AnyRefreshContent {
     
-    ///Whether the content view should pin to the edge
-    ///e.g. when the content view is on a refresh header, and isPinnedToEdge set to true, the content view will pin to the top of the scrollView without scrolling
+    ///A vaule indicates whether the content view should be pined to the edge
+    ///e.g. when the content view is on a refresh header, and isPinnedToEdge set to true, the content view will be pined to the top of the scrollView without scrolling
     @objc optional static var isPinnedToEdge: Bool { get }
     
-    ///When the refresh actions are beging triggered
+    ///Called when the refresh actions are beging triggered
     @objc optional func setProgress(_ progress: CGFloat)
     
-    ///When the refresh control is beginning to load
+    ///Called when the refresh control is beginning to load
     @objc optional func start()
     
-    ///When the refresh control is stopped
+    ///Called when the refresh control is stopped
     @objc optional func stop()
     
-    ///When the refresh control loaded successfully
+    ///Called when the refresh control loaded successfully
     @objc optional func success()
     
-    ///When an error occurred
+    ///Called when an error occurred
     @objc optional func error(withMsg msg: String)
     
-    ///When the refresh control is paused
+    ///Called when the refresh control is paused
     ///Paused means that the scrollView keeps the state of refreshing (e.g. contentInset), but with no more listening to the refresh actions
     @objc optional func pause(withMsg msg: String)
     
@@ -73,7 +73,7 @@ public enum PullRefreshState {
     ///The refreshing state, which will change the scrollView's contentInset and call the refreshing closures
     case refreshing
     
-    //The paused state, which will keeps the scrollView's refreshing state (e.g. contentInset) and stop listening to the actions
+    //The paused state, which will keeps the scrollView's refreshing state (e.g. contentInset) with no listening to the actions
     case pause
     
 }

@@ -31,7 +31,7 @@ class CollectionViewController: UICollectionViewController {
         }
         
         
-        collectionView?.addCustomRefreshHeader { [weak self] (header: RefreshHeaderControl<SegmentContentView>) in
+        let refreshHeader: RefreshHeaderControl<SegmentContentView>? = collectionView?.addCustomRefreshHeader { [weak self] (header) in
             if self == nil {
                 return
             }
@@ -42,8 +42,6 @@ class CollectionViewController: UICollectionViewController {
                 self?.collectionView?.reloadData()
             })
         }
-        
-        let refreshHeader = collectionView?.refreshHeader as? RefreshHeaderControl<SegmentContentView>
         refreshHeader?.progressHandler = progressHandler
     
         collectionView?.addRefreshFooter { [weak self] (footer) in
@@ -79,7 +77,7 @@ class CollectionViewController: UICollectionViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     // MARK: UICollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.count
