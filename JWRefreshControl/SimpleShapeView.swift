@@ -121,7 +121,7 @@ open class SimpleShapeView: UIView {
                 })
             } else if type == .pentastar {
                 if subType == .pentastarHalf {
-                    maskLayer = CAShapeLayer.init()
+                    maskLayer = CAShapeLayer()
                     shapeLayer.mask = maskLayer
                     setupMaskLayer()
                 } else {
@@ -137,7 +137,7 @@ open class SimpleShapeView: UIView {
             guard let typeString = typeString else {
                 return
             }
-            let newType = SimpleShapeType.init(rawValue: typeString)
+            let newType = SimpleShapeType(rawValue: typeString)
             if newType != nil {
                 type = newType!
             }
@@ -153,7 +153,7 @@ open class SimpleShapeView: UIView {
             guard let subTypeString = subTypeString else {
                 return
             }
-            let newType = SimpleShapeSubType.init(rawValue: subTypeString)
+            let newType = SimpleShapeSubType(rawValue: subTypeString)
             if newType != nil {
                 subType = newType!
             }
@@ -173,7 +173,7 @@ open class SimpleShapeView: UIView {
     open func beginSimpleAnimation() {
         if type == .yes {
             shapeLayer.removeAllAnimations()
-            let animation = CABasicAnimation.init(keyPath: "strokeEnd")
+            let animation = CABasicAnimation(keyPath: "strokeEnd")
             animation.fromValue = 0
             animation.toValue = 1.0
             animation.duration = 0.25
@@ -189,7 +189,7 @@ open class SimpleShapeView: UIView {
     
     open override var intrinsicContentSize: CGSize {
         get {
-            return CGSize.init(width: 35, height: 35)
+            return CGSize(width: 35, height: 35)
         }
     }
     
@@ -219,7 +219,7 @@ open class SimpleShapeView: UIView {
     open override func layoutSubviews() {
         super.layoutSubviews()
         let layerSize = min(frame.size.width, frame.size.height)
-        let bezierPath = try? UIBezierPath.init(dataArray: shapeData ?? [], destSize: layerSize)
+        let bezierPath = try? UIBezierPath(dataArray: shapeData ?? [], destSize: layerSize)
         shapeLayer.path = bezierPath?.cgPath
         setupMaskLayer()
     }
@@ -242,7 +242,7 @@ open class SimpleShapeView: UIView {
     
     private func setupMaskLayer() {
         if subType == .pentastarHalf {
-            maskLayer?.path = UIBezierPath.init(rect: CGRect.init(x: 0, y: 0, width: frame.size.width * 0.5, height: frame.size.height)).cgPath
+            maskLayer?.path = UIBezierPath(rect: CGRect(x: 0, y: 0, width: frame.size.width * 0.5, height: frame.size.height)).cgPath
         }
     }
 }
@@ -301,8 +301,8 @@ extension UIBezierPath {
             let lineGroup = line.components(separatedBy: "|")
             var method: PathMethod = defaultMethod ?? .line
             if lineGroup.count == 2 {
-                guard let aMethod = PathMethod.init(rawValue: Int(lineGroup[1])!) else {
-                    throw NSError.init(domain: "com.jerry", code: 0, userInfo: [NSLocalizedDescriptionKey: "unknown path method!"])
+                guard let aMethod = PathMethod(rawValue: Int(lineGroup[1])!) else {
+                    throw NSError(domain: "com.jerry", code: 0, userInfo: [NSLocalizedDescriptionKey: "unknown path method!"])
                 }
                 method = aMethod
             }

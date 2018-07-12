@@ -19,6 +19,8 @@
 		C431F55F1FBD8F1200FAD488 /* SimpleShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C402AB0F1FB3F1E900B8FA09 /* SimpleShapeView.swift */; };
 		C431F5601FBD8F1200FAD488 /* CircleLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C402AB111FB3F20100B8FA09 /* CircleLoadingView.swift */; };
 		C431F5611FBD8F1200FAD488 /* CircleProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C402AB121FB3F20200B8FA09 /* CircleProgressView.swift */; };
+		C438428220F74E6400F5FF6C /* AndroidThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C438428120F74E6400F5FF6C /* AndroidThemeViewController.swift */; };
+		C438428420F74FEA00F5FF6C /* AndroidThemeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C438428320F74FE900F5FF6C /* AndroidThemeContentView.swift */; };
 		C438C8C91FB4126600706AD8 /* FakeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C438C8C81FB4126600706AD8 /* FakeRequest.swift */; };
 		C438C8CD1FB4182000706AD8 /* SloganPoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = C438C8CC1FB4182000706AD8 /* SloganPoints.plist */; };
 		C438C8D31FB4257B00706AD8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C438C8D01FB4257B00706AD8 /* README.md */; };
@@ -76,6 +78,8 @@
 		C402AB111FB3F20100B8FA09 /* CircleLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleLoadingView.swift; sourceTree = "<group>"; };
 		C402AB121FB3F20200B8FA09 /* CircleProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleProgressView.swift; sourceTree = "<group>"; };
 		C431F54F1FBD8EF200FAD488 /* JWRefreshControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JWRefreshControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C438428120F74E6400F5FF6C /* AndroidThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AndroidThemeViewController.swift; sourceTree = "<group>"; };
+		C438428320F74FE900F5FF6C /* AndroidThemeContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AndroidThemeContentView.swift; sourceTree = "<group>"; };
 		C438C8C81FB4126600706AD8 /* FakeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeRequest.swift; sourceTree = "<group>"; };
 		C438C8CC1FB4182000706AD8 /* SloganPoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SloganPoints.plist; sourceTree = "<group>"; };
 		C438C8D01FB4257B00706AD8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -169,6 +173,7 @@
 				C4C1487B1FD7D0BC00A68880 /* GifContentView.swift */,
 				C4C1487C1FD7D0BC00A68880 /* SloganContentView.swift */,
 				C499E242207DF32C005D9CA5 /* SegmentContentView.swift */,
+				C438428320F74FE900F5FF6C /* AndroidThemeContentView.swift */,
 			);
 			path = ContentView;
 			sourceTree = "<group>";
@@ -183,6 +188,7 @@
 				C499E246207E0B95005D9CA5 /* SecondFloorViewController.swift */,
 				C499E24E207E5A70005D9CA5 /* SecondFloorViewController.xib */,
 				C499E244207E09D4005D9CA5 /* SecondFloorPresentationController.swift */,
+				C438428120F74E6400F5FF6C /* AndroidThemeViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -325,7 +331,9 @@
 				C4C148841FD7D0BC00A68880 /* ScrollViewController.swift in Sources */,
 				C4C148871FD7D0BC00A68880 /* CollectionViewController.swift in Sources */,
 				C4C148861FD7D0BC00A68880 /* WebViewController.swift in Sources */,
+				C438428220F74E6400F5FF6C /* AndroidThemeViewController.swift in Sources */,
 				C4C148821FD7D0BC00A68880 /* GifContentView.swift in Sources */,
+				C438428420F74FEA00F5FF6C /* AndroidThemeContentView.swift in Sources */,
 				C499E245207E09D4005D9CA5 /* SecondFloorPresentationController.swift in Sources */,
 				C402AADB1FB3F07100B8FA09 /* AppDelegate.swift in Sources */,
 			);

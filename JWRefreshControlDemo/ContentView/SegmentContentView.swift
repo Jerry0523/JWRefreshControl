@@ -30,21 +30,21 @@ class SegmentContentView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         titleLabel.frame = CGRect(x: 0, y: frame.size.height - 30.0, width: frame.size.width, height: 30.0)
-        backgroundImageView.frame = CGRect.init(x: 0, y: frame.size.height - UIScreen.main.bounds.size.height, width: frame.size.width, height: UIScreen.main.bounds.size.height)
+        backgroundImageView.frame = CGRect(x: 0, y: frame.size.height - UIScreen.main.bounds.size.height, width: frame.size.width, height: UIScreen.main.bounds.size.height)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override var intrinsicContentSize: CGSize { return CGSize.init(width: UIViewNoIntrinsicMetric, height: 100.0) }
+    override var intrinsicContentSize: CGSize { return CGSize(width: UIViewNoIntrinsicMetric, height: 100.0) }
     
     private let titleLabel = UILabel()
     private let backgroundImageView = UIImageView(image: UIImage(named: "background"))
     
 }
 
-extension SegmentContentView : AnyRefreshContent {
+extension SegmentContentView : AnyRefreshContent {    
     
     func start() {
         titleLabel.text = MsgLoading

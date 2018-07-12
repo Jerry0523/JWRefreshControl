@@ -45,7 +45,7 @@ open class CircleProgressView: UIView {
                     circleLayer.strokeEnd = 1.0
                 }
             } else {
-                let pathAnimation = CABasicAnimation.init(keyPath: "path")
+                let pathAnimation = CABasicAnimation(keyPath: "path")
                 pathAnimation.fromValue = circleLayer.path
                 setupShape()
                 pathAnimation.toValue = circleLayer.path
@@ -87,7 +87,7 @@ open class CircleProgressView: UIView {
     
     open var clockWise = true
     
-    open var backgroundTintColor = UIColor.init(white: 23.0 / 255.0, alpha: 1.0) {
+    open var backgroundTintColor = UIColor(white: 23.0 / 255.0, alpha: 1.0) {
         didSet {
             if backgroundLayer != oldValue {
                 backgroundLayer.strokeColor = backgroundTintColor.cgColor
@@ -154,30 +154,30 @@ open class CircleProgressView: UIView {
     
     private func setupShape() {
         circleLayer.frame = bounds
-        let path = CGMutablePath.init()
+        let path = CGMutablePath()
         if style == .pie {
-            path.move(to: CGPoint.init(x: frame.size.width * 0.5, y: frame.size.height * 0.5))
+            path.move(to: CGPoint(x: frame.size.width * 0.5, y: frame.size.height * 0.5))
         }
         let circleProgress = style == .pie ? progress : 1.0
         var radius = (min(frame.size.width, frame.size.height) - circleLayer.lineWidth) * 0.5
         if style == .pie {
             radius -= 2.0
         }
-        path.addArc(center: CGPoint.init(x: frame.size.width * 0.5, y: frame.size.height * 0.5), radius: radius, startAngle: CGFloat(-Double.pi / 2), endAngle: CGFloat(-Double.pi / 2 + Double.pi * 2 * Double(circleProgress)), clockwise: false)
+        path.addArc(center: CGPoint(x: frame.size.width * 0.5, y: frame.size.height * 0.5), radius: radius, startAngle: CGFloat(-Double.pi / 2), endAngle: CGFloat(-Double.pi / 2 + Double.pi * 2 * Double(circleProgress)), clockwise: false)
         circleLayer.path = path
     }
     
     private func setupBackgroundShape() {
         backgroundLayer.frame = bounds
-        let path = CGMutablePath.init()
+        let path = CGMutablePath()
         if style == .pie {
-            path.move(to: CGPoint.init(x: frame.size.width * 0.5, y: frame.size.height * 0.5))
+            path.move(to: CGPoint(x: frame.size.width * 0.5, y: frame.size.height * 0.5))
         }
         var radius = (min(frame.size.width, frame.size.height) - circleLayer.lineWidth) * 0.5
         if style == .pie {
             radius -= 2.0
         }
-        path.addArc(center: CGPoint.init(x: frame.size.width * 0.5, y: frame.size.height * 0.5), radius: radius, startAngle: CGFloat(-Double.pi / 2), endAngle: CGFloat(-Double.pi / 2 + Double.pi * 2), clockwise: false)
+        path.addArc(center: CGPoint(x: frame.size.width * 0.5, y: frame.size.height * 0.5), radius: radius, startAngle: CGFloat(-Double.pi / 2), endAngle: CGFloat(-Double.pi / 2 + Double.pi * 2), clockwise: false)
         backgroundLayer.path = path
     }
     

@@ -39,12 +39,12 @@ open class DefaultRefreshHeaderContentView: UIView {
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        arrowView.center = CGPoint.init(x: frame.size.width * 0.5, y: frame.size.height * 0.5 - 11.0)
-        successView.center = CGPoint.init(x: frame.size.width * 0.5, y: frame.size.height * 0.5 - 11.0)
-        progressView.center = CGPoint.init(x: frame.size.width * 0.5, y: frame.size.height * 0.5 - 11.0)
-        loadingView.center = CGPoint.init(x: frame.size.width * 0.5, y: frame.size.height * 0.5 - 11.0)
-        errorLabel.center = CGPoint.init(x: frame.size.width * 0.5, y: frame.size.height * 0.5 - 11.0)
-        statusLabel.center = CGPoint.init(x: frame.size.width * 0.5, y: frame.size.height * 0.5 + 11.0)
+        arrowView.center = CGPoint(x: frame.size.width * 0.5, y: frame.size.height * 0.5 - 11.0)
+        successView.center = CGPoint(x: frame.size.width * 0.5, y: frame.size.height * 0.5 - 11.0)
+        progressView.center = CGPoint(x: frame.size.width * 0.5, y: frame.size.height * 0.5 - 11.0)
+        loadingView.center = CGPoint(x: frame.size.width * 0.5, y: frame.size.height * 0.5 - 11.0)
+        errorLabel.center = CGPoint(x: frame.size.width * 0.5, y: frame.size.height * 0.5 - 11.0)
+        statusLabel.center = CGPoint(x: frame.size.width * 0.5, y: frame.size.height * 0.5 + 11.0)
     }
     
     private func setup() {
@@ -76,7 +76,7 @@ open class DefaultRefreshHeaderContentView: UIView {
         frame.size.width = frame.size.width
 
         errorLabel.frame = frame
-        errorLabel.textColor = UIColor.init(white: 80.0 / 255.0, alpha: 1.0)
+        errorLabel.textColor = UIColor(white: 80.0 / 255.0, alpha: 1.0)
         errorLabel.textAlignment = .center
         errorLabel.font = UIFont.systemFont(ofSize: 12.0)
         errorLabel.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleRightMargin, .flexibleWidth]
@@ -85,13 +85,13 @@ open class DefaultRefreshHeaderContentView: UIView {
         frame = statusLabel.frame
         frame.size.width = frame.size.width
         statusLabel.frame = frame
-        statusLabel.textColor = UIColor.init(white: 80.0 / 255.0, alpha: 1.0)
+        statusLabel.textColor = UIColor(white: 80.0 / 255.0, alpha: 1.0)
         statusLabel.textAlignment = .center
         statusLabel.font = UIFont.systemFont(ofSize: 12.0)
         statusLabel.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
         addSubview(statusLabel)
         
-        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(didTapContentView(sender:)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapContentView(sender:)))
         addGestureRecognizer(tapGesture)
     }
     
@@ -111,17 +111,17 @@ open class DefaultRefreshHeaderContentView: UIView {
         isUserInteractionEnabled = false
     }
     
-    private let arrowView = SimpleShapeView.init(frame: CGRect.init(x: 0, y: 0, width: 10, height: 10))
-    private let successView = SimpleShapeView.init(frame: CGRect.init(x: 0, y: 0, width: 10, height: 10))
-    private let progressView = CircleProgressView.init(frame: CGRect.init(x: 0, y: 0, width: 22, height: 22))
-    private let loadingView = CircleLoadingView.init(frame: CGRect.init(x: 0, y: 0, width: 22, height: 22))
-    private let errorLabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: 0, height: 22))
-    private let statusLabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: 0, height: 22))
+    private let arrowView = SimpleShapeView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+    private let successView = SimpleShapeView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+    private let progressView = CircleProgressView(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
+    private let loadingView = CircleLoadingView(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
+    private let errorLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 22))
+    private let statusLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 22))
 }
 
 extension DefaultRefreshHeaderContentView : AnyRefreshContent {
     
-    open static var isPinnedToEdge = true
+    public static var behaviour = RefreshContentBehaviour.pinnedToEdge
     
     open func setProgress(_ progress: CGFloat) {
         reset()
@@ -197,7 +197,7 @@ open class DefaultRefreshFooterContentView : UIView {
         frame.size.width = frame.size.width
         
         centerLabel.frame = frame
-        centerLabel.textColor = UIColor.init(white: 80.0 / 255.0, alpha: 1.0)
+        centerLabel.textColor = UIColor(white: 80.0 / 255.0, alpha: 1.0)
         centerLabel.textAlignment = .center
         centerLabel.font = UIFont.systemFont(ofSize: 12.0)
         centerLabel.autoresizingMask = .flexibleWidth
@@ -207,7 +207,7 @@ open class DefaultRefreshFooterContentView : UIView {
         frame.size.width = frame.size.width
         
         errorLabel.frame = frame
-        errorLabel.textColor = UIColor.init(white: 80.0 / 255.0, alpha: 1.0)
+        errorLabel.textColor = UIColor(white: 80.0 / 255.0, alpha: 1.0)
         errorLabel.textAlignment = .center
         errorLabel.font = UIFont.systemFont(ofSize: 12.0)
         errorLabel.autoresizingMask = .flexibleWidth
@@ -217,13 +217,13 @@ open class DefaultRefreshFooterContentView : UIView {
         frame.size.width = frame.size.width
         
         statusLabel.frame = frame
-        statusLabel.textColor = UIColor.init(white: 80.0 / 255.0, alpha: 1.0)
+        statusLabel.textColor = UIColor(white: 80.0 / 255.0, alpha: 1.0)
         statusLabel.textAlignment = .center
         statusLabel.font = UIFont.systemFont(ofSize: 12.0)
         statusLabel.autoresizingMask = .flexibleWidth
         addSubview(statusLabel)
         
-        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(didTapContentView(sender:)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapContentView(sender:)))
         addGestureRecognizer(tapGesture)
     }
     
@@ -241,9 +241,9 @@ open class DefaultRefreshFooterContentView : UIView {
         isUserInteractionEnabled = false
     }
     
-    private let centerLabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: 0, height: 50))
-    private let errorLabel = UILabel.init(frame: CGRect.init(x: 0, y: 8, width: 0, height: 17))
-    private let statusLabel = UILabel.init(frame: CGRect.init(x: 0, y: 25, width: 0, height: 17))
+    private let centerLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 50))
+    private let errorLabel = UILabel(frame: CGRect(x: 0, y: 8, width: 0, height: 17))
+    private let statusLabel = UILabel(frame: CGRect(x: 0, y: 25, width: 0, height: 17))
 }
 
 extension DefaultRefreshFooterContentView : AnyRefreshContent {

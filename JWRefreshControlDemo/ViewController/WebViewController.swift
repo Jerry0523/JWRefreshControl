@@ -10,22 +10,25 @@ import UIKit
 import WebKit
 import JWRefreshControl
 
-class WebViewViewController: UIViewController {
+class WebViewViewController: UIViewController, WKNavigationDelegate {
     
     @IBOutlet weak var webView: WKWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        webView.navigationDelegate = self
         webView.scrollView.addCustomRefreshHeader { [weak self] (header: RefreshHeaderControl<SloganContentView>) in
             self?.webView.reload()
-            header.success()
         }        
-        webView.load(URLRequest.init(url: URL.init(string: "https://www.apple.com")!))
+        webView.load(URLRequest.init(url: URL(string: "https://www.apple.com")!))
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        webView.scrollView.refreshHeader?.success(withDelay: 1.0)
     }
 
 }

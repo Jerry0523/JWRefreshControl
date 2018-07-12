@@ -25,43 +25,62 @@ import UIKit
 
 public protocol RefreshControl {
     
+    ///Notify the refresh control to start
     func start()
     
+    ///Notify the refresh control to stop
     func stop()
     
+    ///Notify the refresh control to succeed
     func success(withDelay: TimeInterval?)
     
+    ///Notify the refresh control to pause
+    ///which means that the scrollView keeps the state of refreshing (e.g. contentInset), but with no more listening to refresh actions
     func pause(withMsg msg: String)
     
+    ///Notify the refresh control to fail
     func error(withMsg msg: String)
     
 }
 
-/// A type that any contentView of the refresh control (header or footer) should conform to
-@objc public protocol AnyRefreshContent {
+///A type that indicates the contentView's behaviour.
+public enum RefreshContentBehaviour {
+    
+    ///Scroll with the scrollView
+    case `default`
     
     ///A vaule indicates whether the content view should be pined to the edge
     ///e.g. when the content view is on a refresh header, and isPinnedToEdge set to true, the content view will be pined to the top of the scrollView without scrolling
-    @objc optional static var isPinnedToEdge: Bool { get }
+    case pinnedToEdge
+    
+    ///Keep the scrollView still and move the content view. Like in android.
+    case android
+    
+}
+
+/// A type that any contentView of the refresh control (header or footer) should conform to
+public protocol AnyRefreshContent {
+    
+    static var behaviour: RefreshContentBehaviour { get }
     
     ///Called when the refresh actions are beging triggered
-    @objc optional func setProgress(_ progress: CGFloat)
+    func setProgress(_ progress: CGFloat)
     
     ///Called when the refresh control is beginning to load
-    @objc optional func start()
+    func start()
     
     ///Called when the refresh control is stopped
-    @objc optional func stop()
+    func stop()
     
     ///Called when the refresh control loaded successfully
-    @objc optional func success()
+    func success()
     
     ///Called when an error occurred
-    @objc optional func error(withMsg msg: String)
+    func error(withMsg msg: String)
     
     ///Called when the refresh control is paused
-    ///Paused means that the scrollView keeps the state of refreshing (e.g. contentInset), but with no more listening to the refresh actions
-    @objc optional func pause(withMsg msg: String)
+    ///which means that the scrollView keeps the state of refreshing (e.g. contentInset), but with no more listening to the refresh actions
+    func pause(withMsg msg: String)
     
 }
 
@@ -73,7 +92,7 @@ public enum PullRefreshState {
     ///The refreshing state, which will change the scrollView's contentInset and call the refreshing closures
     case refreshing
     
-    //The paused state, which will keeps the scrollView's refreshing state (e.g. contentInset) with no listening to the actions
+    //The paused state, which will keeps the scrollView's refreshing state (e.g. contentInset) with no listening to actions
     case pause
     
 }
@@ -104,15 +123,31 @@ protocol AnyRefreshObserver : class {
     
 }
 
+///default imp for AnyRefreshContent provided
+extension AnyRefreshContent {
+    
+    public static var behaviour: RefreshContentBehaviour {
+        return RefreshContentBehaviour.default
+    }
+    
+    public func success() {}
+    
+    public func error(withMsg msg: String) {}
+    
+    public func pause(withMsg msg: String) {}
+    
+    public func setProgress(_ progress: CGFloat) {}
+}
+
 extension RefreshControl where Self : AnyRefreshContext {
     
     public func pause(withMsg msg: String) {
-        contentView.pause?(withMsg: msg)
+        contentView.pause(withMsg: msg)
         state = .pause
     }
     
     public func error(withMsg msg: String) {
-        contentView.error?(withMsg: msg)
+        contentView.error(withMsg: msg)
         state = .pause
     }
     
@@ -125,7 +160,7 @@ extension RefreshControl where Self : AnyRefreshContext {
     }
     
     public func success(withDelay: TimeInterval? = 0.6) {
-        contentView.success?()
+        contentView.success()
         DispatchQueue.main.asyncAfter(deadline: .now() + (withDelay ?? 0.6)) {[weak self] in
             self?.state = .idle
         }

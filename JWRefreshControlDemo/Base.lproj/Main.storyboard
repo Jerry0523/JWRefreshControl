@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ngQ-Au-0q7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ngQ-Au-0q7">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -118,6 +118,26 @@
                                             <segue destination="cJ7-qC-HvJ" kind="show" id="jR7-YN-PWD"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="XPn-zb-btc" rowHeight="60" style="IBUITableViewCellStyleDefault" id="Iik-CU-ZpD">
+                                        <rect key="frame" x="0.0" y="275" width="320" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Iik-CU-ZpD" id="eHe-ue-lTK">
+                                            <rect key="frame" x="0.0" y="0.0" width="286" height="59.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="ScrollView with android theme refresh control" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XPn-zb-btc">
+                                                    <rect key="frame" x="16" y="0.0" width="269" height="59.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="14"/>
+                                                    <color key="textColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="aki-BW-Fjt" kind="show" id="lHv-Ye-NXw"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -164,7 +184,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7RB-nW-aPl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1151" y="844"/>
+            <point key="canvasLocation" x="-1689" y="843"/>
         </scene>
         <!--ScrollView with Gif Refresh Control-->
         <scene sceneID="gJm-zx-QRs">
@@ -231,7 +251,75 @@ Bottoms likewise has the backing of major Atlanta hip-hop figures, like Killer M
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAL-cw-j3E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-381" y="843"/>
+            <point key="canvasLocation" x="-804" y="912"/>
+        </scene>
+        <!--ScrollView with Android Theme Refresh Control-->
+        <scene sceneID="zIA-TY-psd">
+            <objects>
+                <viewController id="aki-BW-Fjt" customClass="AndroidThemeViewController" customModule="JWRefreshControlDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="W1b-wV-UjA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0rW-FT-vGE">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7wg-eY-eMG">
+                                        <rect key="frame" x="10" y="10" width="300" height="2462"/>
+                                        <string key="text">Atlanta voters hit the polls on Tuesday and delivered a nearly split decision in the city's mayoral contest, leading candidate Mary Norwood to call for a recount minutes into Wednesday morning as Keisha Lance Bottoms celebrated the result.
+
+"We will be asking for a recount," Norwood said.
+Norwood cited an unofficial count in remarks before her supporters, and said while she was trailing her opponent Bottoms, she was waiting for further updates on the vote total later in the week.
+"It's not over yet," Norwood said.
+Bottoms, meanwhile, delivered a celebratory speech alongside sitting Mayor Kasim Reed, who backed her bid.
+Bottoms, a Democrat, squared off against Norwood, an independent, in the nonpartisan runoff to succeed Reed, who is term limited from seeking re-election.
+Votes rolled in late Tuesday evening, offering a nail-biting finish for the contentious race to lead one of the largest cities in the deep south -- and one that echoed Atlanta's 2009 mayoral contest, when Norwood narrowly lost to Reed and requested a recount, which certified the slim loss.
+Acknowledging this history, Norwood said, "I've done this before."
+A Norwood victory would mean Atlanta -- a gentrifying city where the African American share of the population remains a majority but has gone down over the years -- would have its first white mayor in more than 40 years.
+Georgia utilizes a majority rule with a runoff voting system, which means that if no candidate secures more than 50% of the vote in the general election, a final race between the top two candidates decides the winner.
+Bottoms and Norwood earned about 26% and 21%, respectively, of the vote in the general election on November 6, meaning they emerged as the top two candidates from the field of 11.
+Reed, the current mayor, endorsed Bottoms ahead of the general election, and the two share many positions in common. His tenure as mayor became one of the major factors in the race. Norwood, in the final debate on Sunday, sought to cast Reed's support as a negative, tying Bottoms to the controversial aspects of Reed's tenure, including a reported bribery investigation into Atlanta City Hall.
+Reed, according to the Atlanta Journal-Constitution, has denied he is personally involved in the probe and said he would cooperate with any requests from the Justice Department.
+Reed and Norwood traded barbs for much of the race, and Norwood drew ire when the Atlanta newspaper reported she had told a group of Young Republicans that she believed she lost the 2009 mayoral race against Reed because he engaged in voter fraud -- an unsubstantiated charge that Reed's office said came without evidence.
+Bottoms, meanwhile, sought to cast Norwood as a Republican hiding behind the guise of her independent status. The city of Atlanta is a Democratic stronghold in a state that is otherwise largely Republican, and the city's government remains the only major Democratic power center in the state's political system, which is dominated by Republican officeholders.
+In a last-minute boost to Norwood -- and one with significant cachet -- former Atlanta Mayor Shirley Franklin endorsed the independent candidate over Bottoms.
+Norwood also got endorsements from several of her former competitors, and state senator Vincent Fort -- the unsuccessful candidate backed by independent Sen. Bernie Sanders of Vermont -- had kind words to say about her after the general election.
+Fort, however, declined to endorse one of the two remaining contenders and told his supporters to vote their consciences.
+Bottoms counts the backing of major Georgia Democrats like former Atlanta Mayor Andrew Young, a civil rights icon and former UN ambassador.
+And Bottoms got herself a last-minute boost as well. Democratic US Sens. Kamala Harris of California and Cory Booker of New Jersey appeared in Atlanta the weekend before the runoff election to promote her candidacy.
+Bottoms likewise has the backing of major Atlanta hip-hop figures, like Killer Mike and T.I., who compared Norwood to President Donald Trump.</string>
+                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="15"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="7wg-eY-eMG" firstAttribute="centerX" secondItem="0rW-FT-vGE" secondAttribute="centerX" id="COc-uS-uGP"/>
+                                    <constraint firstItem="7wg-eY-eMG" firstAttribute="top" secondItem="0rW-FT-vGE" secondAttribute="top" constant="10" id="KAX-Go-lPq"/>
+                                    <constraint firstItem="7wg-eY-eMG" firstAttribute="leading" secondItem="0rW-FT-vGE" secondAttribute="leading" constant="10" id="RMQ-Yj-mTL"/>
+                                    <constraint firstAttribute="trailing" secondItem="7wg-eY-eMG" secondAttribute="trailing" constant="10" id="YUb-Dn-Nyv"/>
+                                    <constraint firstAttribute="bottom" secondItem="7wg-eY-eMG" secondAttribute="bottom" constant="10" id="p44-jf-ngK"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="0rW-FT-vGE" secondAttribute="bottom" id="6OG-bm-N0I"/>
+                            <constraint firstItem="0rW-FT-vGE" firstAttribute="leading" secondItem="W1b-wV-UjA" secondAttribute="leading" id="Dfi-OK-5uv"/>
+                            <constraint firstItem="0rW-FT-vGE" firstAttribute="top" secondItem="cMQ-2E-TKO" secondAttribute="top" id="HW7-WQ-CsK"/>
+                            <constraint firstAttribute="trailing" secondItem="0rW-FT-vGE" secondAttribute="trailing" id="YiB-L4-5P6"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="cMQ-2E-TKO"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="ScrollView with Android Theme Refresh Control" id="Dal-6X-I2K"/>
+                    <connections>
+                        <outlet property="scrollView" destination="0rW-FT-vGE" id="SQp-HE-bD3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rm6-dQ-MnP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-111" y="912"/>
         </scene>
         <!--CollectionView with Segment Refresh Control-->
         <scene sceneID="N1T-6W-mBw">
@@ -278,7 +366,7 @@ Bottoms likewise has the backing of major Atlanta hip-hop figures, like Killer M
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RAk-Zo-l9S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="278" y="388"/>
+            <point key="canvasLocation" x="621" y="374"/>
         </scene>
         <!--Default Refresh Control-->
         <scene sceneID="iC9-wT-Nyu">

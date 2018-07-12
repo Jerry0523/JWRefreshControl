@@ -42,7 +42,7 @@ class CollectionViewController: UICollectionViewController {
                 self?.collectionView?.reloadData()
             })
         }
-        refreshHeader?.progressHandler = progressHandler
+        refreshHeader?.handleStateByProgressChange = handleStateByProgressChange
     
         collectionView?.addRefreshFooter { [weak self] (footer) in
             if self == nil {
@@ -61,7 +61,7 @@ class CollectionViewController: UICollectionViewController {
         }
     }
     
-    func progressHandler(refreshHeader: RefreshHeaderControl<SegmentContentView>, progress: CGFloat) {
+    func handleStateByProgressChange(refreshHeader: RefreshHeaderControl<SegmentContentView>, progress: CGFloat) {
         if progress < 1.0 {
             refreshHeader.state = .idle
         } else if progress < SegmentContentView.SegmentThreshold {

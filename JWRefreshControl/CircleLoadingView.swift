@@ -74,28 +74,28 @@ open class CircleLoadingView: UIView {
         isAnimating = true
         let duration = 1.5
         if style == .cumulative {
-            let strokeStartAnimation = CAKeyframeAnimation.init(keyPath: "strokeStart")
+            let strokeStartAnimation = CAKeyframeAnimation(keyPath: "strokeStart")
             strokeStartAnimation.duration = duration
             strokeStartAnimation.values = [0, 0.2, 1.0]
             strokeStartAnimation.keyTimes = [0, 0.5, 1.0]
-            let strokeEndAnimation = CAKeyframeAnimation.init(keyPath: "strokeEnd")
+            let strokeEndAnimation = CAKeyframeAnimation(keyPath: "strokeEnd")
             strokeEndAnimation.duration = duration
             strokeEndAnimation.values = [0, 0.9, 1.0]
             strokeEndAnimation.keyTimes = [0, 0.5, 1.0]
-            let groupAnimation = CAAnimationGroup.init()
+            let groupAnimation = CAAnimationGroup()
             groupAnimation.animations = [strokeStartAnimation, strokeEndAnimation]
             groupAnimation.duration = duration
             groupAnimation.repeatCount = Float.infinity
             circleLayer.add(groupAnimation, forKey: CircleLoadingView.animationKey)
         } else if style == .default {
-            let rotationAnimation = CABasicAnimation.init(keyPath: "transform.rotation.z")
+            let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
             rotationAnimation.toValue = Float(Double.pi * 2)
             rotationAnimation.duration = duration
             rotationAnimation.isCumulative = true
             rotationAnimation.repeatCount = Float.infinity
             circleLayer.add(rotationAnimation, forKey: CircleLoadingView.animationKey)
         } else if style ==  .gradient {
-            let rotationAnimation = CABasicAnimation.init(keyPath: "transform.rotation.z")
+            let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
             rotationAnimation.toValue = Float(Double.pi * 2.0)
             rotationAnimation.duration = duration
             rotationAnimation.isCumulative = true
@@ -164,15 +164,15 @@ open class CircleLoadingView: UIView {
         let path = CGMutablePath()
         
         let radius = (min(frame.size.width, frame.size.height) - circleLayer.lineWidth) * 0.5
-        path.addArc(center:CGPoint.init(x: frame.size.width * 0.5, y: frame.size.height * 0.5), radius: radius, startAngle: CGFloat(-Double.pi / 2), endAngle: CGFloat(-Double.pi / 2 + Double.pi * 2), clockwise: false)
+        path.addArc(center:CGPoint(x: frame.size.width * 0.5, y: frame.size.height * 0.5), radius: radius, startAngle: CGFloat(-Double.pi / 2), endAngle: CGFloat(-Double.pi / 2 + Double.pi * 2), clockwise: false)
         circleLayer.path = path;
         
         if let gradientLayer = gradientLayer {
             gradientLayer.frame = bounds
             let g0 = gradientLayer.sublayers?.first as? CAGradientLayer
             let g1 = gradientLayer.sublayers?.last as? CAGradientLayer
-            g0?.frame = CGRect.init(x: 0, y: 0, width: frame.size.width * 0.5, height: frame.size.height)
-            g1?.frame = CGRect.init(x: frame.size.width * 0.5, y: 0, width: frame.size.width * 0.5, height: frame.size.height)
+            g0?.frame = CGRect(x: 0, y: 0, width: frame.size.width * 0.5, height: frame.size.height)
+            g1?.frame = CGRect(x: frame.size.width * 0.5, y: 0, width: frame.size.width * 0.5, height: frame.size.height)
             gradientLayer.mask = circleLayer
         }
     }
@@ -185,12 +185,12 @@ open class CircleLoadingView: UIView {
         let g1 = gradientLayer.sublayers?.last as? CAGradientLayer
         
         g0?.colors = [tintColor.withAlphaComponent(0.5).cgColor, tintColor.withAlphaComponent(0.15).cgColor]
-        g0?.startPoint = CGPoint.init(x: 1.0, y: 1.0)
-        g0?.endPoint = CGPoint.init(x: 1.0, y: 0.0)
+        g0?.startPoint = CGPoint(x: 1.0, y: 1.0)
+        g0?.endPoint = CGPoint(x: 1.0, y: 0.0)
         
         g1?.colors = [tintColor.withAlphaComponent(0.5).cgColor, tintColor.cgColor]
-        g1?.startPoint = CGPoint.init(x: 1.0, y: 1.0)
-        g1?.endPoint = CGPoint.init(x: 1.0, y: 0.0)
+        g1?.startPoint = CGPoint(x: 1.0, y: 1.0)
+        g1?.endPoint = CGPoint(x: 1.0, y: 0.0)
         
     }
     
@@ -198,11 +198,11 @@ open class CircleLoadingView: UIView {
         switch style {
         case .gradient:
             if gradientLayer == nil {
-                let gradientLayer = CALayer.init()
+                let gradientLayer = CALayer()
                 gradientLayer.mask = circleLayer
                 
-                let g0 = CAGradientLayer.init()
-                let g1 = CAGradientLayer.init()
+                let g0 = CAGradientLayer()
+                let g1 = CAGradientLayer()
                 
                 gradientLayer.addSublayer(g0)
                 gradientLayer.addSublayer(g1)
@@ -238,7 +238,7 @@ open class CircleLoadingView: UIView {
     }
     
     private var circleLayer: CAShapeLayer = {
-        let layer = CAShapeLayer.init()
+        let layer = CAShapeLayer()
         layer.lineCap = kCALineCapRound
         layer.strokeEnd = 0
         layer.fillColor = UIColor.clear.cgColor

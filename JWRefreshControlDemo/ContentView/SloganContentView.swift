@@ -9,13 +9,13 @@
 import UIKit
 import JWRefreshControl
 
-let themeColor = UIColor.init(red: 246.0 / 255.0, green: 72 / 255.0, blue: 69 / 255.0, alpha: 1.0)
+let themeColor = UIColor(red: 246.0 / 255.0, green: 72 / 255.0, blue: 69 / 255.0, alpha: 1.0)
 
 class SloganContentView: UIView {
     
     override init(frame: CGRect) {
         
-        sloganLayer = SloganLayer.init()
+        sloganLayer = SloganLayer()
         
         super.init(frame: frame)
         layer.addSublayer(sloganLayer)
@@ -31,7 +31,7 @@ class SloganContentView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        sloganLayer.frame = CGRect.init(x: (frame.size.width - 170) * 0.5, y: frame.size.height - 69, width: 170, height: 56)
+        sloganLayer.frame = CGRect(x: (frame.size.width - 170) * 0.5, y: frame.size.height - 69, width: 170, height: 56)
     }
     
     private let sloganLayer: SloganLayer!
@@ -61,7 +61,7 @@ class SloganLayer: CAShapeLayer {
     func convertToPoint(pointString: String) -> CGPoint {
         let pointsArray = pointString.components(separatedBy: ",")
         if pointsArray.count == 2 {
-            return CGPoint.init(x: CGFloat(Float(pointsArray[0])!) , y: CGFloat(Float(pointsArray[1])!))
+            return CGPoint(x: CGFloat(Float(pointsArray[0])!) , y: CGFloat(Float(pointsArray[1])!))
         } else {
             return CGPoint.zero
         }
@@ -81,7 +81,7 @@ class SloganLayer: CAShapeLayer {
         var final: UIBezierPath? = nil
         if let pointsArray = NSArray(contentsOfFile: Bundle.main.path(forResource: "SloganPoints", ofType: "plist")!) {
             if pointsArray.count > 0 {
-                final = try? UIBezierPath.init(dataArray: pointsArray as! [String], defaultMethod: .curve)
+                final = try? UIBezierPath(dataArray: pointsArray as! [String], defaultMethod: .curve)
             }
         }
         

@@ -25,6 +25,17 @@ import UIKit
 
 extension UIScrollView {
     
+    var jw_draggedHeaderOffsetY: CGFloat {
+        
+        get {
+            var offsetY = -(contentInset.top + contentOffset.y)
+            if #available(iOS 11.0, *) {
+                offsetY -= (adjustedContentInset.top - contentInset.top)
+            }
+            return offsetY
+        }
+    }
+    
     var jw_adjustedContentInset: UIEdgeInsets {
         
         get {

@@ -23,7 +23,7 @@
 
 import UIKit
 
-open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl where T: AnyRefreshContent & UIView {
+open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl, UIGestureRecognizerDelegate where T: AnyRefreshContent & UIView {
     
     public var state = PullRefreshState.idle {
         didSet {
@@ -36,9 +36,9 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl wh
     open var refreshingBlock: ((RefreshHeaderControl<T>) -> ())?
     
     ///called when the pan gesture ended
-    open var progressHandler: ((RefreshHeaderControl<T>, CGFloat) -> ())?
+    open var handleStateByProgressChange: ((RefreshHeaderControl<T>, CGFloat) -> ())?
     
-    open let contentView = T() //(frame: CGRect.zero)
+    open let contentView = T(frame: CGRect.zero)
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -52,26 +52,16 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl wh
     
     open override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
-        
         if newSuperview == nil {
             self.state = .idle
         }
-        
-        removeKVO()
-        
+        removeListener()
         guard let scrollView = newSuperview as? UIScrollView else {
             return
         }
-        
         self.scrollView = scrollView
         scrollView.alwaysBounceVertical = true
-        registKVO()
-        let panGestureRecognizer = scrollView.panGestureRecognizer
-        keyPathObservations.append(
-            panGestureRecognizer.observe(\.state, changeHandler: { [weak self] (scrollView, change) in
-                self?.scrollViewPanGestureStateDidChange()
-            })
-        )
+        addListener()
     }
     
     private func setup() {
@@ -83,45 +73,111 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl wh
     
     private func layout(contentView: T) {
         let viewHeight = contentView.intrinsicContentSize.height
-        if T.self.isPinnedToEdge ?? false {
-            contentView.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: viewHeight)
+        switch T.self.behaviour {
+        case .pinnedToEdge:
+            contentView.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: viewHeight)
             contentView.autoresizingMask = .flexibleWidth
-        } else {
-            contentView.frame = CGRect(x: 0, y: self.frame.size.height - viewHeight, width: self.frame.size.width, height: viewHeight)
+        case .default, .android:
+            contentView.frame = CGRect(x: 0, y: frame.size.height - viewHeight, width: self.frame.size.width, height: viewHeight)
             contentView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         }
     }
     
-    private func scrollViewPanGestureStateDidChange() {
+    private func removeListener() {
+        removeKVO()
+        if let headerPanGesture = headerPanGesture {
+            scrollView?.removeGestureRecognizer(headerPanGesture)
+        }
+    }
+    
+    private func addListener() {
+        registKVO()
+        switch T.self.behaviour {
+        case .android:
+            if headerPanGesture == nil {
+                headerPanGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+                headerPanGesture?.delegate = self
+            }
+            scrollView?.addGestureRecognizer(headerPanGesture!)
+        default:
+            guard let panGestureRecognizer = scrollView?.panGestureRecognizer else {
+                return
+            }
+            keyPathObservations.append(
+                panGestureRecognizer.observe(\.state, changeHandler: { [weak self] (scrollView, change) in
+                    self?.handlePanGestureStateChange()
+                })
+            )
+        }
+    }
+    
+    @objc private func handlePanGesture(_ sender: UIPanGestureRecognizer) {
         guard let scrollView = scrollView else {
             return
         }
+        let distance = sender.translation(in: scrollView).y
+        
+        switch sender.state {
+        case .changed:
+            frame = CGRect(x: 0, y: 0, width: scrollView.frame.size.width, height: distance)
+            scrollView.bringSubview(toFront: self)
+            if state == .idle {
+                contentView.setProgress(distance / contentView.intrinsicContentSize.height)
+            }
+        case .ended:
+            handleProgress(distance / contentView.intrinsicContentSize.height)
+        default: break
+        }
+        
+    }
+    
+    private func handlePanGestureStateChange() {
+        guard let scrollView = scrollView else {
+            return
+        }
+        
         if scrollView.panGestureRecognizer.state == .ended {
             if state != .idle {
                 return
             }
-            var offsetY = -(scrollView.contentInset.top + scrollView.contentOffset.y)
-            if #available(iOS 11.0, *) {
-                offsetY -= (scrollView.adjustedContentInset.top - scrollView.contentInset.top)
-            }
             
+            let offsetY = scrollView.jw_draggedHeaderOffsetY
             let progress = offsetY / contentView.intrinsicContentSize.height
             
-            if let progressHandler = progressHandler {
-                progressHandler(self, progress)
+            handleProgress(progress)
+        }
+    }
+    
+    private func handleProgress(_ progress: CGFloat) {
+        if let handleStateByProgressChange = handleStateByProgressChange {
+            handleStateByProgressChange(self, progress)
+        } else {
+            if (progress >= 1) {
+                state = .refreshing
             } else {
-                if (progress >= 1) {
-                    state = .refreshing
-                } else {
-                    state = .idle
-                }
+                state = .idle
             }
         }
     }
     
+    // MARK: UIGestureRecognizerDelegate
+    open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard let scrollView = scrollView, gestureRecognizer == headerPanGesture else {
+            return true
+        }
+        return scrollView.jw_draggedHeaderOffsetY >= 0 && headerPanGesture!.velocity(in: gestureRecognizer.view).y > 0
+    }
+    
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return gestureRecognizer == headerPanGesture && otherGestureRecognizer == scrollView?.panGestureRecognizer
+    }
+    
+    // MARK: Private vars
     weak var scrollView: UIScrollView?
     
     var keyPathObservations: [NSKeyValueObservation] = []
+    
+    var headerPanGesture: UIPanGestureRecognizer?
     
 }
 
@@ -200,7 +256,7 @@ extension RefreshHeaderControl : AnyRefreshObserver {
             frame = CGRect(x: 0, y: -offsetY, width: scrollView.frame.size.width, height: offsetY)
             
             if state == .idle {
-                contentView.setProgress?(frame.size.height / contentView.intrinsicContentSize.height)
+                contentView.setProgress(frame.size.height / contentView.intrinsicContentSize.height)
             }
         }
         
@@ -229,17 +285,30 @@ extension RefreshHeaderControl : AnyRefreshObserver {
             return
         }
         
+        let isAndroidTheme = T.self.behaviour == .android
+        
         switch state {
         case .idle:
-            contentView.stop?()
+            contentView.stop()
             UIView.animate(withDuration: 0.25, animations: {
-                scrollView.jw_updateHeaderInset(0)
+                if isAndroidTheme {
+                    var frame = self.frame
+                    frame.size.height = 0
+                    self.frame = frame
+                } else {
+                    scrollView.jw_updateHeaderInset(0)
+                }
             })
-            
         case .refreshing:
-            contentView.start?()
+            contentView.start()
             UIView.animate(withDuration: 0.25, animations: {
-                scrollView.jw_updateHeaderInset(self.contentView.intrinsicContentSize.height)
+                if isAndroidTheme {
+                    var frame = self.frame
+                    frame.size.height = self.contentView.intrinsicContentSize.height
+                    self.frame = frame
+                } else {
+                    scrollView.jw_updateHeaderInset(self.contentView.intrinsicContentSize.height)
+                }
             }, completion: { (finished) in
                 self.refreshingBlock?(self)
                 self.scrollView?.refreshFooter?.stop()
@@ -268,7 +337,7 @@ extension RefreshFooterControl : AnyRefreshObserver {
             contentHeight >= scrollView.frame.size.height &&
             scrollView.contentOffset.y + scrollView.frame.size.height - scrollView.contentSize.height > offsetSpace {
             state = .refreshing
-            if T.self.isPinnedToEdge ?? false {
+            if T.self.behaviour == .pinnedToEdge {
                 let offsetY = scrollView.contentOffset.y + scrollView.frame.size.height - contentView.intrinsicContentSize.height
                 frame = CGRect(x: 0, y: offsetY, width: scrollView.frame.size.width, height: contentView.intrinsicContentSize.height)
             } else {
@@ -285,7 +354,7 @@ extension RefreshFooterControl : AnyRefreshObserver {
         switch state {
         case .idle:
             isHidden = true
-            contentView.stop?()
+            contentView.stop()
             scrollView.jw_updateFooterInset(0)
         case .refreshing:
             scrollView.jw_updateFooterInset(contentView.intrinsicContentSize.height)
@@ -296,7 +365,7 @@ extension RefreshFooterControl : AnyRefreshObserver {
             var contentFrame = contentView.frame
             contentFrame.size.width = scrollView.frame.size.width
             contentView.frame = contentFrame
-            contentView.start?()
+            contentView.start()
         default:
             break
         }
