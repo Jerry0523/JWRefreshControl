@@ -15,8 +15,16 @@ class AndroidThemeContentView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        imageView.tintColor = UIColor.red
-        addSubview(imageView)
+        
+        let wrapper = UIView(frame: CGRect(x: 0, y: 0, width: imageView.bounds.size.width + 20, height: imageView.bounds.size.height + 20))
+        wrapper.layer.masksToBounds = true
+        wrapper.layer.cornerRadius = wrapper.bounds.width * 0.5
+        wrapper.backgroundColor = UIColor.red
+        imageView.center = CGPoint(x: wrapper.bounds.width * 0.5, y: wrapper.bounds.height * 0.5)
+        imageView.tintColor = UIColor.white
+
+        wrapper.addSubview(imageView)
+        addSubview(wrapper)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -27,7 +35,7 @@ class AndroidThemeContentView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        imageView.center = CGPoint(x: self.bounds.size.width * 0.5, y: self.bounds.size.height * 0.5)
+        subviews.first?.center = CGPoint(x: bounds.width * 0.5, y: bounds.height * 0.5)
     }
 }
 

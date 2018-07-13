@@ -60,7 +60,7 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl, U
             return
         }
         self.scrollView = scrollView
-        scrollView.alwaysBounceVertical = true
+        scrollView.alwaysBounceVertical = T.self.behaviour != .android
         addListener()
     }
     
@@ -91,32 +91,35 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl, U
     }
     
     private func addListener() {
+        guard let scrollView = scrollView else {
+            return
+        }
         registKVO()
         switch T.self.behaviour {
         case .android:
             if headerPanGesture == nil {
-                headerPanGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+                headerPanGesture = UIPanGestureRecognizer(target: self, action: #selector(handleAndroidThemePanGesture(_:)))
                 headerPanGesture?.delegate = self
             }
-            scrollView?.addGestureRecognizer(headerPanGesture!)
+            scrollView.addGestureRecognizer(headerPanGesture!)
+            scrollView.panGestureRecognizer.require(toFail: headerPanGesture!)
         default:
-            guard let panGestureRecognizer = scrollView?.panGestureRecognizer else {
-                return
-            }
             keyPathObservations.append(
-                panGestureRecognizer.observe(\.state, changeHandler: { [weak self] (scrollView, change) in
+                scrollView.panGestureRecognizer.observe(\.state, changeHandler: { [weak self] (scrollView, change) in
                     self?.handlePanGestureStateChange()
                 })
             )
         }
     }
     
-    @objc private func handlePanGesture(_ sender: UIPanGestureRecognizer) {
+    @objc private func handleAndroidThemePanGesture(_ sender: UIPanGestureRecognizer) {
         guard let scrollView = scrollView else {
             return
         }
+        if state != .idle {
+            return
+        }
         let distance = sender.translation(in: scrollView).y
-        
         switch sender.state {
         case .changed:
             frame = CGRect(x: 0, y: 0, width: scrollView.frame.size.width, height: distance)
@@ -126,6 +129,18 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl, U
             }
         case .ended:
             handleProgress(distance / contentView.intrinsicContentSize.height)
+            if state == .idle {
+                UIView.animate(withDuration: 0.25, animations: {
+                    var frame = self.frame
+                    frame.origin.y = -self.bounds.height
+                    self.frame = frame
+                }) { (completed) in
+                    self.contentView.stop()
+                    var frame = self.frame
+                    frame.size.height = 0
+                    self.frame = frame
+                }
+            }
         default: break
         }
         
@@ -162,13 +177,13 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl, U
     
     // MARK: UIGestureRecognizerDelegate
     open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        guard let scrollView = scrollView, gestureRecognizer == headerPanGesture else {
+        guard let scrollView = scrollView, let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer else {
             return true
         }
-        return scrollView.jw_draggedHeaderOffsetY >= 0 && headerPanGesture!.velocity(in: gestureRecognizer.view).y > 0
+        return scrollView.jw_draggedHeaderOffsetY >= 0 && gestureRecognizer.velocity(in: gestureRecognizer.view).y > 0
     }
     
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return gestureRecognizer == headerPanGesture && otherGestureRecognizer == scrollView?.panGestureRecognizer
     }
     
@@ -242,6 +257,10 @@ extension RefreshHeaderControl : AnyRefreshObserver {
     
     func scrollViewContentOffsetDidChange() {
         guard let scrollView = scrollView else {
+            return
+        }
+        
+        guard T.self.behaviour != .android else {
             return
         }
         
