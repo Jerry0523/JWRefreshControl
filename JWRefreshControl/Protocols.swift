@@ -46,15 +46,15 @@ public protocol RefreshControl {
 ///A type that indicates the contentView's behaviour.
 public enum RefreshContentBehaviour {
     
-    ///Scroll with the scrollView
-    case `default`
+    ///Scroll along with the scrollView
+    case scroll
     
     ///A vaule indicates whether the content view should be pined to the edge
     ///e.g. when the content view is on a refresh header, and isPinnedToEdge set to true, the content view will be pined to the top of the scrollView without scrolling
     case pinnedToEdge
     
     ///Keep the scrollView still and move the content view. Like in android.
-    case android
+    case transfer
     
 }
 
@@ -127,7 +127,7 @@ protocol AnyRefreshObserver : class {
 extension AnyRefreshContent {
     
     public static var behaviour: RefreshContentBehaviour {
-        return RefreshContentBehaviour.default
+        return RefreshContentBehaviour.scroll
     }
     
     public func success() {}

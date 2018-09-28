@@ -1,5 +1,5 @@
 //
-// RefreshControl.swift
+// RefreshHeaderControl.swift
 //
 // Copyright (c) 2015 Jerry Wong
 //
@@ -60,7 +60,7 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl, U
             return
         }
         self.scrollView = scrollView
-        scrollView.alwaysBounceVertical = T.self.behaviour != .android
+        scrollView.alwaysBounceVertical = T.self.behaviour != .transfer
         addListener()
     }
     
@@ -77,7 +77,7 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl, U
         case .pinnedToEdge:
             contentView.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: viewHeight)
             contentView.autoresizingMask = .flexibleWidth
-        case .default, .android:
+        case .scroll, .transfer:
             contentView.frame = CGRect(x: 0, y: frame.size.height - viewHeight, width: self.frame.size.width, height: viewHeight)
             contentView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         }
@@ -96,7 +96,7 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl, U
         }
         registKVO()
         switch T.self.behaviour {
-        case .android:
+        case .transfer:
             if headerPanGesture == nil {
                 headerPanGesture = UIPanGestureRecognizer(target: self, action: #selector(handleAndroidThemePanGesture(_:)))
                 headerPanGesture?.delegate = self
@@ -143,7 +143,6 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl, U
             }
         default: break
         }
-        
     }
     
     private func handlePanGestureStateChange() {
@@ -156,7 +155,7 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl, U
                 return
             }
             
-            let offsetY = scrollView.jw_draggedHeaderOffsetY
+            let offsetY = scrollView.jw_draggedHeaderSpace
             let progress = offsetY / contentView.intrinsicContentSize.height
             
             handleProgress(progress)
@@ -180,7 +179,7 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl, U
         guard let scrollView = scrollView, let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer else {
             return true
         }
-        return scrollView.jw_draggedHeaderOffsetY >= 0 && gestureRecognizer.velocity(in: gestureRecognizer.view).y > 0
+        return scrollView.jw_draggedHeaderSpace >= 0 && gestureRecognizer.velocity(in: gestureRecognizer.view).y > 0
     }
     
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -196,63 +195,6 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl, U
     
 }
 
-open class RefreshFooterControl<T>: UIView , AnyRefreshContext, RefreshControl where T: AnyRefreshContent & UIView {
-    
-    open var state = PullRefreshState.idle {
-        didSet {
-            if state != oldValue {
-                updateContentViewByStateChanged()
-            }
-        }
-    }
-    
-    open var refreshingBlock: ((RefreshFooterControl<T>) -> ())?
-    
-    open var preFetchedDistance: CGFloat = 0
-    
-    public let contentView = T()
-    
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-    
-    open override func willMove(toSuperview newSuperview: UIView?) {
-        super.willMove(toSuperview: newSuperview)
-        
-        if newSuperview == nil {
-            self.state = .idle
-        }
-        
-        removeKVO()
-        
-        guard let scrollView = newSuperview as? UIScrollView else {
-            return
-        }
-        contentView.frame = CGRect(x: 0, y: 0, width:scrollView.frame.size.width, height: contentView.intrinsicContentSize.height)
-        self.scrollView = scrollView
-        scrollView.alwaysBounceVertical = true
-        registKVO()
-    }
-    
-    private func setup() {
-        autoresizingMask = .flexibleWidth
-        clipsToBounds = true
-        addSubview(contentView)
-        isHidden = true
-    }
-    
-    weak var scrollView: UIScrollView?
-    
-    var keyPathObservations: [NSKeyValueObservation] = []
-    
-}
-
 extension RefreshHeaderControl : AnyRefreshObserver {
     
     func scrollViewContentOffsetDidChange() {
@@ -260,7 +202,7 @@ extension RefreshHeaderControl : AnyRefreshObserver {
             return
         }
         
-        guard T.self.behaviour != .android else {
+        guard T.self.behaviour != .transfer else {
             return
         }
         
@@ -304,7 +246,7 @@ extension RefreshHeaderControl : AnyRefreshObserver {
             return
         }
         
-        let isAndroidTheme = T.self.behaviour == .android
+        let isAndroidTheme = T.self.behaviour == .transfer
         
         switch state {
         case .idle:
@@ -332,59 +274,6 @@ extension RefreshHeaderControl : AnyRefreshObserver {
                 self.refreshingBlock?(self)
                 self.scrollView?.refreshFooter?.stop()
             })
-        default:
-            break
-        }
-    }
-}
-
-extension RefreshFooterControl : AnyRefreshObserver {
-    
-    func scrollViewContentOffsetDidChange() {
-        guard let scrollView = scrollView else {
-            return
-        }
-        var offsetSpace = -preFetchedDistance
-        var contentHeight = scrollView.contentSize.height
-        if #available(iOS 11.0, *) {
-            offsetSpace += scrollView.adjustedContentInset.bottom
-            contentHeight += (scrollView.adjustedContentInset.top + scrollView.adjustedContentInset.bottom)
-        }
-        contentHeight += (scrollView.contentInset.top + scrollView.contentInset.bottom)
-        if state != .pause &&
-            scrollView.contentSize.height > 0 &&
-            contentHeight >= scrollView.frame.size.height &&
-            scrollView.contentOffset.y + scrollView.frame.size.height - scrollView.contentSize.height > offsetSpace {
-            state = .refreshing
-            if T.self.behaviour == .pinnedToEdge {
-                let offsetY = scrollView.contentOffset.y + scrollView.frame.size.height - contentView.intrinsicContentSize.height
-                frame = CGRect(x: 0, y: offsetY, width: scrollView.frame.size.width, height: contentView.intrinsicContentSize.height)
-            } else {
-                frame = CGRect(x: 0, y: scrollView.contentSize.height, width: scrollView.frame.size.width, height: contentView.intrinsicContentSize.height)
-            }
-        }
-    }
-    
-    public func updateContentViewByStateChanged() {
-        guard let scrollView = scrollView else {
-            return
-        }
-        
-        switch state {
-        case .idle:
-            isHidden = true
-            contentView.stop()
-            scrollView.jw_updateFooterInset(0)
-        case .refreshing:
-            scrollView.jw_updateFooterInset(contentView.intrinsicContentSize.height)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: {
-                self.refreshingBlock?(self)
-            })
-            isHidden = false
-            var contentFrame = contentView.frame
-            contentFrame.size.width = scrollView.frame.size.width
-            contentView.frame = contentFrame
-            contentView.start()
         default:
             break
         }

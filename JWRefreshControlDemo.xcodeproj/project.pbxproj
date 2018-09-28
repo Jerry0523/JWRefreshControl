@@ -14,7 +14,7 @@
 		C431F5561FBD8EF200FAD488 /* JWRefreshControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C431F54F1FBD8EF200FAD488 /* JWRefreshControl.framework */; };
 		C431F5571FBD8EF200FAD488 /* JWRefreshControl.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C431F54F1FBD8EF200FAD488 /* JWRefreshControl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C431F55C1FBD8F1200FAD488 /* UIScrollView+PullRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = C402AB0B1FB3F0CB00B8FA09 /* UIScrollView+PullRefresh.swift */; };
-		C431F55D1FBD8F1200FAD488 /* RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C402AB091FB3F0CB00B8FA09 /* RefreshControl.swift */; };
+		C431F55D1FBD8F1200FAD488 /* RefreshHeaderControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C402AB091FB3F0CB00B8FA09 /* RefreshHeaderControl.swift */; };
 		C431F55E1FBD8F1200FAD488 /* RefreshContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C402AB0A1FB3F0CB00B8FA09 /* RefreshContentView.swift */; };
 		C431F55F1FBD8F1200FAD488 /* SimpleShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C402AB0F1FB3F1E900B8FA09 /* SimpleShapeView.swift */; };
 		C431F5601FBD8F1200FAD488 /* CircleLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C402AB111FB3F20100B8FA09 /* CircleLoadingView.swift */; };
@@ -38,6 +38,7 @@
 		C4C148851FD7D0BC00A68880 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C1487F1FD7D0BC00A68880 /* TableViewController.swift */; };
 		C4C148861FD7D0BC00A68880 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C148801FD7D0BC00A68880 /* WebViewController.swift */; };
 		C4C148871FD7D0BC00A68880 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C148811FD7D0BC00A68880 /* CollectionViewController.swift */; };
+		C4E0581D215E5660007B8CD5 /* RefreshFooterControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E0581C215E5660007B8CD5 /* RefreshFooterControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,7 +72,7 @@
 		C402AAE11FB3F07100B8FA09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C402AAE41FB3F07100B8FA09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C402AAE61FB3F07100B8FA09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C402AB091FB3F0CB00B8FA09 /* RefreshControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshControl.swift; sourceTree = "<group>"; };
+		C402AB091FB3F0CB00B8FA09 /* RefreshHeaderControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshHeaderControl.swift; sourceTree = "<group>"; };
 		C402AB0A1FB3F0CB00B8FA09 /* RefreshContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshContentView.swift; sourceTree = "<group>"; };
 		C402AB0B1FB3F0CB00B8FA09 /* UIScrollView+PullRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+PullRefresh.swift"; sourceTree = "<group>"; };
 		C402AB0F1FB3F1E900B8FA09 /* SimpleShapeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleShapeView.swift; sourceTree = "<group>"; };
@@ -97,6 +98,7 @@
 		C4C1487F1FD7D0BC00A68880 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		C4C148801FD7D0BC00A68880 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		C4C148811FD7D0BC00A68880 /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		C4E0581C215E5660007B8CD5 /* RefreshFooterControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshFooterControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,7 +159,8 @@
 			children = (
 				C47A43E9202C2C3200F39F23 /* Protocols.swift */,
 				C402AB0B1FB3F0CB00B8FA09 /* UIScrollView+PullRefresh.swift */,
-				C402AB091FB3F0CB00B8FA09 /* RefreshControl.swift */,
+				C402AB091FB3F0CB00B8FA09 /* RefreshHeaderControl.swift */,
+				C4E0581C215E5660007B8CD5 /* RefreshFooterControl.swift */,
 				C402AB0A1FB3F0CB00B8FA09 /* RefreshContentView.swift */,
 				C402AB0F1FB3F1E900B8FA09 /* SimpleShapeView.swift */,
 				C402AB111FB3F20100B8FA09 /* CircleLoadingView.swift */,
@@ -346,8 +349,9 @@
 			files = (
 				C47A43E8202C28D700F39F23 /* UIScrollView+Private.swift in Sources */,
 				C431F55C1FBD8F1200FAD488 /* UIScrollView+PullRefresh.swift in Sources */,
-				C431F55D1FBD8F1200FAD488 /* RefreshControl.swift in Sources */,
+				C431F55D1FBD8F1200FAD488 /* RefreshHeaderControl.swift in Sources */,
 				C431F55E1FBD8F1200FAD488 /* RefreshContentView.swift in Sources */,
+				C4E0581D215E5660007B8CD5 /* RefreshFooterControl.swift in Sources */,
 				C431F55F1FBD8F1200FAD488 /* SimpleShapeView.swift in Sources */,
 				C431F5601FBD8F1200FAD488 /* CircleLoadingView.swift in Sources */,
 				C431F5611FBD8F1200FAD488 /* CircleProgressView.swift in Sources */,

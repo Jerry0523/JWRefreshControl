@@ -41,7 +41,7 @@ class AndroidThemeContentView: UIView {
 
 extension AndroidThemeContentView : AnyRefreshContent {
     
-    static var behaviour = RefreshContentBehaviour.android
+    static var behaviour = RefreshContentBehaviour.transfer
     
     func start() {
         layer.speed = 1.0

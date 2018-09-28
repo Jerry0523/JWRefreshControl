@@ -19,6 +19,10 @@ class AndroidThemeViewController: UIViewController {
         scrollView.addCustomRefreshHeader { (header: RefreshHeaderControl<AndroidThemeContentView>) in
             header.success()
         }
+        
+        scrollView.addCustomRefreshFooter { (footer: RefreshFooterControl<AndroidThemeContentView>) in
+            footer.success()
+        }
     }
 
     override func didReceiveMemoryWarning() {
