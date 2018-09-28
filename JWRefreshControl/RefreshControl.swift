@@ -38,7 +38,7 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl, U
     ///called when the pan gesture ended
     open var handleStateByProgressChange: ((RefreshHeaderControl<T>, CGFloat) -> ())?
     
-    open let contentView = T(frame: CGRect.zero)
+    public let contentView = T(frame: CGRect.zero)
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -210,7 +210,7 @@ open class RefreshFooterControl<T>: UIView , AnyRefreshContext, RefreshControl w
     
     open var preFetchedDistance: CGFloat = 0
     
-    open let contentView = T()
+    public let contentView = T()
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

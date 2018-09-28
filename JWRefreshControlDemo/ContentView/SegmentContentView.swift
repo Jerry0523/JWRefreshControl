@@ -37,7 +37,7 @@ class SegmentContentView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override var intrinsicContentSize: CGSize { return CGSize(width: UIViewNoIntrinsicMetric, height: 100.0) }
+    override var intrinsicContentSize: CGSize { return CGSize(width: UIView.noIntrinsicMetric, height: 100.0) }
     
     private let titleLabel = UILabel()
     private let backgroundImageView = UIImageView(image: UIImage(named: "background"))

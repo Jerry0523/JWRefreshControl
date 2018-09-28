@@ -24,7 +24,7 @@ class GifContentView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    open override var intrinsicContentSize: CGSize { return CGSize(width: UIViewNoIntrinsicMetric, height: 160.0) }
+    open override var intrinsicContentSize: CGSize { return CGSize(width: UIView.noIntrinsicMetric, height: 160.0) }
     
     override func layoutSubviews() {
         super.layoutSubviews()

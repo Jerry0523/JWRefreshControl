@@ -27,7 +27,7 @@ class SloganContentView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    open override var intrinsicContentSize: CGSize { return CGSize(width: UIViewNoIntrinsicMetric, height: 120.0) }
+    open override var intrinsicContentSize: CGSize { return CGSize(width: UIView.noIntrinsicMetric, height: 120.0) }
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -105,7 +105,7 @@ class SloganLayer: CAShapeLayer {
         
         let pathAnimation = CABasicAnimation(keyPath: "strokeEnd")
         pathAnimation.duration = 3.0
-        pathAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        pathAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         pathAnimation.fromValue = 0.0
         pathAnimation.toValue = 1.0
         
@@ -114,7 +114,7 @@ class SloganLayer: CAShapeLayer {
         animGroup.duration = 6.0
         animGroup.repeatCount = Float(LONG_MAX)
         animGroup.isRemovedOnCompletion = false
-        animGroup.fillMode = kCAFillModeForwards
+        animGroup.fillMode = CAMediaTimingFillMode.forwards
         
         add(animGroup, forKey: "sloganAnimation")
     }
