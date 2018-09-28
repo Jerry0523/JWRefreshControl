@@ -42,12 +42,12 @@ self.tableView.refreshHeader.success()
 
 - Notify refresh error
 ```swift
-self.tableView.refreshHeader.error(withMsg: "Network Error")
+self.tableView.refreshHeader.error("Network Error")
 ```
 
 - Notify no more data
 ```swift
-self.tableView.refreshFooter.pause(withMsg: "No More Data")
+self.tableView.refreshFooter.pause("No More Data")
 ```
 
 - Notify fetch task to stop
