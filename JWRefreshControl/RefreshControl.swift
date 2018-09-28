@@ -123,7 +123,7 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl, U
         switch sender.state {
         case .changed:
             frame = CGRect(x: 0, y: 0, width: scrollView.frame.size.width, height: distance)
-            scrollView.bringSubview(toFront: self)
+            scrollView.bringSubviewToFront(self)
             if state == .idle {
                 contentView.setProgress(distance / contentView.intrinsicContentSize.height)
             }

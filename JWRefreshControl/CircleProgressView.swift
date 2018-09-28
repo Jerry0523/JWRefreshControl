@@ -139,7 +139,7 @@ open class CircleProgressView: UIView {
     
     private func setupLayerStyle() {
         if style == .default {
-            circleLayer.lineCap = kCALineCapRound
+            circleLayer.lineCap = CAShapeLayerLineCap.round
             circleLayer.strokeStart = 0
             if clockWise {
                 circleLayer.strokeEnd = 0

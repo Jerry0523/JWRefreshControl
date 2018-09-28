@@ -239,7 +239,7 @@ open class CircleLoadingView: UIView {
     
     private var circleLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
-        layer.lineCap = kCALineCapRound
+        layer.lineCap = CAShapeLayerLineCap.round
         layer.strokeEnd = 0
         layer.fillColor = UIColor.clear.cgColor
         return layer

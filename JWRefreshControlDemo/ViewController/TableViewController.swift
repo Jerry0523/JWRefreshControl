@@ -43,7 +43,7 @@ class TableViewController: UITableViewController {
             }
             
             if self!.data.count >= 60 {
-                footer.pause(withMsg: "No More Data")
+                footer.pause("No More Data")
             } else {
                 FakeRequest.createMockData(forStartIndex: self!.data.count + 1, callBack: { [weak self] (output) in
                     self?.data.append(contentsOf: output)

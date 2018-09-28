@@ -35,7 +35,7 @@ open class DefaultRefreshHeaderContentView: UIView {
         setup()
     }
     
-    open override var intrinsicContentSize: CGSize { return CGSize(width: UIViewNoIntrinsicMetric, height: 70.0) }
+    open override var intrinsicContentSize: CGSize { return CGSize(width: UIView.noIntrinsicMetric, height: 70.0) }
     
     open override func layoutSubviews() {
         super.layoutSubviews()
@@ -167,7 +167,7 @@ extension DefaultRefreshHeaderContentView : AnyRefreshContent {
 
     }
     
-    open func error(withMsg msg: String) {
+    open func error(_ msg: String) {
         reset()
         errorLabel.isHidden = false
         errorLabel.text = msg
@@ -189,7 +189,7 @@ open class DefaultRefreshFooterContentView : UIView {
         setup()
     }
     
-    open override var intrinsicContentSize: CGSize { return CGSize(width: UIViewNoIntrinsicMetric, height: 50.0) }
+    open override var intrinsicContentSize: CGSize { return CGSize(width: UIView.noIntrinsicMetric, height: 50.0) }
     
     private func setup() {
         
@@ -259,7 +259,7 @@ extension DefaultRefreshFooterContentView : AnyRefreshContent {
         statusLabel.text = nil
     }
     
-    open func error(withMsg msg: String) {
+    open func error(_ msg: String) {
         reset()
         errorLabel.isHidden = false
         statusLabel.isHidden = false
@@ -268,7 +268,7 @@ extension DefaultRefreshFooterContentView : AnyRefreshContent {
         isUserInteractionEnabled = true
     }
     
-    open func pause(withMsg msg: String) {
+    open func pause(_ msg: String) {
         reset()
         centerLabel.isHidden = false
         centerLabel.text = msg

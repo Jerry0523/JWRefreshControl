@@ -226,8 +226,8 @@ open class SimpleShapeView: UIView {
     
     private func setup() {
         shapeLayer.lineWidth = lineWidth
-        shapeLayer.lineCap = kCALineCapRound
-        shapeLayer.lineJoin = kCALineJoinRound
+        shapeLayer.lineCap = CAShapeLayerLineCap.round
+        shapeLayer.lineJoin = CAShapeLayerLineJoin.round
         updateLayerColor()
     }
     

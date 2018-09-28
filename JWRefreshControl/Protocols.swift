@@ -36,10 +36,10 @@ public protocol RefreshControl {
     
     ///Notify the refresh control to pause
     ///which means that the scrollView keeps the state of refreshing (e.g. contentInset), but with no more listening to refresh actions
-    func pause(withMsg msg: String)
+    func pause(_ msg: String)
     
     ///Notify the refresh control to fail
-    func error(withMsg msg: String)
+    func error(_ msg: String)
     
 }
 
@@ -76,11 +76,11 @@ public protocol AnyRefreshContent {
     func success()
     
     ///Called when an error occurred
-    func error(withMsg msg: String)
+    func error(_ msg: String)
     
     ///Called when the refresh control is paused
     ///which means that the scrollView keeps the state of refreshing (e.g. contentInset), but with no more listening to the refresh actions
-    func pause(withMsg msg: String)
+    func pause(_ msg: String)
     
 }
 
@@ -132,22 +132,22 @@ extension AnyRefreshContent {
     
     public func success() {}
     
-    public func error(withMsg msg: String) {}
+    public func error(_ msg: String) {}
     
-    public func pause(withMsg msg: String) {}
+    public func pause(_ msg: String) {}
     
     public func setProgress(_ progress: CGFloat) {}
 }
 
 extension RefreshControl where Self : AnyRefreshContext {
     
-    public func pause(withMsg msg: String) {
-        contentView.pause(withMsg: msg)
+    public func pause(_ msg: String) {
+        contentView.pause(_: msg)
         state = .pause
     }
     
-    public func error(withMsg msg: String) {
-        contentView.error(withMsg: msg)
+    public func error(_ msg: String) {
+        contentView.error(_: msg)
         state = .pause
     }
     
