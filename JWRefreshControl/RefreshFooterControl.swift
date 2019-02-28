@@ -25,6 +25,14 @@ import UIKit
 
 open class RefreshFooterControl<T>: UIView , AnyRefreshContext, RefreshControl, UIGestureRecognizerDelegate where T: AnyRefreshContent & UIView {
     
+    public var isEnabled = true {
+        didSet {
+            if !isEnabled {
+                self.state = .idle
+            }
+        }
+    }
+    
     open var state = PullRefreshState.idle {
         didSet {
             if state != oldValue {
@@ -97,10 +105,7 @@ open class RefreshFooterControl<T>: UIView , AnyRefreshContext, RefreshControl, 
     }
     
     @objc private func handleAndroidThemePanGesture(_ sender: UIPanGestureRecognizer) {
-        guard let scrollView = scrollView else {
-            return
-        }
-        if state != .idle {
+        guard let scrollView = scrollView, isEnabled, state == .idle else {
             return
         }
         isHidden = false
@@ -130,7 +135,7 @@ open class RefreshFooterControl<T>: UIView , AnyRefreshContext, RefreshControl, 
     
     // MARK: UIGestureRecognizerDelegate
     open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        guard let scrollView = scrollView, let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer else {
+        guard let scrollView = scrollView, isEnabled,let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer else {
             return true
         }
         return scrollView.jw_draggedFooterSpace >= 0 && gestureRecognizer.velocity(in: gestureRecognizer.view).y < 0
@@ -151,14 +156,9 @@ open class RefreshFooterControl<T>: UIView , AnyRefreshContext, RefreshControl, 
 extension RefreshFooterControl : AnyRefreshObserver {
     
     func scrollViewContentOffsetDidChange() {
-        guard let scrollView = scrollView else {
+        guard let scrollView = scrollView, isEnabled, T.self.behaviour != .transfer else {
             return
         }
-        
-        guard T.self.behaviour != .transfer else {
-            return
-        }
-        
         var offsetSpace = -preFetchedDistance
         var contentHeight = scrollView.contentSize.height
         if #available(iOS 11.0, *) {

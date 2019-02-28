@@ -25,6 +25,8 @@ import UIKit
 
 public protocol RefreshControl {
     
+    var isEnabled: Bool { get set }
+    
     ///Notify the refresh control to start
     func start()
     

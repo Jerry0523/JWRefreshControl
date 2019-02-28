@@ -25,6 +25,14 @@ import UIKit
 
 open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl, UIGestureRecognizerDelegate where T: AnyRefreshContent & UIView {
     
+    public var isEnabled = true {
+        didSet {
+            if !isEnabled {
+                self.state = .idle
+            }
+        }
+    }
+    
     public var state = PullRefreshState.idle {
         didSet {
             if state != oldValue {
@@ -113,7 +121,7 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl, U
     }
     
     @objc private func handleAndroidThemePanGesture(_ sender: UIPanGestureRecognizer) {
-        guard let scrollView = scrollView else {
+        guard let scrollView = scrollView, isEnabled else {
             return
         }
         if state != .idle {
@@ -146,7 +154,7 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl, U
     }
     
     private func handlePanGestureStateChange() {
-        guard let scrollView = scrollView else {
+        guard let scrollView = scrollView, isEnabled else {
             return
         }
         
@@ -176,7 +184,7 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl, U
     
     // MARK: UIGestureRecognizerDelegate
     open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        guard let scrollView = scrollView, let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer else {
+        guard let scrollView = scrollView, isEnabled,let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer else {
             return true
         }
         return scrollView.jw_draggedHeaderSpace >= 0 && gestureRecognizer.velocity(in: gestureRecognizer.view).y > 0
@@ -198,11 +206,7 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl, U
 extension RefreshHeaderControl : AnyRefreshObserver {
     
     func scrollViewContentOffsetDidChange() {
-        guard let scrollView = scrollView else {
-            return
-        }
-        
-        guard T.self.behaviour != .transfer else {
+        guard let scrollView = scrollView, isEnabled, T.self.behaviour != .transfer else {
             return
         }
         
