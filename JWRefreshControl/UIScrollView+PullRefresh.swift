@@ -26,7 +26,7 @@ import UIKit
 public extension UIScrollView {
     
     ///The refresh header. Setting a nil value will remove the current refresh header.
-    public var refreshHeader: RefreshControl? {
+    var refreshHeader: RefreshControl? {
         get {
             return objc_getAssociatedObject(self, &UIScrollView.refreshHeaderKey) as? RefreshControl
         }
@@ -41,7 +41,7 @@ public extension UIScrollView {
     }
     
     ///The refresh footer. Setting a nil value will remove the current refresh footer.
-    public var refreshFooter: RefreshControl? {
+    var refreshFooter: RefreshControl? {
         get {
             return objc_getAssociatedObject(self, &UIScrollView.refreshFooterKey) as? RefreshControl
         }
@@ -57,19 +57,19 @@ public extension UIScrollView {
     
     ///Add a default refresh header.
     @discardableResult
-    public func addRefreshHeader(callBack: @escaping (RefreshHeaderControl<DefaultRefreshHeaderContentView>) -> ()) -> RefreshHeaderControl<DefaultRefreshHeaderContentView> {
+    func addRefreshHeader(callBack: @escaping (RefreshHeaderControl<DefaultRefreshHeaderContentView>) -> ()) -> RefreshHeaderControl<DefaultRefreshHeaderContentView> {
         return addCustomRefreshHeader(callBack: callBack)
     }
     
     ///Add a default refresh footer.
     @discardableResult
-    public func addRefreshFooter(callBack: @escaping (RefreshFooterControl<DefaultRefreshFooterContentView>) -> ()) -> RefreshFooterControl<DefaultRefreshFooterContentView>{
+    func addRefreshFooter(callBack: @escaping (RefreshFooterControl<DefaultRefreshFooterContentView>) -> ()) -> RefreshFooterControl<DefaultRefreshFooterContentView>{
         return addCustomRefreshFooter(callBack: callBack)
     }
    
     ///Add a custome refresh header. Custom content view should be provided.
     @discardableResult
-    public func addCustomRefreshHeader<T>(callBack: @escaping (RefreshHeaderControl<T>) -> ()) -> RefreshHeaderControl<T> {
+    func addCustomRefreshHeader<T>(callBack: @escaping (RefreshHeaderControl<T>) -> ()) -> RefreshHeaderControl<T> {
         let headerControl = RefreshHeaderControl<T>.init(frame: CGRect.init(x: 0, y: 0, width: frame.size.width, height: 0))
         headerControl.refreshingBlock = callBack
         refreshHeader = headerControl
@@ -78,7 +78,7 @@ public extension UIScrollView {
     
     ///Add a custome refresh footer. Custom content view should be provided.
     @discardableResult
-    public func addCustomRefreshFooter<T>(callBack: @escaping (RefreshFooterControl<T>) -> ()) -> RefreshFooterControl<T> {
+    func addCustomRefreshFooter<T>(callBack: @escaping (RefreshFooterControl<T>) -> ()) -> RefreshFooterControl<T> {
         let footerControl = RefreshFooterControl<T>.init(frame: CGRect.init(x: 0, y: 0, width: frame.size.width, height: 0))
         footerControl.refreshingBlock = callBack
         refreshFooter = footerControl
@@ -86,7 +86,7 @@ public extension UIScrollView {
     }
     
     ///Remove the current refresh header.
-    public func removeRefreshHeader() {
+    func removeRefreshHeader() {
         let headerControl = refreshHeader
         headerControl?.stop()
         if let refreshView = headerControl as? UIView {
@@ -96,7 +96,7 @@ public extension UIScrollView {
     }
     
     ///Remove the current refresh footer.
-    public func removeRefreshFooter() {
+    func removeRefreshFooter() {
         let footerControl = refreshFooter
         footerControl?.stop()
         if let refreshView = footerControl as? UIView {

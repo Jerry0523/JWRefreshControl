@@ -134,7 +134,7 @@ open class SimpleShapeView: UIView {
     
     @IBInspectable open var typeString: String? {
         set {
-            guard let typeString = typeString else {
+            guard let typeString = newValue else {
                 return
             }
             let newType = SimpleShapeType(rawValue: typeString)
@@ -150,7 +150,7 @@ open class SimpleShapeView: UIView {
     
     @IBInspectable open var subTypeString: String? {
         set {
-            guard let subTypeString = subTypeString else {
+            guard let subTypeString = newValue else {
                 return
             }
             let newType = SimpleShapeSubType(rawValue: subTypeString)
