@@ -33,10 +33,10 @@ public extension UIScrollView {
         
         set {
             removeRefreshHeader()
-            objc_setAssociatedObject(self, &UIScrollView.refreshHeaderKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             if let refreshView = newValue as? UIView {
                 insertSubview(refreshView, at: 0)
             }
+            objc_setAssociatedObject(self, &UIScrollView.refreshHeaderKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
@@ -48,10 +48,10 @@ public extension UIScrollView {
         
         set {
             removeRefreshFooter()
-            objc_setAssociatedObject(self, &UIScrollView.refreshFooterKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             if let refreshView = newValue as? UIView {
                 insertSubview(refreshView, at: 0)
             }
+            objc_setAssociatedObject(self, &UIScrollView.refreshFooterKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
