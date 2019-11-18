@@ -109,22 +109,6 @@ public protocol AnyRefreshContext : AnyObject where ContentType : AnyRefreshCont
     
 }
 
-protocol AnyRefreshObserver : AnyObject {
-    
-    var scrollView: UIScrollView? { get set }
-    
-    var keyPathObservations: [NSKeyValueObservation] { get set }
-    
-    func registKVO()
-    
-    func removeKVO()
-    
-    func scrollViewContentOffsetDidChange()
-    
-    func updateContentViewByStateChanged()
-    
-}
-
 ///default imp for AnyRefreshContent provided
 extension AnyRefreshContent {
     
@@ -166,25 +150,5 @@ public extension RefreshControl where Self : AnyRefreshContext {
         DispatchQueue.main.asyncAfter(deadline: .now() + (withDelay ?? 0.6)) {[weak self] in
             self?.state = .idle
         }
-    }
-}
-
-extension AnyRefreshObserver {
-    
-    func registKVO() {
-        guard let scrollView = scrollView else {
-            return
-        }
-        
-        keyPathObservations = [
-            scrollView.observe(\.contentOffset, changeHandler: { [weak self] (scrollView, change) in
-                self?.scrollViewContentOffsetDidChange()
-            })
-        ]
-    }
-    
-    func removeKVO() {
-        scrollView = nil
-        keyPathObservations = []
     }
 }

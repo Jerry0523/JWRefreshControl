@@ -153,7 +153,24 @@ open class RefreshFooterControl<T>: UIView , AnyRefreshContext, RefreshControl, 
     
 }
 
-extension RefreshFooterControl : AnyRefreshObserver {
+extension RefreshFooterControl {
+    
+    func registKVO() {
+        guard let scrollView = scrollView else {
+            return
+        }
+        
+        keyPathObservations = [
+            scrollView.observe(\.contentOffset, changeHandler: { [weak self] (scrollView, change) in
+                self?.scrollViewContentOffsetDidChange()
+            })
+        ]
+    }
+    
+    func removeKVO() {
+        scrollView = nil
+        keyPathObservations = []
+    }
     
     func scrollViewContentOffsetDidChange() {
         guard let scrollView = scrollView, isEnabled, T.self.behaviour != .transfer else {
