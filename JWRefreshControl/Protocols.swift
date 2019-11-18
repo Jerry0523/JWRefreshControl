@@ -169,7 +169,7 @@ public extension RefreshControl where Self : AnyRefreshContext {
     }
 }
 
-extension RefreshControl where Self : AnyRefreshObserver {
+extension AnyRefreshObserver {
     
     func registKVO() {
         guard let scrollView = scrollView else {
