@@ -109,7 +109,7 @@ public protocol AnyRefreshContext : class where ContentType : AnyRefreshContent 
     
 }
 
-protocol AnyRefreshObserver : class {
+public protocol AnyRefreshObserver : class {
     
     var scrollView: UIScrollView? { get set }
     
@@ -126,42 +126,42 @@ protocol AnyRefreshObserver : class {
 }
 
 ///default imp for AnyRefreshContent provided
-extension AnyRefreshContent {
+public extension AnyRefreshContent {
     
-    public static var behaviour: RefreshContentBehaviour {
+    static var behaviour: RefreshContentBehaviour {
         return RefreshContentBehaviour.scroll
     }
     
-    public func success() {}
+    func success() {}
     
-    public func error(_ msg: String) {}
+    func error(_ msg: String) {}
     
-    public func pause(_ msg: String) {}
+    func pause(_ msg: String) {}
     
-    public func setProgress(_ progress: CGFloat) {}
+    func setProgress(_ progress: CGFloat) {}
 }
 
-extension RefreshControl where Self : AnyRefreshContext {
+public extension RefreshControl where Self : AnyRefreshContext {
     
-    public func pause(_ msg: String) {
+    func pause(_ msg: String) {
         contentView.pause(_: msg)
         state = .pause
     }
     
-    public func error(_ msg: String) {
+    func error(_ msg: String) {
         contentView.error(_: msg)
         state = .pause
     }
     
-    public func start() {
+    func start() {
         state = .refreshing
     }
     
-    public func stop() {
+    func stop() {
         state = .idle
     }
     
-    public func success(withDelay: TimeInterval? = 0.6) {
+    func success(withDelay: TimeInterval? = 0.6) {
         contentView.success()
         DispatchQueue.main.asyncAfter(deadline: .now() + (withDelay ?? 0.6)) {[weak self] in
             self?.state = .idle
@@ -169,7 +169,7 @@ extension RefreshControl where Self : AnyRefreshContext {
     }
 }
 
-extension RefreshControl where Self : AnyRefreshObserver {
+public extension RefreshControl where Self : AnyRefreshObserver {
     
     func registKVO() {
         guard let scrollView = scrollView else {
