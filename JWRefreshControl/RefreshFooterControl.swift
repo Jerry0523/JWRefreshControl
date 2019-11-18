@@ -145,17 +145,17 @@ open class RefreshFooterControl<T>: UIView , AnyRefreshContext, RefreshControl, 
         return gestureRecognizer == footerPanGesture && otherGestureRecognizer == scrollView?.panGestureRecognizer
     }
     
-    weak var scrollView: UIScrollView?
+    private weak var scrollView: UIScrollView?
     
-    var keyPathObservations: [NSKeyValueObservation] = []
+    private var keyPathObservations: [NSKeyValueObservation] = []
     
-    var footerPanGesture: UIPanGestureRecognizer?
+    private var footerPanGesture: UIPanGestureRecognizer?
     
 }
 
 extension RefreshFooterControl {
     
-    func registKVO() {
+    private func registKVO() {
         guard let scrollView = scrollView else {
             return
         }
@@ -167,12 +167,12 @@ extension RefreshFooterControl {
         ]
     }
     
-    func removeKVO() {
+    private func removeKVO() {
         scrollView = nil
         keyPathObservations = []
     }
     
-    func scrollViewContentOffsetDidChange() {
+    private func scrollViewContentOffsetDidChange() {
         guard let scrollView = scrollView, isEnabled, T.self.behaviour != .transfer else {
             return
         }
@@ -201,7 +201,7 @@ extension RefreshFooterControl {
         }
     }
     
-    public func updateContentViewByStateChanged() {
+    private func updateContentViewByStateChanged() {
         guard let scrollView = scrollView else {
             return
         }

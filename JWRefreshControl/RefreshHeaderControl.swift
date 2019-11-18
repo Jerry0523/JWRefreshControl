@@ -195,17 +195,17 @@ open class RefreshHeaderControl<T>: UIView, AnyRefreshContext, RefreshControl, U
     }
     
     // MARK: Private vars
-    weak var scrollView: UIScrollView?
+    private weak var scrollView: UIScrollView?
     
-    var keyPathObservations: [NSKeyValueObservation] = []
+    private var keyPathObservations: [NSKeyValueObservation] = []
     
-    var headerPanGesture: UIPanGestureRecognizer?
+    private var headerPanGesture: UIPanGestureRecognizer?
     
 }
 
 extension RefreshHeaderControl {
     
-    func registKVO() {
+    private func registKVO() {
         guard let scrollView = scrollView else {
             return
         }
@@ -217,12 +217,12 @@ extension RefreshHeaderControl {
         ]
     }
     
-    func removeKVO() {
+    private func removeKVO() {
         scrollView = nil
         keyPathObservations = []
     }
     
-    func scrollViewContentOffsetDidChange() {
+    private func scrollViewContentOffsetDidChange() {
         guard let scrollView = scrollView, isEnabled, T.self.behaviour != .transfer else {
             return
         }
@@ -262,7 +262,7 @@ extension RefreshHeaderControl {
         
     }
     
-    func updateContentViewByStateChanged() {
+    private func updateContentViewByStateChanged() {
         guard let scrollView = scrollView else {
             return
         }
