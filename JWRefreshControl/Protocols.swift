@@ -99,7 +99,7 @@ public enum PullRefreshState {
     
 }
 
-public protocol AnyRefreshContext : class where ContentType : AnyRefreshContent {
+public protocol AnyRefreshContext : AnyObject where ContentType : AnyRefreshContent {
     
     associatedtype ContentType
     
@@ -109,7 +109,7 @@ public protocol AnyRefreshContext : class where ContentType : AnyRefreshContent 
     
 }
 
-protocol AnyRefreshObserver : class {
+protocol AnyRefreshObserver : AnyObject {
     
     var scrollView: UIScrollView? { get set }
     
@@ -141,27 +141,27 @@ extension AnyRefreshContent {
     public func setProgress(_ progress: CGFloat) {}
 }
 
-extension RefreshControl where Self : AnyRefreshContext {
+public extension RefreshControl where Self : AnyRefreshContext {
     
-    public func pause(_ msg: String) {
+    func pause(_ msg: String) {
         contentView.pause(_: msg)
         state = .pause
     }
     
-    public func error(_ msg: String) {
+    func error(_ msg: String) {
         contentView.error(_: msg)
         state = .pause
     }
     
-    public func start() {
+    func start() {
         state = .refreshing
     }
     
-    public func stop() {
+    func stop() {
         state = .idle
     }
     
-    public func success(withDelay: TimeInterval? = 0.6) {
+    func success(withDelay: TimeInterval? = 0.6) {
         contentView.success()
         DispatchQueue.main.asyncAfter(deadline: .now() + (withDelay ?? 0.6)) {[weak self] in
             self?.state = .idle
