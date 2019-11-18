@@ -109,7 +109,7 @@ public protocol AnyRefreshContext : class where ContentType : AnyRefreshContent 
     
 }
 
-public protocol AnyRefreshObserver : class {
+protocol AnyRefreshObserver : class {
     
     var scrollView: UIScrollView? { get set }
     
@@ -126,42 +126,42 @@ public protocol AnyRefreshObserver : class {
 }
 
 ///default imp for AnyRefreshContent provided
-public extension AnyRefreshContent {
+extension AnyRefreshContent {
     
-    static var behaviour: RefreshContentBehaviour {
+    public static var behaviour: RefreshContentBehaviour {
         return RefreshContentBehaviour.scroll
     }
     
-    func success() {}
+    public func success() {}
     
-    func error(_ msg: String) {}
+    public func error(_ msg: String) {}
     
-    func pause(_ msg: String) {}
+    public func pause(_ msg: String) {}
     
-    func setProgress(_ progress: CGFloat) {}
+    public func setProgress(_ progress: CGFloat) {}
 }
 
-public extension RefreshControl where Self : AnyRefreshContext {
+extension RefreshControl where Self : AnyRefreshContext {
     
-    func pause(_ msg: String) {
+    public func pause(_ msg: String) {
         contentView.pause(_: msg)
         state = .pause
     }
     
-    func error(_ msg: String) {
+    public func error(_ msg: String) {
         contentView.error(_: msg)
         state = .pause
     }
     
-    func start() {
+    public func start() {
         state = .refreshing
     }
     
-    func stop() {
+    public func stop() {
         state = .idle
     }
     
-    func success(withDelay: TimeInterval? = 0.6) {
+    public func success(withDelay: TimeInterval? = 0.6) {
         contentView.success()
         DispatchQueue.main.asyncAfter(deadline: .now() + (withDelay ?? 0.6)) {[weak self] in
             self?.state = .idle
@@ -169,7 +169,7 @@ public extension RefreshControl where Self : AnyRefreshContext {
     }
 }
 
-public extension RefreshControl where Self : AnyRefreshObserver {
+extension RefreshControl where Self : AnyRefreshObserver {
     
     func registKVO() {
         guard let scrollView = scrollView else {

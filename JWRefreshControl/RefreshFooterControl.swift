@@ -145,9 +145,9 @@ open class RefreshFooterControl<T>: UIView , AnyRefreshContext, RefreshControl, 
         return gestureRecognizer == footerPanGesture && otherGestureRecognizer == scrollView?.panGestureRecognizer
     }
     
-    weak public var scrollView: UIScrollView?
+    weak var scrollView: UIScrollView?
     
-    public var keyPathObservations: [NSKeyValueObservation] = []
+    var keyPathObservations: [NSKeyValueObservation] = []
     
     var footerPanGesture: UIPanGestureRecognizer?
     
@@ -155,7 +155,7 @@ open class RefreshFooterControl<T>: UIView , AnyRefreshContext, RefreshControl, 
 
 extension RefreshFooterControl : AnyRefreshObserver {
     
-    public func scrollViewContentOffsetDidChange() {
+    func scrollViewContentOffsetDidChange() {
         guard let scrollView = scrollView, isEnabled, T.self.behaviour != .transfer else {
             return
         }
