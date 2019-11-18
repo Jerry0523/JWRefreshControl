@@ -78,6 +78,7 @@
 		C402AB0F1FB3F1E900B8FA09 /* SimpleShapeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleShapeView.swift; sourceTree = "<group>"; };
 		C402AB111FB3F20100B8FA09 /* CircleLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleLoadingView.swift; sourceTree = "<group>"; };
 		C402AB121FB3F20200B8FA09 /* CircleProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleProgressView.swift; sourceTree = "<group>"; };
+		C427DDEF2382CBE000D26F2E /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		C431F54F1FBD8EF200FAD488 /* JWRefreshControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JWRefreshControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C438428120F74E6400F5FF6C /* AndroidThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AndroidThemeViewController.swift; sourceTree = "<group>"; };
 		C438428320F74FE900F5FF6C /* AndroidThemeContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AndroidThemeContentView.swift; sourceTree = "<group>"; };
@@ -123,6 +124,7 @@
 		C402AACE1FB3F07100B8FA09 = {
 			isa = PBXGroup;
 			children = (
+				C427DDEF2382CBE000D26F2E /* Package.swift */,
 				C402AB081FB3F0AF00B8FA09 /* JWRefreshControl */,
 				C402AAD91FB3F07100B8FA09 /* JWRefreshControlDemo */,
 				C438C8D11FB4257B00706AD8 /* JWRefreshControl.podspec */,

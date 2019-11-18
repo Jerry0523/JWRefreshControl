@@ -8,5 +8,6 @@ let package = Package(
     ],
     targets: [
         .target(name: "JWRefreshControl", path: "JWRefreshControl")
-    ]
+    ],
+    swiftLanguageVersions: [.v5]
 )
